@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  portaye-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: portaye-website
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - portaye-network
+    # Optional: for local development with live reload
+    # volumes:
+    #   - ./main.html:/usr/share/nginx/html/main.html
+    #   - ./logo:/usr/share/nginx/html/logo
+
+networks:
+  portaye-network:
+    driver: bridge
+
+# Optional: Add reverse proxy (Traefik or Nginx Proxy Manager) if needed
+# services:
+#   reverse-proxy:
+#     image: traefik:latest
+#     ports:
+#       - "80:80"
+#       - "443:443"
+#     volumes:
+#       - /var/run/docker.sock:/var/run/docker.sock
+#     command:
+#       - "--api.insecure=true"
+#       - "--providers.docker=true"
+#     networks:
+#       - portaye-network
