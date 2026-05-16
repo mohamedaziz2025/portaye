@@ -18,7 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($_POST)) {
 function p(string $key, $default = ''): string {
     global $json;
     $v = $_POST[$key] ?? $json[$key] ?? $default;
-    return is_string($v) ? trim($v) : (string)$default;
+    if (is_array($v)) return (string)$default;
+    return trim((string)$v);
 }
 
 // ─── ROUTES PUBLIQUES ────────────────────────────────────────────────────────

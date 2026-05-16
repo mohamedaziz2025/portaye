@@ -352,7 +352,7 @@ tr:hover td { background:#fafafa; }
   </div>
 </div>
 
-<!-- ─── DATES BLOQUÉES ─── */
+<!-- ─── DATES BLOQUÉES ─── -->
 <div class="page" id="page-blocked">
   <div class="topbar"><div class="page-title">Dates bloquées</div></div>
   <div class="card">
