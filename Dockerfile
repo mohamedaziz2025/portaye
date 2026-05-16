@@ -5,6 +5,7 @@ WORKDIR /app
 
 # Copy necessary files
 COPY main.html ./
+COPY calendly-config.js ./
 COPY logo/ ./logo/
 
 # If you have a package.json for any build process
@@ -37,6 +38,8 @@ RUN echo 'server { \
 
 # Copy built files from builder stage
 COPY --from=builder /app /usr/share/nginx/html/
+COPY entrypoint.sh /usr/share/nginx/html/entrypoint.sh
+RUN chmod +x /usr/share/nginx/html/entrypoint.sh
 
 # Expose port
 EXPOSE 80
@@ -45,5 +48,5 @@ EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost/ || exit 1
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start nginx with runtime env injection
+CMD ["/bin/sh", "/usr/share/nginx/html/entrypoint.sh"]

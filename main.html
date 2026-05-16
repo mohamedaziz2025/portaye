@@ -7,7 +7,7 @@
 <meta name="description" content="Portaye transforme votre porte en système de surveillance intelligent. Vision 4K HDR, IA intégrée, installation en 1h. 179€ tout inclus.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<!-- booking styles injected below -->
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -411,6 +411,90 @@ footer {
 .cta-row{animation:fadeUp .5s .25s ease both}
 .price-badge{animation:fadeUp .5s .3s ease both}
 .hero-device{animation:fadeUp .7s .2s ease both}
+
+/* ─── CALENDAR PICKER ─── */
+.cal-wrapper {
+  display:none; margin-top:24px;
+  background:#f5f5f7; border-radius:16px; padding:24px;
+  animation: fadeUp .35s ease both;
+}
+.cal-wrapper.visible { display:block; }
+.cal-nav {
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;
+}
+.cal-nav-btn {
+  width:34px;height:34px;border-radius:50%;border:1px solid #d2d2d7;
+  background:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;
+  justify-content:center;transition:background .15s;
+}
+.cal-nav-btn:hover { background:var(--light); }
+.cal-nav-btn:disabled { opacity:.3; cursor:not-allowed; }
+.cal-month-label { font-size:16px;font-weight:600;color:var(--black); }
+.cal-grid { display:grid;grid-template-columns:repeat(7,1fr);gap:4px; }
+.cal-dow {
+  font-size:11px;font-weight:500;color:var(--mid);text-align:center;
+  padding:6px 0;letter-spacing:.3px;
+}
+.cal-day {
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;font-size:14px;font-weight:400;color:var(--black);cursor:default;
+  transition:background .15s,color .15s;position:relative;
+}
+.cal-day.available {
+  cursor:pointer;font-weight:500;
+  background:#e8f1fd; color:#0071e3;
+}
+.cal-day.available:hover { background:#0071e3;color:#fff; }
+.cal-day.selected { background:#0071e3 !important;color:#fff !important;font-weight:600; }
+.cal-day.past,.cal-day.empty { color:#d2d2d7;background:transparent; }
+.cal-day.blocked { color:#d2d2d7;background:transparent; text-decoration:line-through; }
+.cal-loading { text-align:center;padding:32px;font-size:14px;color:var(--mid); }
+
+/* Slots */
+.slots-wrapper { margin-top:20px;display:none; }
+.slots-wrapper.visible { display:block; }
+.slots-label { font-size:13px;font-weight:500;color:var(--mid);letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px; }
+.slots-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px; }
+.slot-btn {
+  padding:10px 6px;background:#fff;border:1px solid #d2d2d7;border-radius:10px;
+  font-size:14px;font-weight:500;color:var(--black);cursor:pointer;text-align:center;
+  transition:all .15s;
+}
+.slot-btn:hover { border-color:#0071e3;color:#0071e3; }
+.slot-btn.selected { background:#0071e3;border-color:#0071e3;color:#fff; }
+.slots-empty { font-size:14px;color:var(--mid);padding:12px 0; }
+
+/* Confirmation step */
+.confirm-box {
+  display:none; margin-top:20px;background:#fff;border-radius:14px;padding:24px;
+  border:1px solid #d2d2d7;
+}
+.confirm-box.visible { display:block; }
+.confirm-row { display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e5e5ea;font-size:15px; }
+.confirm-row:last-of-type { border-bottom:none; }
+.confirm-row span:first-child { color:var(--mid);font-size:14px; }
+.confirm-row span:last-child { font-weight:500; }
+.confirm-btn {
+  width:100%;background:#0071e3;color:#fff;border:none;
+  padding:14px;border-radius:980px;font-size:16px;cursor:pointer;
+  font-family:var(--sf);margin-top:16px;transition:background .15s;
+}
+.confirm-btn:hover { background:var(--blue-hover); }
+.confirm-btn:disabled { opacity:.6;cursor:not-allowed; }
+
+/* Success */
+.booking-success {
+  display:none;text-align:center;padding:32px 16px;
+}
+.booking-success.visible { display:block; }
+.bs-icon { font-size:52px;margin-bottom:16px; }
+.bs-title { font-size:22px;font-weight:700;color:var(--black);margin-bottom:8px; }
+.bs-sub { font-size:15px;color:var(--mid);line-height:1.6; }
+
+@media(max-width:680px){
+  .booking-grid{grid-template-columns:1fr}
+  .cal-day{font-size:13px}
+}
 </style>
 </head>
 <body>
@@ -750,38 +834,94 @@ footer {
     <h2 class="section-h2">Planifier votre installation.</h2>
     <p class="section-p">Formulaire en 2 minutes · Confirmation sous 1h · Installation sous 48h partout en France</p>
     <div class="booking-grid">
-      <div class="booking-form">
-        <div class="f-row">
-          <label class="f-label">Nom complet</label>
-          <input id="f-name" type="text" class="f-input" placeholder="Jean Dupont">
+
+      <!-- Colonne gauche : formulaire + calendrier + confirmation -->
+      <div>
+        <!-- Étape 1 : infos contact -->
+        <div class="booking-form" id="step-form">
+          <div class="f-row">
+            <label class="f-label">Nom complet</label>
+            <input id="f-name" type="text" class="f-input" placeholder="Jean Dupont">
+          </div>
+          <div class="f-row">
+            <label class="f-label">Email</label>
+            <input id="f-email" type="email" class="f-input" placeholder="jean@exemple.fr">
+          </div>
+          <div class="f-row">
+            <label class="f-label">Téléphone</label>
+            <input id="f-phone" type="tel" class="f-input" placeholder="+33 6 00 00 00 00">
+          </div>
+          <div class="f-row">
+            <label class="f-label">Ville</label>
+            <input id="f-city" type="text" class="f-input" placeholder="Paris">
+          </div>
+          <div class="f-row">
+            <label class="f-label" style="margin-bottom:8px">Type de porte</label>
+            <div class="door-grid" id="dg">
+              <div class="door-opt sel">Bois</div>
+              <div class="door-opt">Métal</div>
+              <div class="door-opt">Blindée</div>
+              <div class="door-opt">PVC</div>
+              <div class="door-opt">Double</div>
+              <div class="door-opt">Autre</div>
+            </div>
+          </div>
+          <button id="f-submit" class="f-btn">Voir les disponibilités →</button>
+          <p class="f-note">🔒 Aucun paiement maintenant · Données protégées</p>
         </div>
-        <div class="f-row">
-          <label class="f-label">Email</label>
-          <input id="f-email" type="email" class="f-input" placeholder="jean@exemple.fr">
-        </div>
-        <div class="f-row">
-          <label class="f-label">Téléphone</label>
-          <input id="f-phone" type="tel" class="f-input" placeholder="+33 6 00 00 00 00">
-        </div>
-        <div class="f-row">
-          <label class="f-label">Ville</label>
-          <input id="f-city" type="text" class="f-input" placeholder="Paris">
-        </div>
-        <div class="f-row">
-          <label class="f-label" style="margin-bottom:8px">Type de porte</label>
-          <div class="door-grid" id="dg">
-            <div class="door-opt sel">Bois</div>
-            <div class="door-opt">Métal</div>
-            <div class="door-opt">Blindée</div>
-            <div class="door-opt">PVC</div>
-            <div class="door-opt">Double</div>
-            <div class="door-opt">Autre</div>
+
+        <!-- Étape 2 : calendrier -->
+        <div class="booking-form" id="step-calendar" style="display:none">
+          <button id="back-to-form" style="background:none;border:none;color:var(--blue);cursor:pointer;font-size:14px;padding:0;margin-bottom:20px;font-family:var(--sf)">← Modifier mes informations</button>
+          <h3 style="font-size:17px;font-weight:600;margin-bottom:4px">Choisissez une date</h3>
+          <p style="font-size:13px;color:var(--mid);margin-bottom:16px">Les jours disponibles sont indiqués en bleu.</p>
+
+          <!-- Navigation mois -->
+          <div class="cal-nav">
+            <button class="cal-nav-btn" id="cal-prev">‹</button>
+            <span class="cal-month-label" id="cal-month-label"></span>
+            <button class="cal-nav-btn" id="cal-next">›</button>
+          </div>
+          <!-- Grille calendrier -->
+          <div class="cal-grid" id="cal-grid">
+            <div class="cal-loading" style="grid-column:span 7">Chargement…</div>
+          </div>
+
+          <!-- Créneaux horaires -->
+          <div class="slots-wrapper" id="slots-wrapper">
+            <p class="slots-label" id="slots-label">Créneaux disponibles</p>
+            <div class="slots-grid" id="slots-grid"></div>
+          </div>
+
+          <!-- Récapitulatif + confirmation -->
+          <div class="confirm-box" id="confirm-box">
+            <p style="font-size:14px;font-weight:600;margin-bottom:14px;color:var(--black)">Récapitulatif de votre réservation</p>
+            <div class="confirm-row"><span>Nom</span><span id="cr-name"></span></div>
+            <div class="confirm-row"><span>Email</span><span id="cr-email"></span></div>
+            <div class="confirm-row"><span>Téléphone</span><span id="cr-phone"></span></div>
+            <div class="confirm-row"><span>Ville</span><span id="cr-city"></span></div>
+            <div class="confirm-row"><span>Type de porte</span><span id="cr-door"></span></div>
+            <div class="confirm-row"><span>Date</span><span id="cr-date"></span></div>
+            <div class="confirm-row"><span>Heure</span><span id="cr-time"></span></div>
+            <div class="confirm-row"><span>Prix</span><span style="color:#0071e3;font-weight:700">179 € TTC</span></div>
+            <button class="confirm-btn" id="confirm-btn">Confirmer ma réservation</button>
+            <p style="text-align:center;font-size:12px;color:var(--mid);margin-top:10px">Paiement uniquement le jour de l'installation</p>
           </div>
         </div>
-        <button id="f-submit" class="f-btn">Voir les disponibilités →</button>
-        <p class="f-note">🔒 Aucun paiement maintenant · Données protégées</p>
+
+        <!-- Étape 3 : succès -->
+        <div class="booking-form booking-success" id="step-success">
+          <div class="bs-icon">✅</div>
+          <div class="bs-title">Réservation enregistrée !</div>
+          <div class="bs-sub">
+            Votre demande a bien été reçue.<br>
+            Nous vous confirmons votre créneau par email sous <strong>1 heure</strong>.<br><br>
+            <span id="success-detail" style="font-weight:500;color:var(--black)"></span>
+          </div>
+        </div>
       </div>
 
+      <!-- Colonne droite : infos prix -->
       <div class="booking-info">
         <div class="bi-price">
           <div class="bi-amount"><sup>€</sup>179</div>
@@ -831,70 +971,223 @@ footer {
   <div class="footer-copy">Copyright © 2026 Portaye. Tous droits réservés.</div>
 </footer>
 
-<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <script>
-document.querySelectorAll('.faq-q').forEach(q=>{
-  q.addEventListener('click',()=>{
-    const item=q.closest('.faq-item'),open=item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-    if(!open)item.classList.add('open');
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.closest('.faq-item'), open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!open) item.classList.add('open');
   });
 });
-document.querySelectorAll('.door-opt').forEach(d=>{
-  d.addEventListener('click',()=>{
-    document.querySelectorAll('.door-opt').forEach(x=>x.classList.remove('sel'));
+
+// ─── TYPE DE PORTE ────────────────────────────────────────────────────────────
+document.querySelectorAll('.door-opt').forEach(d => {
+  d.addEventListener('click', () => {
+    document.querySelectorAll('.door-opt').forEach(x => x.classList.remove('sel'));
     d.classList.add('sel');
   });
 });
 
-(function(){
-  const TOKEN = 'eyJraWQiOiIxY2UxZTEzNjE3ZGNmNzY2YjNjZWJjY2Y4ZGM1YmFmYThhNjVlNjg0MDIzZjdjMzJiZTgzNDliMjM4MDEzNWI0IiwidHlwIjoiUEFUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2F1dGguY2FsZW5kbHkuY29tIiwiaWF0IjoxNzc4Nzk2MjM5LCJqdGkiOiI0OGI3ZjM1Yi0xMWY4LTQxNGYtYmFiNy01YjdjOTYyNDRkMzAiLCJ1c2VyX3V1aWQiOiJjMGU3ODRkYy02ZDEyLTQ0MDQtYmZhZi1iMmZjNTAzNmMxYTMiLCJzY29wZSI6ImF2YWlsYWJpbGl0eTpyZWFkIGF2YWlsYWJpbGl0eTp3cml0ZSBldmVudF90eXBlczpyZWFkIGV2ZW50X3R5cGVzOndyaXRlIGxvY2F0aW9uczpyZWFkIHJvdXRpbmdfZm9ybXM6cmVhZCBzaGFyZXM6d3JpdGUgc2NoZWR1bGVkX2V2ZW50czpyZWFkIHNjaGVkdWxlZF9ldmVudHM6d3JpdGUgc2NoZWR1bGluZ19saW5rczp3cml0ZSBncm91cHM6cmVhZCBvcmdhbml6YXRpb25zOnJlYWQgb3JnYW5pemF0aW9uczp3cml0ZSB1c2VyczpyZWFkIHdlYmhvb2tzOnJlYWQgd2ViaG9va3M6d3JpdGUifQ.8dqk4cOLZRpdvse7jdJ7jBy9Vzx1MrnJCU6xsNW_q1Vl40buYpf3U_0a8gobxB2tIr5uaJfksq-TptIojxL7fA';
-  let schedulingUrl = null;
+// ─── BOOKING ENGINE ───────────────────────────────────────────────────────────
+(function () {
+  const API = 'api.php';
+  let calYear, calMonth, availableCache = {}, selectedDate = null, selectedTime = null;
+  const MONTHS = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  const DAYS   = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
 
-  async function fetchSchedulingUrl() {
-    if (schedulingUrl) return schedulingUrl;
-    const resp = await fetch('https://api.calendly.com/users/me', {
-      headers: { 'Authorization': 'Bearer ' + TOKEN }
+  const $ = id => document.getElementById(id);
+
+  // Étapes
+  function showStep(name) {
+    ['step-form','step-calendar','step-success'].forEach(s => {
+      const el = $(s);
+      if (el) el.style.display = s === name ? '' : 'none';
     });
-    if (!resp.ok) throw new Error('Calendly API error ' + resp.status);
-    const data = await resp.json();
-    schedulingUrl = data.resource.scheduling_url;
-    return schedulingUrl;
   }
 
-  document.getElementById('f-submit').addEventListener('click', async function() {
-    const name  = document.getElementById('f-name').value.trim();
-    const email = document.getElementById('f-email').value.trim();
-    const phone = document.getElementById('f-phone').value.trim();
-    const city  = document.getElementById('f-city').value.trim();
-    const door  = (document.querySelector('.door-opt.sel') || {}).textContent || '';
-
-    if (!name || !email) {
-      alert('Veuillez renseigner votre nom et votre email pour continuer.');
-      return;
-    }
+  // Étape 1 → 2
+  $('f-submit').addEventListener('click', async function () {
+    const name  = $('f-name').value.trim();
+    const email = $('f-email').value.trim();
+    if (!name) { $('f-name').focus(); return alert('Veuillez saisir votre nom.'); }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { $('f-email').focus(); return alert('Veuillez saisir un email valide.'); }
 
     const btn = this;
-    btn.disabled = true;
-    btn.textContent = 'Chargement…';
-
+    btn.disabled = true; btn.textContent = 'Chargement…';
     try {
-      const url = await fetchSchedulingUrl();
-      Calendly.initPopupWidget({
-        url: url,
-        prefill: {
-          name: name,
-          email: email,
-          customAnswers: { a1: phone, a2: city + (door ? ' — Porte : ' + door : '') }
-        }
-      });
-    } catch(e) {
-      alert('Impossible de charger le calendrier. Veuillez réessayer.');
+      const now = new Date();
+      calYear = now.getFullYear(); calMonth = now.getMonth();
+      showStep('step-calendar');
+      document.getElementById('step-calendar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      await renderCalendar();
     } finally {
-      btn.disabled = false;
-      btn.textContent = 'Voir les disponibilités →';
+      btn.disabled = false; btn.textContent = 'Voir les disponibilités →';
     }
   });
+
+  // Retour étape 1
+  $('back-to-form').addEventListener('click', () => {
+    selectedDate = null; selectedTime = null;
+    $('slots-wrapper').classList.remove('visible');
+    $('confirm-box').classList.remove('visible');
+    showStep('step-form');
+  });
+
+  // Navigation mois
+  $('cal-prev').addEventListener('click', () => { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(); });
+  $('cal-next').addEventListener('click', () => { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(); });
+
+  async function renderCalendar() {
+    const monthKey = `${calYear}-${String(calMonth + 1).padStart(2, '0')}`;
+    $('cal-month-label').textContent = `${MONTHS[calMonth]} ${calYear}`;
+
+    const now = new Date();
+    const isPast = calYear < now.getFullYear() || (calYear === now.getFullYear() && calMonth < now.getMonth());
+    $('cal-prev').disabled = isPast;
+
+    // Fetch available days (with cache)
+    let available = availableCache[monthKey];
+    if (!available) {
+      $('cal-grid').innerHTML = `<div class="cal-loading" style="grid-column:span 7">Chargement…</div>`;
+      try {
+        const res = await fetch(`${API}?a=calendar&month=${monthKey}`);
+        const data = await res.json();
+        available = data.available || [];
+        availableCache[monthKey] = available;
+      } catch {
+        $('cal-grid').innerHTML = `<div class="cal-loading" style="grid-column:span 7;color:#ff3b30">Erreur de chargement. Réessayez.</div>`;
+        return;
+      }
+    }
+
+    // Render grid
+    const firstDay = new Date(calYear, calMonth, 1).getDay(); // 0=Sun
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+    const offset = firstDay === 0 ? 6 : firstDay - 1; // start on Monday
+    const todayStr = now.toISOString().slice(0, 10);
+
+    let html = DAYS.map(d => `<div class="cal-dow">${d}</div>`).join('');
+    for (let i = 0; i < offset; i++) html += `<div class="cal-day empty"></div>`;
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const isAvail = available.includes(dateStr);
+      const isPastDay = dateStr < todayStr;
+      const isSel = dateStr === selectedDate;
+      let cls = 'cal-day';
+      if (isPastDay || !isAvail) cls += ' past';
+      else if (isSel) cls += ' available selected';
+      else cls += ' available';
+      html += `<div class="${cls}" data-date="${dateStr}">${d}</div>`;
+    }
+    $('cal-grid').innerHTML = html;
+
+    // Click handlers
+    $('cal-grid').querySelectorAll('.cal-day.available').forEach(el => {
+      el.addEventListener('click', () => selectDate(el.dataset.date));
+    });
+  }
+
+  async function selectDate(date) {
+    selectedDate = date; selectedTime = null;
+    $('confirm-box').classList.remove('visible');
+    document.querySelectorAll('.cal-day.selected').forEach(e => e.classList.remove('selected'));
+    const el = $('cal-grid').querySelector(`[data-date="${date}"]`);
+    if (el) el.classList.add('selected');
+
+    const sw = $('slots-wrapper'); sw.classList.add('visible');
+    $('slots-label').textContent = `Créneaux — ${formatDateFr(date)}`;
+    $('slots-grid').innerHTML = '<span style="font-size:14px;color:var(--mid)">Chargement des créneaux…</span>';
+
+    try {
+      const res = await fetch(`${API}?a=slots&date=${date}`);
+      const data = await res.json();
+      if (!data.slots || data.slots.length === 0) {
+        $('slots-grid').innerHTML = '<p class="slots-empty">Aucun créneau disponible ce jour. Choisissez une autre date.</p>';
+      } else {
+        $('slots-grid').innerHTML = data.slots.map(t =>
+          `<button class="slot-btn" data-time="${t}">${t}</button>`
+        ).join('');
+        $('slots-grid').querySelectorAll('.slot-btn').forEach(b => {
+          b.addEventListener('click', () => selectTime(b.dataset.time));
+        });
+      }
+    } catch {
+      $('slots-grid').innerHTML = '<p class="slots-empty" style="color:#ff3b30">Erreur de chargement.</p>';
+    }
+
+    sw.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function selectTime(time) {
+    selectedTime = time;
+    document.querySelectorAll('.slot-btn.selected').forEach(b => b.classList.remove('selected'));
+    $('slots-grid').querySelector(`[data-time="${time}"]`)?.classList.add('selected');
+
+    // Remplir le récap
+    const name  = $('f-name').value.trim();
+    const email = $('f-email').value.trim();
+    const phone = $('f-phone').value.trim() || '—';
+    const city  = $('f-city').value.trim() || '—';
+    const door  = (document.querySelector('.door-opt.sel') || {}).textContent || '—';
+
+    $('cr-name').textContent  = name;
+    $('cr-email').textContent = email;
+    $('cr-phone').textContent = phone;
+    $('cr-city').textContent  = city;
+    $('cr-door').textContent  = door;
+    $('cr-date').textContent  = formatDateFr(selectedDate);
+    $('cr-time').textContent  = time;
+
+    const cb = $('confirm-box'); cb.classList.add('visible');
+    cb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Confirmer la réservation
+  $('confirm-btn').addEventListener('click', async function () {
+    if (!selectedDate || !selectedTime) return;
+    const btn = this;
+    btn.disabled = true; btn.textContent = 'Envoi en cours…';
+
+    try {
+      const res = await fetch(`${API}?a=book`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:      $('f-name').value.trim(),
+          email:     $('f-email').value.trim(),
+          phone:     $('f-phone').value.trim(),
+          city:      $('f-city').value.trim(),
+          door_type: (document.querySelector('.door-opt.sel') || {}).textContent || '',
+          date:      selectedDate,
+          time:      selectedTime,
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        $('success-detail').textContent = `${formatDateFr(selectedDate)} à ${selectedTime}`;
+        showStep('step-success');
+        $('step-success').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Invalider le cache du mois sélectionné pour la prochaine visite
+        const mk = selectedDate.slice(0, 7);
+        delete availableCache[mk];
+      } else {
+        alert(data.error || 'Une erreur est survenue. Veuillez réessayer.');
+        btn.disabled = false; btn.textContent = 'Confirmer ma réservation';
+      }
+    } catch {
+      alert('Erreur réseau. Vérifiez votre connexion et réessayez.');
+      btn.disabled = false; btn.textContent = 'Confirmer ma réservation';
+    }
+  });
+
+  function formatDateFr(dateStr) {
+    const d = new Date(dateStr + 'T12:00:00');
+    return d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  // Init
+  showStep('step-form');
 })();
 </script>
 </body>
