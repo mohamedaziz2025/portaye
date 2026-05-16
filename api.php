@@ -216,8 +216,10 @@ case 'appointment_update':
         if ((int)$a['id'] === $id) {
             $appt       = $a;
             $prevStatus = $a['status'];
-            $a['status']     = $status;
-            $a['admin_note'] = $note;
+            $a['status'] = $status;
+            if (isset($json['note']) || isset($_POST['note'])) {
+                $a['admin_note'] = $note;
+            }
             $found = true;
             break;
         }
@@ -336,6 +338,16 @@ case 'settings_save':
     }
     jdb_write(JSON_SETTINGS, $settings);
     json_response(['success' => true]);
+    break;
+
+case 'settings':
+    require_admin();
+    $s = get_settings();
+    json_response([
+        'admin_email'  => $s['admin_email']  ?? ADMIN_EMAIL,
+        'advance_days' => $s['advance_days'] ?? (string)ADVANCE_DAYS_MAX,
+        'min_hours'    => $s['min_hours']    ?? (string)MIN_BOOKING_HOURS,
+    ]);
     break;
 
 case 'smtp_test':

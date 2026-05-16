@@ -67,7 +67,7 @@ class SMTPMailer {
             self::cmd($sock, base64_encode(SMTP_PASS), '235');
 
             self::cmd($sock, 'MAIL FROM:<' . SMTP_FROM . '>', '250');
-            self::cmd($sock, 'RCPT TO:<' . $to . '>', '25');
+            self::cmd($sock, 'RCPT TO:<' . $to . '>', '250');
             self::cmd($sock, 'DATA', '354');
 
             $fromEnc    = '=?UTF-8?B?' . base64_encode(SMTP_FROM_NAME) . '?=';

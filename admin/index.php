@@ -670,8 +670,8 @@ async function removeBlocked(id) {
 
 // ─── PARAMÈTRES ───────────────────────────────────────────────────────────────
 async function loadSettings() {
-  const data = await apiFetch('?a=appointments&status=all');
-  if (data.stats) el('s-email').value = '<?= htmlspecialchars(ADMIN_EMAIL) ?>';
+  const data = await apiFetch('?a=settings');
+  if (data.admin_email !== undefined) el('s-email').value = data.admin_email;
 }
 el('save-settings').addEventListener('click', async () => {
   const payload = { admin_email: el('s-email').value.trim() };
