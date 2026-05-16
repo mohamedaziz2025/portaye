@@ -1,0 +1,8 @@
+{
+    "admin_username": "admin",
+    "admin_password": "$2y$10$PLACEHOLDER_RUN_INSTALL_TO_SET",
+    "admin_email": "sirh.contact2023@gmail.com",
+    "slot_duration": "60",
+    "advance_days": "60",
+    "min_hours": "4"
+}
