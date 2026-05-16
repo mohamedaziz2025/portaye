@@ -1,2 +1,5 @@
 .env
 config.php
+
+# Données persistantes — ne jamais écraser via git
+data/*.json

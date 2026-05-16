@@ -1,1 +1,3 @@
 AddHandler application/x-httpd-ea-php81 .php
+DirectoryIndex index.php main.html index.html
+Options -Indexes
