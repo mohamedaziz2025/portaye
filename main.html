@@ -324,60 +324,84 @@ nav a:hover { opacity: 1; }
 }
 .faq-item.open .faq-a { max-height:200px;padding-bottom:20px; }
 
-/* ─── BOOKING — dégradé coloré ─── */
-#booking {
-  background: linear-gradient(135deg, #0071e3 0%, #34aadc 50%, #30d158 100%);
-  padding: 80px 24px;
+/* ─── BOOKING ─── */
+#booking { background: #f5f5f7; padding: 80px 0 72px; }
+.booking-header { text-align:center; padding:0 24px; margin-bottom:48px; }
+.booking-wrap {
+  max-width:1080px; margin:0 auto; padding:0 24px;
+  display:grid; grid-template-columns:1fr 340px; gap:28px; align-items:start;
 }
-.booking-inner { max-width: 960px; margin: 0 auto; }
-.booking-inner .section-h2 { color: #fff; text-align:center; }
-.booking-inner .section-p { color: rgba(255,255,255,.8); text-align:center; margin-bottom:52px; }
-.booking-grid { display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start; }
-
-.booking-form {
-  background: var(--white); border-radius: 20px; padding: 40px;
+/* Step indicator */
+.bk-steps { display:flex; align-items:center; margin-bottom:24px; }
+.bk-step { display:flex; flex-direction:column; align-items:center; gap:5px; }
+.bks-num {
+  width:30px; height:30px; border-radius:50%;
+  background:#e5e5ea; color:#aeaeb2;
+  font-size:13px; font-weight:600;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .25s, color .25s;
 }
-.f-row { margin-bottom: 16px; }
-.f-label {
-  display:block; font-size:12px;font-weight:500;color:var(--mid);
-  letter-spacing:.5px; text-transform:uppercase; margin-bottom:7px;
+.bk-step.active .bks-num { background:var(--blue); color:#fff; }
+.bk-step.done .bks-num { background:#34c759; color:#fff; }
+.bks-label { font-size:11px; color:#aeaeb2; font-weight:500; white-space:nowrap; transition:color .25s; }
+.bk-step.active .bks-label { color:var(--blue); font-weight:600; }
+.bk-step.done .bks-label { color:#34c759; }
+.bks-line { flex:1; height:1.5px; background:#d2d2d7; margin:0 8px 16px; }
+/* Panel */
+.bk-panel {
+  background:#fff; border-radius:20px; padding:36px 40px;
+  box-shadow:0 1px 3px rgba(0,0,0,.05),0 6px 24px rgba(0,0,0,.07);
 }
+.bk-panel-title { font-size:18px; font-weight:700; color:var(--black); margin-bottom:24px; letter-spacing:-.01em; }
+/* Form */
+.bk-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:0 16px; }
+.bk-col-2 { grid-column:1/-1; }
+.f-row { margin-bottom:16px; }
+.f-label { display:block; font-size:11px; font-weight:600; color:var(--mid); letter-spacing:.6px; text-transform:uppercase; margin-bottom:7px; }
 .f-input {
-  width:100%; background:var(--light); border:1px solid #d2d2d7;
-  border-radius:10px; padding:12px 14px; font-size:15px;
-  color:var(--black); font-family:var(--sf); outline:none; transition:border-color .2s;
+  width:100%; background:#f9f9fb; border:1.5px solid #e5e5ea;
+  border-radius:10px; padding:13px 15px; font-size:15px;
+  color:var(--black); font-family:var(--sf); outline:none; transition:border-color .2s,background .2s;
 }
-.f-input:focus { border-color:#0071e3; background:var(--white); }
-.f-input::placeholder { color:#aeaeb2; }
-.door-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px; }
+.f-input:focus { border-color:var(--blue); background:#fff; box-shadow:0 0 0 3px rgba(0,113,227,.1); }
+.f-input::placeholder { color:#c7c7cc; }
+.door-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:24px; }
 .door-opt {
-  background:var(--light);border:1px solid #d2d2d7;
-  border-radius:8px;padding:10px 6px;text-align:center;
-  font-size:13px;color:var(--mid);cursor:pointer;transition:all .15s;user-select:none;
+  background:#f5f5f7; border:1.5px solid #e5e5ea;
+  border-radius:10px; padding:11px 6px; text-align:center;
+  font-size:13px; font-weight:500; color:var(--mid);
+  cursor:pointer; transition:all .15s; user-select:none;
 }
-.door-opt:hover { border-color:#0071e3;color:#0071e3; }
-.door-opt.sel { background:#e8f1fd;border-color:#0071e3;color:#0071e3;font-weight:500; }
+.door-opt:hover { border-color:var(--blue); color:var(--blue); background:#f0f6fe; }
+.door-opt.sel { background:#e8f1fd; border-color:var(--blue); color:var(--blue); }
 .f-btn {
-  width:100%;background:var(--black);color:#fff;border:none;
-  padding:15px;border-radius:980px;font-size:16px;cursor:pointer;
-  font-family:var(--sf);transition:opacity .15s;
+  width:100%; background:var(--black); color:#fff; border:none;
+  padding:16px; border-radius:980px; font-size:16px; font-weight:500;
+  cursor:pointer; font-family:var(--sf); transition:opacity .15s;
 }
-.f-btn:hover { opacity:.8; }
-.f-note { text-align:center;font-size:12px;color:var(--mid);margin-top:12px; }
-
-.booking-info { color: #fff; }
-.bi-price {
-  background: rgba(255,255,255,.15);
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: 18px; padding: 32px;
-  margin-bottom: 24px;
+.f-btn:hover { opacity:.85; }
+.f-btn:disabled { opacity:.5; cursor:not-allowed; }
+.f-note { text-align:center; font-size:12px; color:var(--mid); margin-top:12px; }
+.bk-back {
+  display:inline-flex; align-items:center; gap:5px;
+  background:none; border:none; color:var(--blue);
+  cursor:pointer; font-size:14px; font-family:var(--sf); padding:0; margin-bottom:24px;
 }
-.bi-amount { font-size:64px;font-weight:700;letter-spacing:-2px;line-height:1; }
-.bi-amount sup { font-size:28px;vertical-align:top;margin-top:10px; }
-.bi-once { font-size:14px;opacity:.7;margin-top:6px; }
-.bi-list { list-style:none;display:flex;flex-direction:column;gap:14px; }
-.bi-list li { display:flex;align-items:center;gap:10px;font-size:15px;font-weight:300;opacity:.9; }
-.bi-check { color:#30d158;font-size:14px; }
+.bk-back:hover { opacity:.7; }
+/* Sidebar price */
+.booking-sidebar { position:sticky; top:72px; display:flex; flex-direction:column; gap:14px; }
+.bk-price-card { background:var(--black); border-radius:20px; padding:32px 28px; color:#f5f5f7; }
+.bkp-eyebrow { font-size:11px; font-weight:500; color:#86868b; letter-spacing:.5px; text-transform:uppercase; margin-bottom:14px; }
+.bkp-amount { font-size:60px; font-weight:700; letter-spacing:-2px; line-height:1; margin-bottom:4px; }
+.bkp-amount sup { font-size:24px; vertical-align:top; margin-top:10px; letter-spacing:0; }
+.bkp-note { font-size:12px; color:#86868b; margin-bottom:22px; }
+.bkp-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.bkp-list li { display:flex; align-items:center; gap:9px; font-size:13px; color:#d1d1d6; font-weight:300; }
+.bkp-check { color:#34c759; flex-shrink:0; }
+.bk-trust { background:#fff; border-radius:16px; padding:4px 16px; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+.bkt-item { display:flex; align-items:center; gap:10px; padding:11px 0; font-size:13px; color:var(--mid); border-bottom:1px solid #f0f0f5; }
+.bkt-item:last-child { border-bottom:none; }
+.bkt-icon { font-size:15px; flex-shrink:0; }
 
 /* ─── SEO ─── */
 #seo { background: var(--light); padding: 64px 24px; border-top: 1px solid #d2d2d7; }
@@ -412,88 +436,103 @@ footer {
 .price-badge{animation:fadeUp .5s .3s ease both}
 .hero-device{animation:fadeUp .7s .2s ease both}
 
-/* ─── CALENDAR PICKER ─── */
-.cal-wrapper {
-  display:none; margin-top:24px;
-  background:#f5f5f7; border-radius:16px; padding:24px;
-  animation: fadeUp .35s ease both;
-}
-.cal-wrapper.visible { display:block; }
-.cal-nav {
-  display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;
-}
+/* Calendar */
+.cal-nav { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
 .cal-nav-btn {
-  width:34px;height:34px;border-radius:50%;border:1px solid #d2d2d7;
-  background:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;
-  justify-content:center;transition:background .15s;
+  width:36px; height:36px; border-radius:50%;
+  border:1.5px solid #e5e5ea; background:#fff;
+  cursor:pointer; font-size:16px;
+  display:flex; align-items:center; justify-content:center; transition:all .15s;
 }
-.cal-nav-btn:hover { background:var(--light); }
+.cal-nav-btn:hover { border-color:var(--blue); color:var(--blue); }
 .cal-nav-btn:disabled { opacity:.3; cursor:not-allowed; }
-.cal-month-label { font-size:16px;font-weight:600;color:var(--black); }
-.cal-grid { display:grid;grid-template-columns:repeat(7,1fr);gap:4px; }
-.cal-dow {
-  font-size:11px;font-weight:500;color:var(--mid);text-align:center;
-  padding:6px 0;letter-spacing:.3px;
-}
+.cal-month-label { font-size:15px; font-weight:600; }
+.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+.cal-dow { font-size:11px; font-weight:500; color:var(--mid); text-align:center; padding:8px 0; }
 .cal-day {
-  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
-  border-radius:50%;font-size:14px;font-weight:400;color:var(--black);cursor:default;
-  transition:background .15s,color .15s;position:relative;
+  aspect-ratio:1; display:flex; align-items:center; justify-content:center;
+  border-radius:10px; font-size:13px; font-weight:400; color:var(--black); cursor:default; transition:all .15s;
 }
-.cal-day.available {
-  cursor:pointer;font-weight:500;
-  background:#e8f1fd; color:#0071e3;
-}
-.cal-day.available:hover { background:#0071e3;color:#fff; }
-.cal-day.selected { background:#0071e3 !important;color:#fff !important;font-weight:600; }
-.cal-day.past,.cal-day.empty { color:#d2d2d7;background:transparent; }
-.cal-day.blocked { color:#d2d2d7;background:transparent; text-decoration:line-through; }
-.cal-loading { text-align:center;padding:32px;font-size:14px;color:var(--mid); }
-
+.cal-day.available { cursor:pointer; font-weight:600; background:#e8f1fd; color:var(--blue); }
+.cal-day.available:hover { background:var(--blue); color:#fff; transform:scale(1.08); }
+.cal-day.selected { background:var(--blue)!important; color:#fff!important; font-weight:700; box-shadow:0 4px 10px rgba(0,113,227,.3); }
+.cal-day.past,.cal-day.empty { color:#d2d2d7; }
+.cal-day.blocked { color:#d2d2d7; text-decoration:line-through; }
+.cal-loading { grid-column:span 7; text-align:center; padding:40px; font-size:14px; color:var(--mid); }
 /* Slots */
-.slots-wrapper { margin-top:20px;display:none; }
-.slots-wrapper.visible { display:block; }
-.slots-label { font-size:13px;font-weight:500;color:var(--mid);letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px; }
-.slots-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px; }
+.slots-wrapper { margin-top:24px; display:none; }
+.slots-wrapper.visible { display:block; animation:fadeUp .3s ease both; }
+.slots-label { font-size:11px; font-weight:600; color:var(--mid); letter-spacing:.5px; text-transform:uppercase; margin-bottom:12px; }
+.slots-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(76px,1fr)); gap:8px; }
 .slot-btn {
-  padding:10px 6px;background:#fff;border:1px solid #d2d2d7;border-radius:10px;
-  font-size:14px;font-weight:500;color:var(--black);cursor:pointer;text-align:center;
-  transition:all .15s;
+  padding:11px 6px; background:#f5f5f7; border:1.5px solid #e5e5ea;
+  border-radius:10px; font-size:14px; font-weight:500; color:var(--black);
+  cursor:pointer; text-align:center; transition:all .15s;
 }
-.slot-btn:hover { border-color:#0071e3;color:#0071e3; }
-.slot-btn.selected { background:#0071e3;border-color:#0071e3;color:#fff; }
-.slots-empty { font-size:14px;color:var(--mid);padding:12px 0; }
-
-/* Confirmation step */
-.confirm-box {
-  display:none; margin-top:20px;background:#fff;border-radius:14px;padding:24px;
-  border:1px solid #d2d2d7;
-}
-.confirm-box.visible { display:block; }
-.confirm-row { display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e5e5ea;font-size:15px; }
-.confirm-row:last-of-type { border-bottom:none; }
-.confirm-row span:first-child { color:var(--mid);font-size:14px; }
+.slot-btn:hover { border-color:var(--blue); color:var(--blue); background:#f0f6fe; }
+.slot-btn.selected { background:var(--blue); border-color:var(--blue); color:#fff; }
+.slots-empty { font-size:14px; color:var(--mid); padding:14px 0; }
+/* Confirm */
+.confirm-box { display:none; margin-top:24px; }
+.confirm-box.visible { display:block; animation:fadeUp .3s ease both; }
+.confirm-title { font-size:14px; font-weight:600; color:var(--black); margin-bottom:14px; }
+.confirm-rows { border:1.5px solid #e5e5ea; border-radius:14px; overflow:hidden; margin-bottom:16px; }
+.confirm-row { display:flex; justify-content:space-between; padding:11px 16px; border-bottom:1px solid #f0f0f5; font-size:14px; }
+.confirm-row:last-child { border-bottom:none; }
+.confirm-row span:first-child { color:var(--mid); }
 .confirm-row span:last-child { font-weight:500; }
 .confirm-btn {
-  width:100%;background:#0071e3;color:#fff;border:none;
-  padding:14px;border-radius:980px;font-size:16px;cursor:pointer;
-  font-family:var(--sf);margin-top:16px;transition:background .15s;
+  width:100%; background:var(--blue); color:#fff; border:none;
+  padding:15px; border-radius:980px; font-size:16px; font-weight:500;
+  cursor:pointer; font-family:var(--sf); transition:background .15s;
 }
 .confirm-btn:hover { background:var(--blue-hover); }
-.confirm-btn:disabled { opacity:.6;cursor:not-allowed; }
-
+.confirm-btn:disabled { opacity:.6; cursor:not-allowed; }
+.confirm-safe { text-align:center; font-size:11px; color:var(--mid); margin-top:10px; }
 /* Success */
-.booking-success {
-  display:none;text-align:center;padding:32px 16px;
-}
-.booking-success.visible { display:block; }
-.bs-icon { font-size:52px;margin-bottom:16px; }
-.bs-title { font-size:22px;font-weight:700;color:var(--black);margin-bottom:8px; }
-.bs-sub { font-size:15px;color:var(--mid);line-height:1.6; }
+.bk-success { text-align:center; padding:24px 8px; }
+.bs-icon { font-size:56px; margin-bottom:18px; }
+.bs-title { font-size:22px; font-weight:700; margin-bottom:8px; }
+.bs-sub { font-size:15px; color:var(--mid); line-height:1.6; margin-bottom:24px; }
+.bs-detail { display:inline-block; background:#f0faf4; border:1px solid #b8eecf; border-radius:12px; padding:14px 22px; font-size:14px; color:#1a8a1a; font-weight:600; margin-bottom:20px; }
 
-@media(max-width:680px){
-  .booking-grid{grid-template-columns:1fr}
-  .cal-day{font-size:13px}
+/* ═══════════════════════ RESPONSIVE ═══════════════════════ */
+@media(max-width:1024px) {
+  .booking-wrap { grid-template-columns:1fr; }
+  .booking-sidebar { position:static; flex-direction:row; flex-wrap:wrap; }
+  .bk-price-card,.bk-trust { flex:1 1 260px; }
+}
+@media(max-width:768px) {
+  nav { padding:0 16px; gap:0; justify-content:space-between; }
+  nav a:not(.nav-logo):not(.nav-cta) { display:none; }
+  .hero { padding:56px 20px 40px; min-height:auto; }
+  .hero-device { max-width:100%; }
+  .stats-inner { grid-template-columns:repeat(3,1fr); }
+  .stat-n { font-size:32px; }
+  .stat-box { padding:28px 16px; }
+  .feat-grid { grid-template-columns:1fr 1fr; }
+  .price-layout { grid-template-columns:1fr; }
+  .process-steps { grid-template-columns:1fr; gap:20px; }
+  .process-steps::before { display:none; }
+  .reviews-grid { grid-template-columns:1fr 1fr; }
+  #booking { padding:60px 0 52px; }
+  .bk-panel { padding:28px 22px; }
+  .bk-grid-2 { grid-template-columns:1fr; }
+  .bk-col-2 { grid-column:unset; }
+  .booking-sidebar { flex-direction:row; }
+}
+@media(max-width:520px) {
+  .hero h1 { font-size:clamp(36px,10vw,56px); }
+  .hero-device { display:none; }
+  .stats-inner { grid-template-columns:1fr; background:none; gap:0; border:none; }
+  .stat-box { border-right:none!important; border-bottom:1px solid #e5e5ea; border-radius:0; }
+  .stat-box:last-child { border-bottom:none; }
+  .feat-grid { grid-template-columns:1fr; }
+  .reviews-grid { grid-template-columns:1fr; }
+  .booking-sidebar { flex-direction:column; }
+  .door-grid { grid-template-columns:repeat(2,1fr); }
+  .footer-top { flex-direction:column; align-items:flex-start; }
+  .footer-links { flex-wrap:wrap; gap:14px; }
 }
 </style>
 </head>
@@ -829,73 +868,89 @@ footer {
 
 <!-- BOOKING -->
 <section id="booking">
-  <div class="booking-inner">
-    <p class="section-eyebrow" style="text-align:center;color:rgba(255,255,255,.8)">Réservation</p>
+  <div class="booking-header">
+    <p class="section-eyebrow">Réservation</p>
     <h2 class="section-h2">Planifier votre installation.</h2>
-    <p class="section-p">Formulaire en 2 minutes · Confirmation sous 1h · Installation sous 48h partout en France</p>
-    <div class="booking-grid">
+    <p class="section-p">Formulaire en 2 minutes · Confirmation sous 1h · Installation sous 48h</p>
+  </div>
+  <div class="booking-wrap">
 
-      <!-- Colonne gauche : formulaire + calendrier + confirmation -->
-      <div>
-        <!-- Étape 1 : infos contact -->
-        <div class="booking-form" id="step-form">
+    <!-- Colonne gauche : étapes -->
+    <div>
+      <!-- Indicateur d'étapes -->
+      <div class="bk-steps">
+        <div class="bk-step active" id="bks-1">
+          <div class="bks-num">1</div>
+          <div class="bks-label">Informations</div>
+        </div>
+        <div class="bks-line" id="bkl-1"></div>
+        <div class="bk-step" id="bks-2">
+          <div class="bks-num">2</div>
+          <div class="bks-label">Créneau</div>
+        </div>
+        <div class="bks-line" id="bkl-2"></div>
+        <div class="bk-step" id="bks-3">
+          <div class="bks-num">3</div>
+          <div class="bks-label">Confirmé</div>
+        </div>
+      </div>
+
+      <!-- Étape 1 : coordonnées -->
+      <div class="bk-panel" id="step-form">
+        <div class="bk-panel-title">Vos coordonnées</div>
+        <div class="bk-grid-2">
           <div class="f-row">
             <label class="f-label">Nom complet</label>
-            <input id="f-name" type="text" class="f-input" placeholder="Jean Dupont">
-          </div>
-          <div class="f-row">
-            <label class="f-label">Email</label>
-            <input id="f-email" type="email" class="f-input" placeholder="jean@exemple.fr">
+            <input id="f-name" type="text" class="f-input" placeholder="Jean Dupont" autocomplete="name">
           </div>
           <div class="f-row">
             <label class="f-label">Téléphone</label>
-            <input id="f-phone" type="tel" class="f-input" placeholder="+33 6 00 00 00 00">
+            <input id="f-phone" type="tel" class="f-input" placeholder="+33 6 00 00 00 00" autocomplete="tel">
           </div>
-          <div class="f-row">
+          <div class="f-row bk-col-2">
+            <label class="f-label">Email</label>
+            <input id="f-email" type="email" class="f-input" placeholder="jean@exemple.fr" autocomplete="email">
+          </div>
+          <div class="f-row bk-col-2">
             <label class="f-label">Ville</label>
-            <input id="f-city" type="text" class="f-input" placeholder="Paris">
+            <input id="f-city" type="text" class="f-input" placeholder="Paris, Lyon, Marseille…" autocomplete="address-level2">
           </div>
-          <div class="f-row">
-            <label class="f-label" style="margin-bottom:8px">Type de porte</label>
-            <div class="door-grid" id="dg">
-              <div class="door-opt sel">Bois</div>
-              <div class="door-opt">Métal</div>
-              <div class="door-opt">Blindée</div>
-              <div class="door-opt">PVC</div>
-              <div class="door-opt">Double</div>
-              <div class="door-opt">Autre</div>
-            </div>
-          </div>
-          <button id="f-submit" class="f-btn">Voir les disponibilités →</button>
-          <p class="f-note">🔒 Aucun paiement maintenant · Données protégées</p>
         </div>
-
-        <!-- Étape 2 : calendrier -->
-        <div class="booking-form" id="step-calendar" style="display:none">
-          <button id="back-to-form" style="background:none;border:none;color:var(--blue);cursor:pointer;font-size:14px;padding:0;margin-bottom:20px;font-family:var(--sf)">← Modifier mes informations</button>
-          <h3 style="font-size:17px;font-weight:600;margin-bottom:4px">Choisissez une date</h3>
-          <p style="font-size:13px;color:var(--mid);margin-bottom:16px">Les jours disponibles sont indiqués en bleu.</p>
-
-          <!-- Navigation mois -->
-          <div class="cal-nav">
-            <button class="cal-nav-btn" id="cal-prev">‹</button>
-            <span class="cal-month-label" id="cal-month-label"></span>
-            <button class="cal-nav-btn" id="cal-next">›</button>
+        <div class="f-row" style="margin-bottom:24px">
+          <label class="f-label" style="margin-bottom:10px">Type de porte</label>
+          <div class="door-grid" id="dg">
+            <div class="door-opt sel">Bois</div>
+            <div class="door-opt">Métal</div>
+            <div class="door-opt">Blindée</div>
+            <div class="door-opt">PVC</div>
+            <div class="door-opt">Double</div>
+            <div class="door-opt">Autre</div>
           </div>
-          <!-- Grille calendrier -->
-          <div class="cal-grid" id="cal-grid">
-            <div class="cal-loading" style="grid-column:span 7">Chargement…</div>
-          </div>
+        </div>
+        <button id="f-submit" class="f-btn">Voir les disponibilités →</button>
+        <p class="f-note">🔒 Aucun paiement maintenant · Données sécurisées SSL</p>
+      </div>
 
-          <!-- Créneaux horaires -->
-          <div class="slots-wrapper" id="slots-wrapper">
-            <p class="slots-label" id="slots-label">Créneaux disponibles</p>
-            <div class="slots-grid" id="slots-grid"></div>
-          </div>
-
-          <!-- Récapitulatif + confirmation -->
-          <div class="confirm-box" id="confirm-box">
-            <p style="font-size:14px;font-weight:600;margin-bottom:14px;color:var(--black)">Récapitulatif de votre réservation</p>
+      <!-- Étape 2 : calendrier + créneaux -->
+      <div class="bk-panel" id="step-calendar" style="display:none">
+        <button id="back-to-form" class="bk-back">← Modifier mes informations</button>
+        <div class="bk-cal-title">Choisissez une date</div>
+        <div class="bk-cal-sub" style="font-size:13px;color:var(--mid);margin-bottom:20px">Les jours disponibles apparaissent en bleu</div>
+        <div class="cal-nav">
+          <button class="cal-nav-btn" id="cal-prev">‹</button>
+          <span class="cal-month-label" id="cal-month-label"></span>
+          <button class="cal-nav-btn" id="cal-next">›</button>
+        </div>
+        <div class="cal-grid" id="cal-grid">
+          <div class="cal-loading">Chargement…</div>
+        </div>
+        <div class="slots-wrapper" id="slots-wrapper">
+          <p class="slots-label" id="slots-label">Créneaux disponibles</p>
+          <div class="slots-grid" id="slots-grid"></div>
+        </div>
+        <div class="confirm-box" id="confirm-box">
+          <div class="confirm-title">Récapitulatif de votre réservation</div>
+          <div class="confirm-rows">
             <div class="confirm-row"><span>Nom</span><span id="cr-name"></span></div>
             <div class="confirm-row"><span>Email</span><span id="cr-email"></span></div>
             <div class="confirm-row"><span>Téléphone</span><span id="cr-phone"></span></div>
@@ -903,38 +958,42 @@ footer {
             <div class="confirm-row"><span>Type de porte</span><span id="cr-door"></span></div>
             <div class="confirm-row"><span>Date</span><span id="cr-date"></span></div>
             <div class="confirm-row"><span>Heure</span><span id="cr-time"></span></div>
-            <div class="confirm-row"><span>Prix</span><span style="color:#0071e3;font-weight:700">179 € TTC</span></div>
-            <button class="confirm-btn" id="confirm-btn">Confirmer ma réservation</button>
-            <p style="text-align:center;font-size:12px;color:var(--mid);margin-top:10px">Paiement uniquement le jour de l'installation</p>
+            <div class="confirm-row"><span>Prix total</span><span style="color:var(--blue);font-weight:700">179 € TTC</span></div>
           </div>
-        </div>
-
-        <!-- Étape 3 : succès -->
-        <div class="booking-form booking-success" id="step-success">
-          <div class="bs-icon">✅</div>
-          <div class="bs-title">Réservation enregistrée !</div>
-          <div class="bs-sub">
-            Votre demande a bien été reçue.<br>
-            Nous vous confirmons votre créneau par email sous <strong>1 heure</strong>.<br><br>
-            <span id="success-detail" style="font-weight:500;color:var(--black)"></span>
-          </div>
+          <button class="confirm-btn" id="confirm-btn">Confirmer ma réservation</button>
+          <p class="confirm-safe">Paiement uniquement le jour de l'installation · Annulation gratuite</p>
         </div>
       </div>
 
-      <!-- Colonne droite : infos prix -->
-      <div class="booking-info">
-        <div class="bi-price">
-          <div class="bi-amount"><sup>€</sup>179</div>
-          <div class="bi-once">Paiement unique · Aucun abonnement</div>
-        </div>
-        <ul class="bi-list">
-          <li><span class="bi-check">✓</span> Appareil + installation inclus</li>
-          <li><span class="bi-check">✓</span> Satisfait ou remboursé 30 jours</li>
-          <li><span class="bi-check">✓</span> Support humain 7j/7</li>
-          <li><span class="bi-check">✓</span> Garantie 2 ans pièces & main d'œuvre</li>
-          <li><span class="bi-check">✓</span> Cloud 30 jours offerts</li>
-          <li><span class="bi-check">✓</span> Compatible toutes portes</li>
+      <!-- Étape 3 : succès -->
+      <div class="bk-panel bk-success" id="step-success" style="display:none">
+        <div class="bs-icon">✅</div>
+        <div class="bs-title">Réservation enregistrée !</div>
+        <div class="bs-sub">Votre demande a bien été reçue.<br>Nous confirmons votre créneau par email sous <strong>1 heure</strong>.</div>
+        <div class="bs-detail" id="success-detail"></div>
+        <button onclick="location.reload()" style="background:none;border:1.5px solid #d2d2d7;padding:11px 24px;border-radius:980px;font-size:14px;cursor:pointer;font-family:var(--sf);color:var(--mid);margin-top:4px">Nouvelle réservation</button>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="booking-sidebar">
+      <div class="bk-price-card">
+        <div class="bkp-eyebrow">Installation complète</div>
+        <div class="bkp-amount"><sup>€</sup>179</div>
+        <div class="bkp-note">Paiement unique · Aucun abonnement</div>
+        <ul class="bkp-list">
+          <li><span class="bkp-check">✓</span> Appareil + installation inclus</li>
+          <li><span class="bkp-check">✓</span> Satisfait ou remboursé 30 jours</li>
+          <li><span class="bkp-check">✓</span> Support humain 7j/7</li>
+          <li><span class="bkp-check">✓</span> Garantie 2 ans pièces & MO</li>
+          <li><span class="bkp-check">✓</span> Cloud 30 jours offerts</li>
         </ul>
+      </div>
+      <div class="bk-trust">
+        <div class="bkt-item"><span class="bkt-icon">🔒</span> Données sécurisées SSL</div>
+        <div class="bkt-item"><span class="bkt-icon">📅</span> Annulation gratuite</div>
+        <div class="bkt-item"><span class="bkt-icon">🚀</span> Installation sous 48h</div>
+        <div class="bkt-item"><span class="bkt-icon">⭐</span> 4,9/5 · 312 avis vérifiés</div>
       </div>
     </div>
   </div>
@@ -999,11 +1058,21 @@ document.querySelectorAll('.door-opt').forEach(d => {
   const $ = id => document.getElementById(id);
 
   // Étapes
+  const stepMap = { 'step-form':1, 'step-calendar':2, 'step-success':3 };
   function showStep(name) {
     ['step-form','step-calendar','step-success'].forEach(s => {
-      const el = $(s);
-      if (el) el.style.display = s === name ? '' : 'none';
+      const el = $(s); if (el) el.style.display = s === name ? '' : 'none';
     });
+    const cur = stepMap[name] || 1;
+    [1,2,3].forEach(n => {
+      const s = $('bks-' + n); if (!s) return;
+      s.classList.remove('active','done');
+      if (n < cur) s.classList.add('done');
+      else if (n === cur) s.classList.add('active');
+    });
+    const l1 = $('bkl-1'), l2 = $('bkl-2');
+    if (l1) l1.style.background = cur > 1 ? '#34c759' : '#d2d2d7';
+    if (l2) l2.style.background = cur > 2 ? '#34c759' : '#d2d2d7';
   }
 
   // Étape 1 → 2

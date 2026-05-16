@@ -692,6 +692,10 @@ el('test-smtp').addEventListener('click', async () => {
   el('test-smtp').disabled=false; el('test-smtp').textContent='Envoyer un email de test';
 });
 
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+loadDashboard();
+setInterval(() => { if (currentPage === 'dashboard') loadDashboard(); }, 30000);
+
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
