@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portaye — Sécurité Résidentielle Intelligente</title>
+<meta name="description" content="Portaye transforme votre porte en système de surveillance intelligent. Vision 4K HDR, IA intégrée, installation en 1h. 179€ tout inclus.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- booking styles injected below -->
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+:root {
+  --sf: -apple-system, 'Helvetica Neue', sans-serif;
+  --black: #1d1d1f;
+  --mid: #6e6e73;
+  --light: #f5f5f7;
+  --white: #ffffff;
+  --blue: #0071e3;
+  --blue-hover: #0077ed;
+}
+
+body { font-family: var(--sf); background: var(--white); color: var(--black); -webkit-font-smoothing: antialiased; }
+
+/* ─── NAV ─── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.85); backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  height: 52px; display: flex; align-items: center; justify-content: center;
+  padding: 0 22px; gap: 28px;
+}
+nav a {
+  font-size: 13px; color: var(--black); text-decoration: none; opacity: .8;
+  transition: opacity .15s; white-space: nowrap;
+}
+nav a:hover { opacity: 1; }
+.nav-logo { font-size: 20px; font-weight: 600; margin-right: 12px; }
+.nav-cta { color: var(--blue) !important; opacity: 1 !important; }
+
+/* ─── HERO — noir ─── */
+.hero {
+  background: #000;
+  padding: 80px 24px 60px;
+  text-align: center;
+  min-height: 600px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero-glow {
+  position: absolute; width: 600px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,113,227,0.25) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-size: 17px; font-weight: 400; color: #86b9f5;
+  margin-bottom: 12px; letter-spacing: 0;
+}
+.hero h1 {
+  font-size: clamp(48px, 7vw, 88px); font-weight: 700;
+  color: #f5f5f7; line-height: 1.04; letter-spacing: -0.015em;
+  margin-bottom: 16px;
+}
+.hero h1 span { color: #86b9f5; }
+.hero-sub {
+  font-size: clamp(19px, 2.5vw, 24px); font-weight: 300;
+  color: #a1a1a6; max-width: 620px; line-height: 1.42;
+  margin-bottom: 32px;
+}
+.cta-row { display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap; }
+.cta-primary {
+  background: var(--blue); color: #fff;
+  font-size: 17px; font-weight: 400; padding: 12px 28px;
+  border-radius: 980px; text-decoration: none;
+  transition: background .15s; display: inline-block;
+}
+.cta-primary:hover { background: var(--blue-hover); }
+.cta-link { font-size: 17px; color: var(--blue); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+.cta-link:hover { text-decoration: underline; }
+.price-badge {
+  margin-top: 20px; font-size: 15px; color: #86868b;
+}
+.price-badge strong { color: #f5f5f7; }
+
+/* hero device strip */
+.hero-device {
+  margin-top: 52px;
+  background: #1c1c1e; border-radius: 18px;
+  border: 1px solid #3a3a3c;
+  max-width: 560px; width: 100%; overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+}
+.hd-bar {
+  background: #2c2c2e; padding: 12px 18px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid #3a3a3c;
+}
+.hd-title { font-size: 13px; color: #ebebf5cc; }
+.hd-live { display:flex; align-items:center; gap:6px; font-size:11px; color:#30d158; font-weight:500; letter-spacing:.5px; }
+.hd-dot { width:6px;height:6px;border-radius:50%;background:#30d158;animation:pulse 2s infinite; }
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hd-screen {
+  background: #0a0a0a; height: 180px;
+  display:flex; align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
+}
+.hd-grid {
+  position:absolute;inset:0;
+  background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.hd-c { position:absolute;width:18px;height:18px;border-color:rgba(255,255,255,.2);border-style:solid; }
+.hd-c.tl{top:12px;left:12px;border-width:1.5px 0 0 1.5px}
+.hd-c.tr{top:12px;right:12px;border-width:1.5px 1.5px 0 0}
+.hd-c.bl{bottom:12px;left:12px;border-width:0 0 1.5px 1.5px}
+.hd-c.br{bottom:12px;right:12px;border-width:0 1.5px 1.5px 0}
+.hd-label { font-size:11px;color:rgba(255,255,255,.35);letter-spacing:2px;text-transform:uppercase;z-index:1; }
+.hd-topbadge {
+  position:absolute;top:10px;right:12px;
+  background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.1);
+  border-radius:4px;padding:3px 7px;font-size:10px;color:rgba(255,255,255,.6);letter-spacing:1px;
+}
+.hd-stats {
+  display:grid;grid-template-columns:repeat(3,1fr);
+  background:#1c1c1e;
+}
+.hds { padding:14px 0;text-align:center;border-right:1px solid #3a3a3c; }
+.hds:last-child{border-right:none}
+.hds-v{font-size:16px;font-weight:600;color:#f5f5f7;}
+.hds-k{font-size:10px;color:#86868b;margin-top:2px;letter-spacing:.5px;}
+.hd-notif {
+  padding:12px 16px;background:#1c1c1e;border-top:1px solid #3a3a3c;
+  display:flex;align-items:center;gap:10px;
+}
+.hdn-icon{font-size:22px;}
+.hdn-title{font-size:13px;font-weight:500;color:#f5f5f7;}
+.hdn-sub{font-size:11px;color:#86868b;}
+.hdn-time{font-size:11px;color:#86868b;margin-left:auto;}
+
+/* ─── STATS BAND — blanc ─── */
+.stats-band {
+  background: var(--white);
+  padding: 52px 24px;
+  border-bottom: 1px solid #d2d2d7;
+}
+.stats-inner {
+  max-width: 900px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: #d2d2d7;
+  border: 1px solid #d2d2d7; border-radius: 18px; overflow: hidden;
+}
+.stat-box {
+  background: var(--white); padding: 36px 28px; text-align: center;
+}
+.stat-n {
+  font-size: 48px; font-weight: 700; color: var(--black);
+  letter-spacing: -1.5px; line-height: 1;
+}
+.stat-l { font-size: 15px; color: var(--mid); margin-top: 8px; line-height: 1.4; }
+
+/* ─── FEATURES — gris clair ─── */
+#features { background: var(--light); padding: 80px 24px; }
+.feat-header { text-align: center; margin-bottom: 52px; }
+.section-eyebrow {
+  font-size: 13px; font-weight: 500; color: var(--blue);
+  letter-spacing: .5px; text-transform: uppercase; margin-bottom: 12px;
+}
+.section-h2 {
+  font-size: clamp(32px, 5vw, 52px); font-weight: 700;
+  color: var(--black); letter-spacing: -0.015em; line-height: 1.06;
+  margin-bottom: 14px;
+}
+.section-p {
+  font-size: 17px; font-weight: 300; color: var(--mid);
+  max-width: 560px; margin: 0 auto; line-height: 1.6;
+}
+.feat-grid {
+  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 16px;
+}
+.feat-card {
+  background: var(--white); border-radius: 18px; padding: 36px 30px;
+  transition: transform .2s;
+}
+.feat-card:hover { transform: scale(1.01); }
+.feat-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; margin-bottom: 22px;
+}
+.feat-card h3 { font-size: 19px; font-weight: 600; margin-bottom: 10px; letter-spacing: -.01em; }
+.feat-card p { font-size: 14px; color: var(--mid); line-height: 1.65; font-weight: 300; }
+.feat-pill {
+  display: inline-block; margin-top: 18px;
+  font-size: 12px; font-weight: 500; color: var(--blue);
+  background: #e8f1fd; padding: 4px 12px; border-radius: 980px;
+}
+/* icon backgrounds */
+.ic-blue   { background: #e8f1fd; }
+.ic-purple { background: #f0e8fd; }
+.ic-green  { background: #e8fdf0; }
+.ic-orange { background: #fdf3e8; }
+.ic-red    { background: #fde8e8; }
+.ic-teal   { background: #e8f8fd; }
+
+/* ─── PRICE — noir ─── */
+#price { background: #000; padding: 80px 24px; }
+.price-wrap { max-width: 960px; margin: 0 auto; }
+.price-wrap .section-h2 { color: #f5f5f7; text-align:center; }
+.price-wrap .section-p { color: #a1a1a6; text-align:center; margin-bottom:52px; }
+.price-layout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start;
+}
+.price-card {
+  background: #1c1c1e; border: 1px solid #3a3a3c;
+  border-radius: 20px; padding: 48px 40px;
+}
+.pc-eyebrow { font-size:13px;font-weight:500;color:var(--blue);letter-spacing:.5px;text-transform:uppercase;margin-bottom:20px; }
+.pc-amount {
+  font-size: 80px; font-weight: 700; color: #f5f5f7;
+  letter-spacing: -3px; line-height: 1; margin-bottom: 6px;
+}
+.pc-amount sup { font-size: 32px; vertical-align: top; margin-top: 16px; letter-spacing:0; }
+.pc-note { font-size: 13px; color: #86868b; margin-bottom: 36px; }
+.pc-list { list-style:none; display:flex; flex-direction:column; gap:14px; margin-bottom:36px; padding-bottom:36px; border-bottom:1px solid #3a3a3c; }
+.pc-list li { display:flex;align-items:center;gap:12px;font-size:15px;color:#e5e5ea;font-weight:300; }
+.pc-check { color:#30d158; font-size:14px; }
+.pc-btn {
+  width:100%; background:var(--blue); color:#fff; border:none;
+  padding:16px; border-radius:980px; font-size:17px; cursor:pointer;
+  font-family:var(--sf); transition:background .15s;
+}
+.pc-btn:hover { background:var(--blue-hover); }
+.pc-safe { text-align:center;font-size:12px;color:#86868b;margin-top:12px; }
+
+.price-guarantees { display:flex;flex-direction:column;gap:0; }
+.pg-item {
+  padding: 28px 0; border-bottom: 1px solid #3a3a3c;
+  display: flex; gap: 18px; align-items: flex-start;
+}
+.pg-item:first-child { padding-top: 0; }
+.pg-item:last-child { border-bottom: none; padding-bottom: 0; }
+.pg-icon { font-size: 28px; flex-shrink:0; margin-top:2px; }
+.pg-title { font-size:16px;font-weight:600;color:#f5f5f7;margin-bottom:6px; }
+.pg-desc { font-size:14px;color:#86868b;line-height:1.6;font-weight:300; }
+
+/* ─── PROCESS — blanc ─── */
+#process { background: var(--white); padding: 80px 24px; }
+.process-inner { max-width: 960px; margin: 0 auto; }
+.process-steps {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 40px;
+  margin-top: 52px; position: relative;
+}
+.process-steps::before {
+  content:''; position:absolute; top:28px;
+  left: calc(16% + 28px); right: calc(16% + 28px);
+  height: 1px; background: #d2d2d7;
+}
+.ps { text-align: center; }
+.ps-n {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--light); border: 1px solid #d2d2d7;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 700; color: var(--black);
+  margin: 0 auto 24px; position: relative; z-index:1; background: var(--white);
+}
+.ps h3 { font-size: 19px; font-weight: 600; margin-bottom: 10px; }
+.ps p { font-size: 14px; color: var(--mid); line-height: 1.65; font-weight: 300; }
+.ps-time {
+  display:inline-block;margin-top:14px;
+  font-size:12px;font-weight:500;color:var(--blue);
+  background:#e8f1fd;padding:4px 12px;border-radius:980px;
+}
+
+/* ─── AVIS — gris clair ─── */
+#avis { background: var(--light); padding: 80px 24px; }
+.reviews-inner { max-width: 1080px; margin: 0 auto; }
+.reviews-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 16px; margin-top: 52px;
+}
+.rv-card {
+  background: var(--white); border-radius: 18px; padding: 30px 26px;
+}
+.rv-stars { font-size: 13px; color: #FF9500; letter-spacing: 2px; margin-bottom: 16px; }
+.rv-text {
+  font-size: 15px; color: var(--black); line-height: 1.65; font-weight: 300;
+  margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid #e5e5ea;
+}
+.rv-author { display:flex; align-items:center; gap:12px; }
+.rv-av {
+  width: 38px; height: 38px; border-radius: 50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size: 14px; font-weight: 700; color: #fff; flex-shrink:0;
+}
+.rv-name { font-size: 14px; font-weight: 500; }
+.rv-meta { font-size: 12px; color: var(--mid); margin-top: 2px; }
+.rv-badge { font-size: 11px; color: #30d158; margin-top: 2px; }
+
+/* ─── FAQ — blanc ─── */
+#faq { background: var(--white); padding: 80px 24px; }
+.faq-inner { max-width: 720px; margin: 0 auto; }
+.faq-list { margin-top: 48px; }
+.faq-item { border-top: 1px solid #d2d2d7; }
+.faq-item:last-child { border-bottom: 1px solid #d2d2d7; }
+.faq-q {
+  padding: 20px 0;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  cursor:pointer;font-size:17px;font-weight:400;color:var(--black);
+  user-select:none;
+}
+.faq-plus { font-size:20px;color:var(--mid);transition:transform .2s;flex-shrink:0; }
+.faq-item.open .faq-plus { transform:rotate(45deg); color:var(--black); }
+.faq-a {
+  max-height:0;overflow:hidden;
+  font-size:15px;color:var(--mid);line-height:1.7;font-weight:300;
+  transition:max-height .3s ease,padding-bottom .2s;
+}
+.faq-item.open .faq-a { max-height:200px;padding-bottom:20px; }
+
+/* ─── BOOKING — dégradé coloré ─── */
+#booking {
+  background: linear-gradient(135deg, #0071e3 0%, #34aadc 50%, #30d158 100%);
+  padding: 80px 24px;
+}
+.booking-inner { max-width: 960px; margin: 0 auto; }
+.booking-inner .section-h2 { color: #fff; text-align:center; }
+.booking-inner .section-p { color: rgba(255,255,255,.8); text-align:center; margin-bottom:52px; }
+.booking-grid { display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start; }
+
+.booking-form {
+  background: var(--white); border-radius: 20px; padding: 40px;
+}
+.f-row { margin-bottom: 16px; }
+.f-label {
+  display:block; font-size:12px;font-weight:500;color:var(--mid);
+  letter-spacing:.5px; text-transform:uppercase; margin-bottom:7px;
+}
+.f-input {
+  width:100%; background:var(--light); border:1px solid #d2d2d7;
+  border-radius:10px; padding:12px 14px; font-size:15px;
+  color:var(--black); font-family:var(--sf); outline:none; transition:border-color .2s;
+}
+.f-input:focus { border-color:#0071e3; background:var(--white); }
+.f-input::placeholder { color:#aeaeb2; }
+.door-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px; }
+.door-opt {
+  background:var(--light);border:1px solid #d2d2d7;
+  border-radius:8px;padding:10px 6px;text-align:center;
+  font-size:13px;color:var(--mid);cursor:pointer;transition:all .15s;user-select:none;
+}
+.door-opt:hover { border-color:#0071e3;color:#0071e3; }
+.door-opt.sel { background:#e8f1fd;border-color:#0071e3;color:#0071e3;font-weight:500; }
+.f-btn {
+  width:100%;background:var(--black);color:#fff;border:none;
+  padding:15px;border-radius:980px;font-size:16px;cursor:pointer;
+  font-family:var(--sf);transition:opacity .15s;
+}
+.f-btn:hover { opacity:.8; }
+.f-note { text-align:center;font-size:12px;color:var(--mid);margin-top:12px; }
+
+.booking-info { color: #fff; }
+.bi-price {
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 18px; padding: 32px;
+  margin-bottom: 24px;
+}
+.bi-amount { font-size:64px;font-weight:700;letter-spacing:-2px;line-height:1; }
+.bi-amount sup { font-size:28px;vertical-align:top;margin-top:10px; }
+.bi-once { font-size:14px;opacity:.7;margin-top:6px; }
+.bi-list { list-style:none;display:flex;flex-direction:column;gap:14px; }
+.bi-list li { display:flex;align-items:center;gap:10px;font-size:15px;font-weight:300;opacity:.9; }
+.bi-check { color:#30d158;font-size:14px; }
+
+/* ─── SEO ─── */
+#seo { background: var(--light); padding: 64px 24px; border-top: 1px solid #d2d2d7; }
+.seo-inner { max-width: 720px; margin: 0 auto; }
+.seo-inner h2 { font-size:24px;font-weight:700;letter-spacing:-.01em;margin-bottom:16px; }
+.seo-inner h3 { font-size:17px;font-weight:600;margin:28px 0 10px; }
+.seo-inner p { font-size:15px;color:var(--mid);line-height:1.75;font-weight:300;margin-bottom:10px; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: #f5f5f7; border-top: 1px solid #d2d2d7;
+  padding: 20px 24px;
+}
+.footer-top {
+  max-width: 960px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px; padding-bottom: 16px;
+  border-bottom: 1px solid #d2d2d7;
+}
+.footer-logo { font-size:18px;font-weight:700;color:var(--black); }
+.footer-links { display:flex;gap:24px;list-style:none; }
+.footer-links a { font-size:12px;color:var(--mid);text-decoration:none; }
+.footer-links a:hover { text-decoration:underline; }
+.footer-copy { max-width:960px;margin:0 auto;padding-top:12px;font-size:12px;color:var(--mid); }
+
+/* animations */
+@keyframes fadeUp { from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)} }
+.hero-eyebrow{animation:fadeUp .5s ease both}
+.hero h1{animation:fadeUp .5s .1s ease both}
+.hero-sub{animation:fadeUp .5s .18s ease both}
+.cta-row{animation:fadeUp .5s .25s ease both}
+.price-badge{animation:fadeUp .5s .3s ease both}
+.hero-device{animation:fadeUp .7s .2s ease both}
+
+/* ─── CALENDAR PICKER ─── */
+.cal-wrapper {
+  display:none; margin-top:24px;
+  background:#f5f5f7; border-radius:16px; padding:24px;
+  animation: fadeUp .35s ease both;
+}
+.cal-wrapper.visible { display:block; }
+.cal-nav {
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;
+}
+.cal-nav-btn {
+  width:34px;height:34px;border-radius:50%;border:1px solid #d2d2d7;
+  background:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;
+  justify-content:center;transition:background .15s;
+}
+.cal-nav-btn:hover { background:var(--light); }
+.cal-nav-btn:disabled { opacity:.3; cursor:not-allowed; }
+.cal-month-label { font-size:16px;font-weight:600;color:var(--black); }
+.cal-grid { display:grid;grid-template-columns:repeat(7,1fr);gap:4px; }
+.cal-dow {
+  font-size:11px;font-weight:500;color:var(--mid);text-align:center;
+  padding:6px 0;letter-spacing:.3px;
+}
+.cal-day {
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;font-size:14px;font-weight:400;color:var(--black);cursor:default;
+  transition:background .15s,color .15s;position:relative;
+}
+.cal-day.available {
+  cursor:pointer;font-weight:500;
+  background:#e8f1fd; color:#0071e3;
+}
+.cal-day.available:hover { background:#0071e3;color:#fff; }
+.cal-day.selected { background:#0071e3 !important;color:#fff !important;font-weight:600; }
+.cal-day.past,.cal-day.empty { color:#d2d2d7;background:transparent; }
+.cal-day.blocked { color:#d2d2d7;background:transparent; text-decoration:line-through; }
+.cal-loading { text-align:center;padding:32px;font-size:14px;color:var(--mid); }
+
+/* Slots */
+.slots-wrapper { margin-top:20px;display:none; }
+.slots-wrapper.visible { display:block; }
+.slots-label { font-size:13px;font-weight:500;color:var(--mid);letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px; }
+.slots-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px; }
+.slot-btn {
+  padding:10px 6px;background:#fff;border:1px solid #d2d2d7;border-radius:10px;
+  font-size:14px;font-weight:500;color:var(--black);cursor:pointer;text-align:center;
+  transition:all .15s;
+}
+.slot-btn:hover { border-color:#0071e3;color:#0071e3; }
+.slot-btn.selected { background:#0071e3;border-color:#0071e3;color:#fff; }
+.slots-empty { font-size:14px;color:var(--mid);padding:12px 0; }
+
+/* Confirmation step */
+.confirm-box {
+  display:none; margin-top:20px;background:#fff;border-radius:14px;padding:24px;
+  border:1px solid #d2d2d7;
+}
+.confirm-box.visible { display:block; }
+.confirm-row { display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e5e5ea;font-size:15px; }
+.confirm-row:last-of-type { border-bottom:none; }
+.confirm-row span:first-child { color:var(--mid);font-size:14px; }
+.confirm-row span:last-child { font-weight:500; }
+.confirm-btn {
+  width:100%;background:#0071e3;color:#fff;border:none;
+  padding:14px;border-radius:980px;font-size:16px;cursor:pointer;
+  font-family:var(--sf);margin-top:16px;transition:background .15s;
+}
+.confirm-btn:hover { background:var(--blue-hover); }
+.confirm-btn:disabled { opacity:.6;cursor:not-allowed; }
+
+/* Success */
+.booking-success {
+  display:none;text-align:center;padding:32px 16px;
+}
+.booking-success.visible { display:block; }
+.bs-icon { font-size:52px;margin-bottom:16px; }
+.bs-title { font-size:22px;font-weight:700;color:var(--black);margin-bottom:8px; }
+.bs-sub { font-size:15px;color:var(--mid);line-height:1.6; }
+
+@media(max-width:680px){
+  .booking-grid{grid-template-columns:1fr}
+  .cal-day{font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Portaye</span>
+  <a href="#features">Produit</a>
+  <a href="#process">Installation</a>
+  <a href="#avis">Avis</a>
+  <a href="#faq">FAQ</a>
+  <a href="#booking" class="nav-cta">Réserver</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <p class="hero-eyebrow">Nouveau — Sécurité résidentielle intelligente</p>
+  <h1>La sécurité <span>réinventée.</span></h1>
+  <p class="hero-sub">Votre porte d'entrée devient un système de surveillance intelligent. Vision 4K HDR, IA de détection, contrôle instantané depuis n'importe où.</p>
+  <div class="cta-row">
+    <a href="#booking" class="cta-primary">Installer maintenant</a>
+    <a href="#features" class="cta-link">En savoir plus ›</a>
+  </div>
+  <p class="price-badge"><strong>179 €</strong> tout inclus · Aucun abonnement</p>
+
+  <div class="hero-device">
+    <div class="hd-bar">
+      <span class="hd-title">Portaye App — Porte principale</span>
+      <span class="hd-live"><span class="hd-dot"></span>LIVE 4K</span>
+    </div>
+    <div class="hd-screen">
+      <div class="hd-grid"></div>
+      <div class="hd-c tl"></div><div class="hd-c tr"></div>
+      <div class="hd-c bl"></div><div class="hd-c br"></div>
+      <div class="hd-topbadge">VISION NOCTURNE</div>
+      <span class="hd-label">Aucun mouvement détecté</span>
+    </div>
+    <div class="hd-stats">
+      <div class="hds"><div class="hds-v">4K HDR</div><div class="hds-k">Résolution</div></div>
+      <div class="hds"><div class="hds-v">165°</div><div class="hds-k">Angle</div></div>
+      <div class="hds"><div class="hds-v">0,3 s</div><div class="hds-k">Latence</div></div>
+    </div>
+    <div class="hd-notif">
+      <span class="hdn-icon">🔔</span>
+      <div><div class="hdn-title">Visiteur détecté</div><div class="hdn-sub">Répondre depuis l'app</div></div>
+      <span class="hdn-time">maintenant</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="stat-box">
+      <div class="stat-n">2 400+</div>
+      <div class="stat-l">Foyers protégés<br>en France</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-n">4,9/5</div>
+      <div class="stat-l">Note moyenne<br>clients vérifiés</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-n">&lt; 1 h</div>
+      <div class="stat-l">Durée<br>d'installation</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="feat-header">
+    <p class="section-eyebrow">Technologie</p>
+    <h2 class="section-h2">Conçu pour l'excellence.</h2>
+    <p class="section-p">Chaque composant sélectionné pour vous offrir la meilleure expérience de sécurité résidentielle disponible aujourd'hui.</p>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon ic-blue">📷</div>
+      <h3>Vision 4K HDR</h3>
+      <p>Reconnaissez un visage à 8 mètres, de jour comme en pleine nuit. Capteur grand format, angle 165° et vision nocturne automatique.</p>
+      <span class="feat-pill">165° · HDR · Vision nocturne</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon ic-purple">🤖</div>
+      <h3>IA de Détection</h3>
+      <p>Distingue un visiteur, un colis, un animal ou une intrusion. Zéro fausse alerte. Précision de 99,4% grâce à l'apprentissage continu.</p>
+      <span class="feat-pill">Précision 99,4%</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon ic-green">📱</div>
+      <h3>Contrôle Mobile</h3>
+      <p>Répondez à votre porte depuis Tokyo. Déverrouillez, parlez, visionnez — tout en temps réel sur iOS et Android.</p>
+      <span class="feat-pill">iOS & Android · &lt; 300ms</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon ic-orange">🔐</div>
+      <h3>Chiffrement AES-256</h3>
+      <p>Le standard bancaire. Serveurs hébergés en France, conformité RGPD totale. Vos données restent vôtres.</p>
+      <span class="feat-pill">AES-256 · RGPD · Serveurs FR</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon ic-teal">☁️</div>
+      <h3>Cloud 30 jours</h3>
+      <p>Tout l'historique vidéo des 30 derniers jours, accessible en un clic. Inclus sans supplément, aucune limite.</p>
+      <span class="feat-pill">30 jours inclus</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon ic-red">🔋</div>
+      <h3>Autonomie 18 mois</h3>
+      <p>Batterie longue durée ou filaire. Compatible toutes configurations : bois, métal, blindée, PVC. Aucun travaux requis.</p>
+      <span class="feat-pill">18 mois · Wired option</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section id="price">
+  <div class="price-wrap">
+    <p class="section-eyebrow" style="text-align:center;color:#86b9f5">Tarif</p>
+    <h2 class="section-h2">Simple. Transparent.</h2>
+    <p class="section-p">Un forfait unique, tout inclus. Aucun abonnement, aucune surprise.</p>
+    <div class="price-layout">
+      <div class="price-card">
+        <p class="pc-eyebrow">Forfait tout inclus</p>
+        <div class="pc-amount"><sup>€</sup>179</div>
+        <p class="pc-note">Paiement unique · Aucun abonnement</p>
+        <ul class="pc-list">
+          <li><span class="pc-check">✓</span> Appareil Portaye 4K HDR</li>
+          <li><span class="pc-check">✓</span> Installation par expert certifié</li>
+          <li><span class="pc-check">✓</span> Configuration & mise en service</li>
+          <li><span class="pc-check">✓</span> Application iOS & Android</li>
+          <li><span class="pc-check">✓</span> Stockage cloud 30 jours</li>
+          <li><span class="pc-check">✓</span> Support 7j/7</li>
+          <li><span class="pc-check">✓</span> Garantie 2 ans</li>
+          <li><span class="pc-check">✓</span> Remboursé si non satisfait</li>
+        </ul>
+        <button class="pc-btn" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
+          Réserver mon installation
+        </button>
+        <p class="pc-safe">🔒 Paiement sécurisé · Aucun frais caché</p>
+      </div>
+      <div class="price-guarantees">
+        <div class="pg-item">
+          <span class="pg-icon">🛡️</span>
+          <div>
+            <div class="pg-title">Satisfait ou remboursé 30 jours</div>
+            <div class="pg-desc">Pas convaincu dans les 30 jours ? Remboursement intégral, désinstallation à nos frais. Sans condition.</div>
+          </div>
+        </div>
+        <div class="pg-item">
+          <span class="pg-icon">⚡</span>
+          <div>
+            <div class="pg-title">Installation en moins d'une heure</div>
+            <div class="pg-desc">Un technicien certifié se déplace à votre domicile avec tout le matériel. Vous n'avez rien à préparer.</div>
+          </div>
+        </div>
+        <div class="pg-item">
+          <span class="pg-icon">💬</span>
+          <div>
+            <div class="pg-title">Support humain 7j/7</div>
+            <div class="pg-desc">Un vrai conseiller, pas un bot. Disponible de 8h à 22h par téléphone, mail ou chat.</div>
+          </div>
+        </div>
+        <div class="pg-item">
+          <span class="pg-icon">🏆</span>
+          <div>
+            <div class="pg-title">Garantie 2 ans</div>
+            <div class="pg-desc">Panne matérielle ou bug logiciel — nous intervenons gratuitement pendant 2 ans.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="process-inner">
+    <div style="text-align:center;margin-bottom:0">
+      <p class="section-eyebrow">Installation</p>
+      <h2 class="section-h2">Trois étapes. 48 heures.</h2>
+      <p class="section-p" style="margin:0 auto">De la réservation à votre porte protégée en moins de deux jours. Sans effort de votre part.</p>
+    </div>
+    <div class="process-steps">
+      <div class="ps">
+        <div class="ps-n">1</div>
+        <h3>Réservez en ligne</h3>
+        <p>Remplissez le formulaire en 2 minutes. Un conseiller confirme votre créneau sous 1 heure.</p>
+        <span class="ps-time">2 minutes</span>
+      </div>
+      <div class="ps">
+        <div class="ps-n">2</div>
+        <h3>L'expert arrive</h3>
+        <p>Un technicien certifié Portaye se déplace à votre domicile avec tout le matériel nécessaire.</p>
+        <span class="ps-time">Sous 48h</span>
+      </div>
+      <div class="ps">
+        <div class="ps-n">3</div>
+        <h3>Vous êtes protégé</h3>
+        <p>Installation, configuration, formation. Vous payez 179€ à la fin, seulement si satisfait.</p>
+        <span class="ps-time">Moins d'1h</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVIS -->
+<section id="avis">
+  <div class="reviews-inner">
+    <div style="text-align:center">
+      <p class="section-eyebrow">Avis clients</p>
+      <h2 class="section-h2">2 400 foyers nous font confiance.</h2>
+      <p class="section-p" style="margin:0 auto">Des vraies personnes, partout en France.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">Installation impeccable en moins d'une heure. L'app est d'une fluidité remarquable — j'ai répondu à mon livreur depuis mon bureau à 400 km.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#0071e3">SB</div>
+          <div>
+            <div class="rv-name">Sophie B.</div>
+            <div class="rv-meta">Paris 15e · il y a 4 mois</div>
+            <div class="rv-badge">✓ Achat vérifié</div>
+          </div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">Après un cambriolage dans l'immeuble j'avais besoin d'être rassuré. La qualité 4K est bluffante même la nuit. Rapport qualité/prix imbattable.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#34c759">KM</div>
+          <div>
+            <div class="rv-name">Karim M.</div>
+            <div class="rv-meta">Lyon 6e · il y a 6 mois</div>
+            <div class="rv-badge">✓ Achat vérifié</div>
+          </div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">Je voyage souvent. Portaye me donne une tranquillité totale. L'IA n'envoie des alertes que quand c'est vraiment utile — jamais de fausse alarme.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#ff9500">AC</div>
+          <div>
+            <div class="rv-name">Aurélie C.</div>
+            <div class="rv-meta">Bordeaux · il y a 2 mois</div>
+            <div class="rv-badge">✓ Achat vérifié</div>
+          </div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">179€ tout inclus, c'est moins cher qu'une alarme classique et infiniment plus intelligent. Le service client répond en quelques minutes.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#ff3b30">TL</div>
+          <div>
+            <div class="rv-name">Thomas L.</div>
+            <div class="rv-meta">Marseille · il y a 3 mois</div>
+            <div class="rv-badge">✓ Achat vérifié</div>
+          </div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★☆</div>
+        <p class="rv-text">Très satisfaite. Installation un peu plus longue avec ma porte blindée mais le résultat est parfait. Même ma mère de 70 ans utilise l'app sans difficulté.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#af52de">NF</div>
+          <div>
+            <div class="rv-name">Nathalie F.</div>
+            <div class="rv-meta">Nantes · il y a 5 mois</div>
+            <div class="rv-badge">✓ Achat vérifié</div>
+          </div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">Propriétaire de 4 appartements en location. Portaye a changé ma façon de gérer les accès à distance. Indispensable — j'en ai commandé pour chaque logement.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#5ac8fa">RD</div>
+          <div>
+            <div class="rv-name">Romain D.</div>
+            <div class="rv-meta">Paris · 7 mois</div>
+            <div class="rv-badge">✓ Achat vérifié</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-inner">
+    <div style="text-align:center;margin-bottom:0">
+      <p class="section-eyebrow">FAQ</p>
+      <h2 class="section-h2">Questions fréquentes.</h2>
+    </div>
+    <div class="faq-list" id="faqEl">
+      <div class="faq-item">
+        <div class="faq-q">Compatible avec ma porte ? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Oui. Portaye est compatible avec tous les types de portes : bois, métal, blindée, PVC et double porte. Dans 98% des cas, aucun travaux supplémentaires ne sont nécessaires.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Combien de temps dure l'installation ? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Entre 45 minutes et 1 heure en moyenne. Le technicien s'occupe de tout : pose, câblage, configuration de l'application sur votre smartphone et formation rapide à l'utilisation.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Y a-t-il un abonnement mensuel ? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Non. Les 179€ couvrent l'appareil, l'installation, l'app et le support 7j/7. Le stockage cloud 30 jours est inclus et gratuit. Une option premium à 4,90€/mois est disponible pour un archivage plus long.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Mes données sont-elles sécurisées ? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Absolument. Chiffrement AES-256, serveurs hébergés en France, conformité RGPD totale. Vos vidéos ne sont jamais partagées ni revendues.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Comment fonctionne le remboursement 30 jours ? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Pas satisfait dans les 30 jours ? Contactez notre support — nous organisons la désinstallation à nos frais et vous remboursons en 5 jours ouvrés. Aucune condition cachée.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Puis-je partager l'accès en famille ? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Oui. L'application permet d'inviter jusqu'à 10 utilisateurs par porte, avec des permissions personnalisées pour chaque membre.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Et si internet est coupé ? <span class="faq-plus">+</span></div>
+        <div class="faq-a">La sonnette fonctionne toujours. L'enregistrement local prend le relais sur la mémoire embarquée. À la reconnexion, tout se synchronise automatiquement vers le cloud.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="booking-inner">
+    <p class="section-eyebrow" style="text-align:center;color:rgba(255,255,255,.8)">Réservation</p>
+    <h2 class="section-h2">Planifier votre installation.</h2>
+    <p class="section-p">Formulaire en 2 minutes · Confirmation sous 1h · Installation sous 48h partout en France</p>
+    <div class="booking-grid">
+
+      <!-- Colonne gauche : formulaire + calendrier + confirmation -->
+      <div>
+        <!-- Étape 1 : infos contact -->
+        <div class="booking-form" id="step-form">
+          <div class="f-row">
+            <label class="f-label">Nom complet</label>
+            <input id="f-name" type="text" class="f-input" placeholder="Jean Dupont">
+          </div>
+          <div class="f-row">
+            <label class="f-label">Email</label>
+            <input id="f-email" type="email" class="f-input" placeholder="jean@exemple.fr">
+          </div>
+          <div class="f-row">
+            <label class="f-label">Téléphone</label>
+            <input id="f-phone" type="tel" class="f-input" placeholder="+33 6 00 00 00 00">
+          </div>
+          <div class="f-row">
+            <label class="f-label">Ville</label>
+            <input id="f-city" type="text" class="f-input" placeholder="Paris">
+          </div>
+          <div class="f-row">
+            <label class="f-label" style="margin-bottom:8px">Type de porte</label>
+            <div class="door-grid" id="dg">
+              <div class="door-opt sel">Bois</div>
+              <div class="door-opt">Métal</div>
+              <div class="door-opt">Blindée</div>
+              <div class="door-opt">PVC</div>
+              <div class="door-opt">Double</div>
+              <div class="door-opt">Autre</div>
+            </div>
+          </div>
+          <button id="f-submit" class="f-btn">Voir les disponibilités →</button>
+          <p class="f-note">🔒 Aucun paiement maintenant · Données protégées</p>
+        </div>
+
+        <!-- Étape 2 : calendrier -->
+        <div class="booking-form" id="step-calendar" style="display:none">
+          <button id="back-to-form" style="background:none;border:none;color:var(--blue);cursor:pointer;font-size:14px;padding:0;margin-bottom:20px;font-family:var(--sf)">← Modifier mes informations</button>
+          <h3 style="font-size:17px;font-weight:600;margin-bottom:4px">Choisissez une date</h3>
+          <p style="font-size:13px;color:var(--mid);margin-bottom:16px">Les jours disponibles sont indiqués en bleu.</p>
+
+          <!-- Navigation mois -->
+          <div class="cal-nav">
+            <button class="cal-nav-btn" id="cal-prev">‹</button>
+            <span class="cal-month-label" id="cal-month-label"></span>
+            <button class="cal-nav-btn" id="cal-next">›</button>
+          </div>
+          <!-- Grille calendrier -->
+          <div class="cal-grid" id="cal-grid">
+            <div class="cal-loading" style="grid-column:span 7">Chargement…</div>
+          </div>
+
+          <!-- Créneaux horaires -->
+          <div class="slots-wrapper" id="slots-wrapper">
+            <p class="slots-label" id="slots-label">Créneaux disponibles</p>
+            <div class="slots-grid" id="slots-grid"></div>
+          </div>
+
+          <!-- Récapitulatif + confirmation -->
+          <div class="confirm-box" id="confirm-box">
+            <p style="font-size:14px;font-weight:600;margin-bottom:14px;color:var(--black)">Récapitulatif de votre réservation</p>
+            <div class="confirm-row"><span>Nom</span><span id="cr-name"></span></div>
+            <div class="confirm-row"><span>Email</span><span id="cr-email"></span></div>
+            <div class="confirm-row"><span>Téléphone</span><span id="cr-phone"></span></div>
+            <div class="confirm-row"><span>Ville</span><span id="cr-city"></span></div>
+            <div class="confirm-row"><span>Type de porte</span><span id="cr-door"></span></div>
+            <div class="confirm-row"><span>Date</span><span id="cr-date"></span></div>
+            <div class="confirm-row"><span>Heure</span><span id="cr-time"></span></div>
+            <div class="confirm-row"><span>Prix</span><span style="color:#0071e3;font-weight:700">179 € TTC</span></div>
+            <button class="confirm-btn" id="confirm-btn">Confirmer ma réservation</button>
+            <p style="text-align:center;font-size:12px;color:var(--mid);margin-top:10px">Paiement uniquement le jour de l'installation</p>
+          </div>
+        </div>
+
+        <!-- Étape 3 : succès -->
+        <div class="booking-form booking-success" id="step-success">
+          <div class="bs-icon">✅</div>
+          <div class="bs-title">Réservation enregistrée !</div>
+          <div class="bs-sub">
+            Votre demande a bien été reçue.<br>
+            Nous vous confirmons votre créneau par email sous <strong>1 heure</strong>.<br><br>
+            <span id="success-detail" style="font-weight:500;color:var(--black)"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonne droite : infos prix -->
+      <div class="booking-info">
+        <div class="bi-price">
+          <div class="bi-amount"><sup>€</sup>179</div>
+          <div class="bi-once">Paiement unique · Aucun abonnement</div>
+        </div>
+        <ul class="bi-list">
+          <li><span class="bi-check">✓</span> Appareil + installation inclus</li>
+          <li><span class="bi-check">✓</span> Satisfait ou remboursé 30 jours</li>
+          <li><span class="bi-check">✓</span> Support humain 7j/7</li>
+          <li><span class="bi-check">✓</span> Garantie 2 ans pièces & main d'œuvre</li>
+          <li><span class="bi-check">✓</span> Cloud 30 jours offerts</li>
+          <li><span class="bi-check">✓</span> Compatible toutes portes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEO -->
+<section id="seo">
+  <div class="seo-inner">
+    <h2>Portaye : la sonnette connectée intelligente nouvelle génération</h2>
+    <p>Dans un contexte où les cambriolages représentent plus de 200 000 tentatives par an en France, protéger son domicile est devenu une priorité. Portaye répond à ce besoin avec une solution complète : caméra 4K HDR, intelligence artificielle intégrée, contrôle mobile instantané — installée par un expert certifié en moins d'une heure.</p>
+    <h3>Pourquoi choisir Portaye plutôt qu'une alarme classique ?</h3>
+    <p>Les systèmes d'alarme traditionnels sont souvent compliqués, coûteux et déclenchent trop de fausses alertes. Portaye embarque une IA capable de distinguer un visiteur légitime d'une tentative d'intrusion, avec une précision de 99,4%. Résultat : des alertes uniquement quand elles comptent vraiment.</p>
+    <h3>Installation rapide, partout en France sous 48h</h3>
+    <p>Un technicien certifié se déplace à votre domicile dans les 48 heures. Compatible bois, métal, blindée, PVC — Portaye s'installe sans travaux. Vous payez 179€ uniquement à la fin, si vous êtes satisfait.</p>
+    <h3>179€ tout inclus, zéro abonnement</h3>
+    <p>Là où les concurrents imposent 10 à 30€/mois d'abonnement, Portaye fait le choix de la transparence : un seul paiement de 179€ couvrant appareil, installation, application et support 7j/7. Satisfait ou remboursé pendant 30 jours.</p>
+    <h3>Confidentialité et RGPD</h3>
+    <p>Chiffrement AES-256, serveurs en France, conformité RGPD totale. Vos vidéos ne sont jamais partagées ni revendues. Votre vie privée est protégée autant que votre domicile.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-logo">Portaye</div>
+    <ul class="footer-links">
+      <li><a href="#">Mentions légales</a></li>
+      <li><a href="#">CGV</a></li>
+      <li><a href="#">RGPD</a></li>
+      <li><a href="#">Support</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-copy">Copyright © 2026 Portaye. Tous droits réservés.</div>
+</footer>
+
+<script>
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.closest('.faq-item'), open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!open) item.classList.add('open');
+  });
+});
+
+// ─── TYPE DE PORTE ────────────────────────────────────────────────────────────
+document.querySelectorAll('.door-opt').forEach(d => {
+  d.addEventListener('click', () => {
+    document.querySelectorAll('.door-opt').forEach(x => x.classList.remove('sel'));
+    d.classList.add('sel');
+  });
+});
+
+// ─── BOOKING ENGINE ───────────────────────────────────────────────────────────
+(function () {
+  const API = 'api.php';
+  let calYear, calMonth, availableCache = {}, selectedDate = null, selectedTime = null;
+  const MONTHS = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  const DAYS   = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+
+  const $ = id => document.getElementById(id);
+
+  // Étapes
+  function showStep(name) {
+    ['step-form','step-calendar','step-success'].forEach(s => {
+      const el = $(s);
+      if (el) el.style.display = s === name ? '' : 'none';
+    });
+  }
+
+  // Étape 1 → 2
+  $('f-submit').addEventListener('click', async function () {
+    const name  = $('f-name').value.trim();
+    const email = $('f-email').value.trim();
+    if (!name) { $('f-name').focus(); return alert('Veuillez saisir votre nom.'); }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { $('f-email').focus(); return alert('Veuillez saisir un email valide.'); }
+
+    const btn = this;
+    btn.disabled = true; btn.textContent = 'Chargement…';
+    try {
+      const now = new Date();
+      calYear = now.getFullYear(); calMonth = now.getMonth();
+      showStep('step-calendar');
+      document.getElementById('step-calendar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      await renderCalendar();
+    } finally {
+      btn.disabled = false; btn.textContent = 'Voir les disponibilités →';
+    }
+  });
+
+  // Retour étape 1
+  $('back-to-form').addEventListener('click', () => {
+    selectedDate = null; selectedTime = null;
+    $('slots-wrapper').classList.remove('visible');
+    $('confirm-box').classList.remove('visible');
+    showStep('step-form');
+  });
+
+  // Navigation mois
+  $('cal-prev').addEventListener('click', () => { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(); });
+  $('cal-next').addEventListener('click', () => { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(); });
+
+  async function renderCalendar() {
+    const monthKey = `${calYear}-${String(calMonth + 1).padStart(2, '0')}`;
+    $('cal-month-label').textContent = `${MONTHS[calMonth]} ${calYear}`;
+
+    const now = new Date();
+    const isPast = calYear < now.getFullYear() || (calYear === now.getFullYear() && calMonth < now.getMonth());
+    $('cal-prev').disabled = isPast;
+
+    // Fetch available days (with cache)
+    let available = availableCache[monthKey];
+    if (!available) {
+      $('cal-grid').innerHTML = `<div class="cal-loading" style="grid-column:span 7">Chargement…</div>`;
+      try {
+        const res = await fetch(`${API}?a=calendar&month=${monthKey}`);
+        const data = await res.json();
+        available = data.available || [];
+        availableCache[monthKey] = available;
+      } catch {
+        $('cal-grid').innerHTML = `<div class="cal-loading" style="grid-column:span 7;color:#ff3b30">Erreur de chargement. Réessayez.</div>`;
+        return;
+      }
+    }
+
+    // Render grid
+    const firstDay = new Date(calYear, calMonth, 1).getDay(); // 0=Sun
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+    const offset = firstDay === 0 ? 6 : firstDay - 1; // start on Monday
+    const todayStr = now.toISOString().slice(0, 10);
+
+    let html = DAYS.map(d => `<div class="cal-dow">${d}</div>`).join('');
+    for (let i = 0; i < offset; i++) html += `<div class="cal-day empty"></div>`;
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const isAvail = available.includes(dateStr);
+      const isPastDay = dateStr < todayStr;
+      const isSel = dateStr === selectedDate;
+      let cls = 'cal-day';
+      if (isPastDay || !isAvail) cls += ' past';
+      else if (isSel) cls += ' available selected';
+      else cls += ' available';
+      html += `<div class="${cls}" data-date="${dateStr}">${d}</div>`;
+    }
+    $('cal-grid').innerHTML = html;
+
+    // Click handlers
+    $('cal-grid').querySelectorAll('.cal-day.available').forEach(el => {
+      el.addEventListener('click', () => selectDate(el.dataset.date));
+    });
+  }
+
+  async function selectDate(date) {
+    selectedDate = date; selectedTime = null;
+    $('confirm-box').classList.remove('visible');
+    document.querySelectorAll('.cal-day.selected').forEach(e => e.classList.remove('selected'));
+    const el = $('cal-grid').querySelector(`[data-date="${date}"]`);
+    if (el) el.classList.add('selected');
+
+    const sw = $('slots-wrapper'); sw.classList.add('visible');
+    $('slots-label').textContent = `Créneaux — ${formatDateFr(date)}`;
+    $('slots-grid').innerHTML = '<span style="font-size:14px;color:var(--mid)">Chargement des créneaux…</span>';
+
+    try {
+      const res = await fetch(`${API}?a=slots&date=${date}`);
+      const data = await res.json();
+      if (!data.slots || data.slots.length === 0) {
+        $('slots-grid').innerHTML = '<p class="slots-empty">Aucun créneau disponible ce jour. Choisissez une autre date.</p>';
+      } else {
+        $('slots-grid').innerHTML = data.slots.map(t =>
+          `<button class="slot-btn" data-time="${t}">${t}</button>`
+        ).join('');
+        $('slots-grid').querySelectorAll('.slot-btn').forEach(b => {
+          b.addEventListener('click', () => selectTime(b.dataset.time));
+        });
+      }
+    } catch {
+      $('slots-grid').innerHTML = '<p class="slots-empty" style="color:#ff3b30">Erreur de chargement.</p>';
+    }
+
+    sw.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function selectTime(time) {
+    selectedTime = time;
+    document.querySelectorAll('.slot-btn.selected').forEach(b => b.classList.remove('selected'));
+    $('slots-grid').querySelector(`[data-time="${time}"]`)?.classList.add('selected');
+
+    // Remplir le récap
+    const name  = $('f-name').value.trim();
+    const email = $('f-email').value.trim();
+    const phone = $('f-phone').value.trim() || '—';
+    const city  = $('f-city').value.trim() || '—';
+    const door  = (document.querySelector('.door-opt.sel') || {}).textContent || '—';
+
+    $('cr-name').textContent  = name;
+    $('cr-email').textContent = email;
+    $('cr-phone').textContent = phone;
+    $('cr-city').textContent  = city;
+    $('cr-door').textContent  = door;
+    $('cr-date').textContent  = formatDateFr(selectedDate);
+    $('cr-time').textContent  = time;
+
+    const cb = $('confirm-box'); cb.classList.add('visible');
+    cb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Confirmer la réservation
+  $('confirm-btn').addEventListener('click', async function () {
+    if (!selectedDate || !selectedTime) return;
+    const btn = this;
+    btn.disabled = true; btn.textContent = 'Envoi en cours…';
+
+    try {
+      const res = await fetch(`${API}?a=book`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:      $('f-name').value.trim(),
+          email:     $('f-email').value.trim(),
+          phone:     $('f-phone').value.trim(),
+          city:      $('f-city').value.trim(),
+          door_type: (document.querySelector('.door-opt.sel') || {}).textContent || '',
+          date:      selectedDate,
+          time:      selectedTime,
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        $('success-detail').textContent = `${formatDateFr(selectedDate)} à ${selectedTime}`;
+        showStep('step-success');
+        $('step-success').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Invalider le cache du mois sélectionné pour la prochaine visite
+        const mk = selectedDate.slice(0, 7);
+        delete availableCache[mk];
+      } else {
+        alert(data.error || 'Une erreur est survenue. Veuillez réessayer.');
+        btn.disabled = false; btn.textContent = 'Confirmer ma réservation';
+      }
+    } catch {
+      alert('Erreur réseau. Vérifiez votre connexion et réessayez.');
+      btn.disabled = false; btn.textContent = 'Confirmer ma réservation';
+    }
+  });
+
+  function formatDateFr(dateStr) {
+    const d = new Date(dateStr + 'T12:00:00');
+    return d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  // Init
+  showStep('step-form');
+})();
+</script>
+</body>
+</html>
