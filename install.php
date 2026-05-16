@@ -25,15 +25,17 @@ if (!file_exists($htaccess)) {
 $defaultPassword = 'portaye2025';
 $passwordHash    = password_hash($defaultPassword, PASSWORD_DEFAULT);
 
-if (!file_exists(JSON_SETTINGS)) {
-    jdb_write(JSON_SETTINGS, [
+$existingSettings = jdb_read(JSON_SETTINGS);
+$needsPasswordReset = empty($existingSettings) || str_contains($existingSettings['admin_password'] ?? '', 'PLACEHOLDER');
+
+if ($needsPasswordReset) {
+    jdb_write(JSON_SETTINGS, array_merge([
         'admin_username' => ADMIN_USERNAME,
-        'admin_password' => $passwordHash,
         'admin_email'    => ADMIN_EMAIL,
         'slot_duration'  => (string)SLOT_DURATION,
         'advance_days'   => (string)ADVANCE_DAYS_MAX,
         'min_hours'      => (string)MIN_BOOKING_HOURS,
-    ]);
+    ], $existingSettings, ['admin_password' => $passwordHash]));
 }
 
 if (!file_exists(JSON_AVAILABILITY)) {
