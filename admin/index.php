@@ -694,17 +694,12 @@ el('test-smtp').addEventListener('click', async () => {
 });
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
-loadDashboard();
-setInterval(() => { if (currentPage === 'dashboard') loadDashboard(); }, 30000);
-
-// ─── Helpers ──────────────────────────────────────────────────────────────────
 function esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// Init
 loadDashboard();
-loadAvailability();
+setInterval(() => { if (currentPage === 'dashboard') loadDashboard(); }, 30000);
 </script>
 
 <?php endif; ?>

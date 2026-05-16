@@ -190,10 +190,10 @@ case 'appointments':
     $today = date('Y-m-d');
     $stats = [
         'total'     => count($all),
-        'pending'   => count(array_filter($all, fn($a) => $a['status'] === 'pending')),
-        'confirmed' => count(array_filter($all, fn($a) => $a['status'] === 'confirmed')),
-        'cancelled' => count(array_filter($all, fn($a) => $a['status'] === 'cancelled')),
-        'today'     => count(array_filter($all, fn($a) => $a['appt_date'] === $today && $a['status'] !== 'cancelled')),
+        'pending'   => count(array_filter($all, function($a) { return $a['status'] === 'pending'; })),
+        'confirmed' => count(array_filter($all, function($a) { return $a['status'] === 'confirmed'; })),
+        'cancelled' => count(array_filter($all, function($a) { return $a['status'] === 'cancelled'; })),
+        'today'     => count(array_filter($all, function($a) use ($today) { return $a['appt_date'] === $today && $a['status'] !== 'cancelled'; })),
     ];
 
     json_response(['appointments' => $rows, 'total' => $total, 'page' => $page, 'per_page' => $per_page, 'stats' => $stats]);
@@ -240,7 +240,7 @@ case 'appointment_delete':
     if (!$id) json_response(['error' => 'ID invalide'], 400);
 
     $appointments = jdb_read(JSON_APPOINTMENTS);
-    $appointments = array_values(array_filter($appointments, fn($a) => (int)$a['id'] !== $id));
+    $appointments = array_values(array_filter($appointments, function($a) use ($id) { return (int)$a['id'] !== $id; }));
     jdb_write(JSON_APPOINTMENTS, $appointments);
     json_response(['success' => true]);
     break;
@@ -248,7 +248,7 @@ case 'appointment_delete':
 case 'availability':
     require_admin();
     $rules = jdb_read(JSON_AVAILABILITY);
-    usort($rules, fn($a, $b) => $a['day_of_week'] <=> $b['day_of_week']);
+    usort($rules, function($a, $b) { return $a['day_of_week'] <=> $b['day_of_week']; });
     json_response(['rules' => $rules]);
     break;
 
@@ -289,7 +289,7 @@ case 'availability_save':
 case 'blocked':
     require_admin();
     $blocked = jdb_read(JSON_BLOCKED);
-    usort($blocked, fn($a, $b) => strcmp($a['start_date'], $b['start_date']));
+    usort($blocked, function($a, $b) { return strcmp($a['start_date'], $b['start_date']); });
     json_response(['blocked' => $blocked]);
     break;
 
@@ -319,7 +319,7 @@ case 'blocked_remove':
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') json_response(['error' => 'POST requis'], 405);
     $id = (int)p('id');
     $blocked = jdb_read(JSON_BLOCKED);
-    $blocked = array_values(array_filter($blocked, fn($b) => (int)$b['id'] !== $id));
+    $blocked = array_values(array_filter($blocked, function($b) use ($id) { return (int)$b['id'] !== $id; }));
     jdb_write(JSON_BLOCKED, $blocked);
     json_response(['success' => true]);
     break;

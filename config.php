@@ -15,7 +15,7 @@ define('ADMIN_EMAIL',         'sirh.contact2023@gmail.com');
 
 // ─── SITE ─────────────────────────────────────────────────────────────────────
 define('SITE_NAME', 'Portaye');
-define('SITE_URL',  'https://portaye.fr');
+define('SITE_URL',  'https://portaye.com');
 define('TIMEZONE',  'Europe/Paris');
 
 // ─── PARAMÈTRES DE RÉSERVATION (valeurs par défaut) ──────────────────────────
