@@ -182,12 +182,44 @@ tr:hover td { background:#fafafa; }
 .modal-sub { font-size:14px;color:var(--mid);line-height:1.6;margin-bottom:24px; }
 .modal-actions { display:flex;gap:10px;justify-content:flex-end; }
 
+/* ─── MOBILE BAR ─── */
+.mobile-bar {
+  display:none;position:fixed;top:0;left:0;right:0;height:54px;background:#000;z-index:49;
+  align-items:center;padding:0 16px;gap:12px;
+}
+.mobile-bar-logo { color:#f5f5f7;font-size:18px;font-weight:700;flex:1; }
+.hamburger { background:none;border:none;cursor:pointer;padding:6px;display:flex;flex-direction:column;gap:5px; }
+.hamburger span { display:block;width:22px;height:2px;background:#f5f5f7;border-radius:2px;transition:.2s; }
+.sidebar-overlay { display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:48; }
+.sidebar-overlay.open { display:block; }
+
 /* ─── RESPONSIVE ─── */
 @media(max-width:768px){
+  .mobile-bar { display:flex; }
   .sidebar { transform:translateX(-100%);transition:transform .25s; }
   .sidebar.open { transform:translateX(0); }
-  .main { margin-left:0; }
-  .stats-row { grid-template-columns:repeat(2,1fr); }
+  .main { margin-left:0;padding:70px 16px 32px;max-width:100vw; }
+  .stats-row { grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px; }
+  .page-title { font-size:20px; }
+  .topbar { flex-wrap:wrap;gap:8px;margin-bottom:20px; }
+  .topbar-right { flex-wrap:wrap;gap:8px; }
+  .filter-row { width:100%; }
+  .card-header { flex-direction:column;align-items:flex-start; }
+  .cal-nav-bar { flex-wrap:wrap;gap:8px; }
+  .cal-view { overflow-x:auto; }
+  .cal-grid-v { min-width:500px; }
+  .setting-row { flex-direction:column;align-items:flex-start;gap:10px; }
+  .setting-control { width:100%; }
+  #s-email,#s-pass { width:100%!important; }
+  .add-form-row { flex-direction:column;gap:12px; }
+  #b-reason { width:100%!important; }
+  .avail-day { flex-wrap:wrap;row-gap:10px; }
+  .avail-times { width:100%; }
+  .time-input { flex:1;min-width:90px;width:auto; }
+}
+@media(max-width:480px){
+  .stat-card .n { font-size:26px; }
+  .stats-row { gap:10px; }
 }
 @keyframes fadeUp { from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)} }
 </style>
@@ -232,6 +264,13 @@ tr:hover td { background:#fafafa; }
 
 <?php else: ?>
 <!-- ════════════════════════════ ADMIN PANEL ══════════════════════════════════ -->
+
+<!-- Mobile bar -->
+<div class="mobile-bar" id="mobile-bar">
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <span class="mobile-bar-logo">Portaye</span>
+</div>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <!-- Sidebar -->
 <div class="sidebar" id="sidebar">
@@ -692,6 +731,23 @@ el('test-smtp').addEventListener('click', async () => {
   } catch { res.style.display='inline'; res.textContent='✕ Erreur réseau'; res.style.color='var(--red)'; }
   el('test-smtp').disabled=false; el('test-smtp').textContent='Envoyer un email de test';
 });
+
+// ─── MOBILE SIDEBAR ───────────────────────────────────────────────────────────
+(function(){
+  const sidebar = el('sidebar');
+  const hamburger = el('hamburger');
+  const overlay = el('sidebar-overlay');
+  if (!hamburger) return;
+  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('open'); }
+  hamburger.addEventListener('click', () => {
+    const open = sidebar.classList.toggle('open');
+    overlay.classList.toggle('open', open);
+  });
+  overlay.addEventListener('click', closeSidebar);
+  qa('.sb-link').forEach(btn => btn.addEventListener('click', () => {
+    if (window.innerWidth <= 768) closeSidebar();
+  }));
+})();
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 function esc(s) {
