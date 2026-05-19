@@ -30,6 +30,10 @@ define('JSON_APPOINTMENTS', DATA_DIR . '/appointments.json');
 define('JSON_AVAILABILITY', DATA_DIR . '/availability_rules.json');
 define('JSON_BLOCKED',      DATA_DIR . '/blocked_dates.json');
 define('JSON_SETTINGS',     DATA_DIR . '/settings.json');
+define('JSON_CONTENT',      DATA_DIR . '/content.json');
+define('JSON_TECHNICIANS',  DATA_DIR . '/technicians.json');
+define('JSON_PAGES',        DATA_DIR . '/pages.json');
+define('UPLOADS_DIR',       __DIR__ . '/uploads');
 
 date_default_timezone_set(TIMEZONE);
 session_name('portaye_admin');

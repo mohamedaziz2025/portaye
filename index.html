@@ -8,6 +8,8 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- CMS dynamic colors -->
+<style id="cms-colors"></style>
 <!-- booking styles injected below -->
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -552,14 +554,14 @@ footer {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
-  <p class="hero-eyebrow">Nouveau — Sécurité résidentielle intelligente</p>
-  <h1>La sécurité <span>réinventée.</span></h1>
-  <p class="hero-sub">Votre porte d'entrée devient un système de surveillance intelligent. Vision 4K HDR, IA de détection, contrôle instantané depuis n'importe où.</p>
+  <p class="hero-eyebrow" id="cms-hero-eyebrow">Nouveau — Sécurité résidentielle intelligente</p>
+  <h1 id="cms-hero-title">La sécurité <span id="cms-hero-highlight">réinventée.</span></h1>
+  <p class="hero-sub" id="cms-hero-sub">Votre porte d'entrée devient un système de surveillance intelligent. Vision 4K HDR, IA de détection, contrôle instantané depuis n'importe où.</p>
   <div class="cta-row">
     <a href="#booking" class="cta-primary">Installer maintenant</a>
     <a href="#features" class="cta-link">En savoir plus ›</a>
   </div>
-  <p class="price-badge"><strong>179 €</strong> tout inclus · Aucun abonnement</p>
+  <p class="price-badge"><strong id="cms-price-hero">179 €</strong> <span id="cms-price-note">tout inclus · Aucun abonnement</span></p>
 
   <div class="hero-device">
     <div class="hd-bar">
@@ -611,7 +613,7 @@ footer {
     <h2 class="section-h2">Conçu pour l'excellence.</h2>
     <p class="section-p">Chaque composant sélectionné pour vous offrir la meilleure expérience de sécurité résidentielle disponible aujourd'hui.</p>
   </div>
-  <div class="feat-grid">
+  <div class="feat-grid" id="cms-features-grid">
     <div class="feat-card">
       <div class="feat-icon ic-blue">📷</div>
       <h3>Vision 4K HDR</h3>
@@ -660,7 +662,7 @@ footer {
     <div class="price-layout">
       <div class="price-card">
         <p class="pc-eyebrow">Forfait tout inclus</p>
-        <div class="pc-amount"><sup>€</sup>179</div>
+        <div class="pc-amount"><sup>€</sup><span id="cms-price-main">179</span></div>
         <p class="pc-note">Paiement unique · Aucun abonnement</p>
         <ul class="pc-list">
           <li><span class="pc-check">✓</span> Appareil Portaye 4K HDR</li>
@@ -750,7 +752,7 @@ footer {
       <h2 class="section-h2">2 400 foyers nous font confiance.</h2>
       <p class="section-p" style="margin:0 auto">Des vraies personnes, partout en France.</p>
     </div>
-    <div class="reviews-grid">
+    <div class="reviews-grid" id="cms-reviews-grid">
       <div class="rv-card">
         <div class="rv-stars">★★★★★</div>
         <p class="rv-text">Installation impeccable en moins d'une heure. L'app est d'une fluidité remarquable — j'ai répondu à mon livreur depuis mon bureau à 400 km.</p>
@@ -834,7 +836,7 @@ footer {
       <p class="section-eyebrow">FAQ</p>
       <h2 class="section-h2">Questions fréquentes.</h2>
     </div>
-    <div class="faq-list" id="faqEl">
+    <div class="faq-list" id="faqEl" data-cms-faq="1">
       <div class="faq-item">
         <div class="faq-q">Compatible avec ma porte ? <span class="faq-plus">+</span></div>
         <div class="faq-a">Oui. Portaye est compatible avec tous les types de portes : bois, métal, blindée, PVC et double porte. Dans 98% des cas, aucun travaux supplémentaires ne sont nécessaires.</div>
@@ -1258,6 +1260,82 @@ document.querySelectorAll('.door-opt').forEach(d => {
 
   // Init
   showStep('step-form');
+})();
+</script>
+
+<!-- CMS Content Loader -->
+<script>
+(function(){
+  function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  fetch('/api.php?a=content_get').then(r=>r.json()).then(function(c){
+    if(!c||typeof c!=='object') return;
+
+    // Colors
+    if(c.colors){
+      var css=':root{';
+      if(c.colors.primary) css+='--blue:'+c.colors.primary+';';
+      if(c.colors.primary_hover) css+='--blue-hover:'+c.colors.primary_hover+';';
+      css+='}';
+      document.getElementById('cms-colors').textContent=css;
+    }
+
+    // Hero texts
+    if(c.hero_eyebrow){var e=document.getElementById('cms-hero-eyebrow');if(e)e.textContent=c.hero_eyebrow;}
+    if(c.hero_title){
+      var ht=document.getElementById('cms-hero-title');
+      var span=document.getElementById('cms-hero-highlight');
+      if(ht&&span&&c.hero_title_highlight){
+        var before=c.hero_title.replace(c.hero_title_highlight,'').trim();
+        ht.innerHTML=esc(before)+' <span id="cms-hero-highlight">'+esc(c.hero_title_highlight)+'</span>';
+      } else if(ht){ ht.textContent=c.hero_title; }
+    }
+    if(c.hero_sub){var e=document.getElementById('cms-hero-sub');if(e)e.textContent=c.hero_sub;}
+    if(c.price){
+      var ph=document.getElementById('cms-price-hero');if(ph)ph.textContent=c.price+' €';
+      var pm=document.getElementById('cms-price-main');if(pm)pm.textContent=c.price;
+    }
+    if(c.price_note){var pn=document.getElementById('cms-price-note');if(pn)pn.textContent=c.price_note;}
+
+    // Features
+    if(Array.isArray(c.features)&&c.features.length){
+      var fg=document.getElementById('cms-features-grid');
+      if(fg){
+        fg.innerHTML=c.features.map(function(f){
+          return '<div class="feat-card"><div class="feat-icon '+esc(f.color||'')+'">'+esc(f.icon)+'</div><h3>'+esc(f.title)+'</h3><p>'+esc(f.desc)+'</p><span class="feat-pill">'+esc(f.pill)+'</span></div>';
+        }).join('');
+      }
+    }
+
+    // Reviews
+    if(Array.isArray(c.reviews)&&c.reviews.length){
+      var rg=document.getElementById('cms-reviews-grid');
+      if(rg){
+        rg.innerHTML=c.reviews.map(function(r){
+          var stars='★'.repeat(r.stars||5)+(r.stars<5?'☆'.repeat(5-r.stars):'');
+          return '<div class="rv-card"><div class="rv-stars">'+stars+'</div><p class="rv-text">'+esc(r.text)+'</p><div class="rv-author"><div class="rv-av" style="background:'+esc(r.color||'#0071e3')+'">'+esc(r.initials)+'</div><div><div class="rv-name">'+esc(r.name)+'</div><div class="rv-meta">'+esc(r.location)+' · '+esc(r.date)+'</div><div class="rv-badge">✓ Achat vérifié</div></div></div></div>';
+        }).join('');
+      }
+    }
+
+    // FAQ
+    if(Array.isArray(c.faq)&&c.faq.length){
+      var fq=document.getElementById('faqEl');
+      if(fq){
+        fq.innerHTML=c.faq.map(function(f){
+          return '<div class="faq-item"><div class="faq-q">'+esc(f.q)+' <span class="faq-plus">+</span></div><div class="faq-a">'+esc(f.a)+'</div></div>';
+        }).join('');
+        // Re-bind FAQ accordion
+        fq.querySelectorAll('.faq-q').forEach(function(q){
+          q.addEventListener('click',function(){
+            var item=q.parentElement;
+            var open=item.classList.contains('open');
+            fq.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-plus').textContent='+';});
+            if(!open){item.classList.add('open');q.querySelector('.faq-plus').textContent='−';}
+          });
+        });
+      }
+    }
+  }).catch(function(){});
 })();
 </script>
 </body>

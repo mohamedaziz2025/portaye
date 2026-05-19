@@ -357,6 +357,180 @@ case 'smtp_test':
     json_response(['success' => $ok, 'to' => $to]);
     break;
 
+// ─── CONTENU DU SITE ─────────────────────────────────────────────────────────
+
+case 'content_get':
+    $content = jdb_read(JSON_CONTENT);
+    json_response($content ?: []);
+    break;
+
+case 'content_save':
+    require_admin();
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') json_response(['error' => 'POST requis'], 405);
+    $existing = jdb_read(JSON_CONTENT);
+    $allowed = ['hero_eyebrow','hero_title','hero_title_highlight','hero_sub','hero_cta_primary','hero_cta_secondary','price','price_note','colors','features','reviews','faq'];
+    foreach ($allowed as $k) {
+        if (isset($json[$k])) $existing[$k] = $json[$k];
+    }
+    jdb_write(JSON_CONTENT, $existing);
+    json_response(['success' => true]);
+    break;
+
+case 'upload_image':
+    require_admin();
+    if (empty($_FILES['image'])) json_response(['error' => 'Aucun fichier'], 400);
+    $file = $_FILES['image'];
+    $allowed_types = ['image/jpeg','image/png','image/gif','image/webp','image/svg+xml'];
+    if (!in_array($file['type'], $allowed_types)) json_response(['error' => 'Type de fichier non autorisé'], 400);
+    if ($file['size'] > 5 * 1024 * 1024) json_response(['error' => 'Fichier trop lourd (max 5 Mo)'], 400);
+    if (!is_dir(UPLOADS_DIR)) mkdir(UPLOADS_DIR, 0750, true);
+    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $name = bin2hex(random_bytes(12)) . '.' . strtolower($ext);
+    $dest = UPLOADS_DIR . '/' . $name;
+    if (!move_uploaded_file($file['tmp_name'], $dest)) json_response(['error' => 'Erreur lors de l\'upload'], 500);
+    json_response(['success' => true, 'url' => '/uploads/' . $name]);
+    break;
+
+// ─── TECHNICIENS ─────────────────────────────────────────────────────────────
+
+case 'technicians':
+    require_admin();
+    $techs = jdb_read(JSON_TECHNICIANS);
+    json_response(['technicians' => $techs]);
+    break;
+
+case 'technician_save':
+    require_admin();
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') json_response(['error' => 'POST requis'], 405);
+    $techs = jdb_read(JSON_TECHNICIANS);
+    $id = isset($json['id']) ? (int)$json['id'] : 0;
+    $name = trim($json['name'] ?? '');
+    $city = trim($json['city'] ?? '');
+    if (!$name || !$city) json_response(['error' => 'Nom et ville requis'], 400);
+    $entry = [
+        'id'          => $id ?: jdb_next_id($techs),
+        'name'        => $name,
+        'city'        => $city,
+        'email'       => trim($json['email'] ?? ''),
+        'phone'       => trim($json['phone'] ?? ''),
+        'is_active'   => isset($json['is_active']) ? (bool)$json['is_active'] : true,
+        'zones'       => trim($json['zones'] ?? ''),
+        'note'        => trim($json['note'] ?? ''),
+        'created_at'  => date('Y-m-d H:i:s'),
+    ];
+    if ($id) {
+        foreach ($techs as &$t) { if ((int)$t['id'] === $id) { $entry['created_at'] = $t['created_at']; $t = $entry; break; } }
+        unset($t);
+    } else {
+        $techs[] = $entry;
+    }
+    jdb_write(JSON_TECHNICIANS, $techs);
+    json_response(['success' => true, 'id' => $entry['id']]);
+    break;
+
+case 'technician_delete':
+    require_admin();
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') json_response(['error' => 'POST requis'], 405);
+    $id = (int)($json['id'] ?? 0);
+    if (!$id) json_response(['error' => 'ID invalide'], 400);
+    $techs = jdb_read(JSON_TECHNICIANS);
+    $techs = array_values(array_filter($techs, function($t) use ($id) { return (int)$t['id'] !== $id; }));
+    jdb_write(JSON_TECHNICIANS, $techs);
+    json_response(['success' => true]);
+    break;
+
+// ─── PAGES ───────────────────────────────────────────────────────────────────
+
+case 'pages':
+    require_admin();
+    $pages = jdb_read(JSON_PAGES);
+    json_response(['pages' => $pages]);
+    break;
+
+case 'page_get':
+    $slug = preg_replace('/[^a-z0-9_-]/', '', strtolower($_GET['slug'] ?? ''));
+    if (!$slug) json_response(['error' => 'Slug requis'], 400);
+    $pages = jdb_read(JSON_PAGES);
+    foreach ($pages as $pg) {
+        if ($pg['slug'] === $slug) {
+            if (!$pg['is_active'] && !is_admin()) json_response(['error' => 'Page introuvable'], 404);
+            json_response($pg);
+        }
+    }
+    json_response(['error' => 'Page introuvable'], 404);
+    break;
+
+case 'page_save':
+    require_admin();
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') json_response(['error' => 'POST requis'], 405);
+    $pages = jdb_read(JSON_PAGES);
+    $id   = isset($json['id']) ? (int)$json['id'] : 0;
+    $title = trim($json['title'] ?? '');
+    $slug  = preg_replace('/[^a-z0-9_-]/', '', strtolower(trim($json['slug'] ?? '')));
+    if (!$title || !$slug) json_response(['error' => 'Titre et slug requis'], 400);
+    foreach ($pages as $pg) {
+        if ($pg['slug'] === $slug && (int)$pg['id'] !== $id) json_response(['error' => 'Ce slug est déjà utilisé'], 409);
+    }
+    $now = date('Y-m-d H:i:s');
+    $entry = [
+        'id'         => $id ?: jdb_next_id($pages),
+        'title'      => $title,
+        'slug'       => $slug,
+        'is_active'  => isset($json['is_active']) ? (bool)$json['is_active'] : false,
+        'content'    => $json['content'] ?? '',
+        'meta_desc'  => trim($json['meta_desc'] ?? ''),
+        'created_at' => $now,
+        'updated_at' => $now,
+    ];
+    if ($id) {
+        foreach ($pages as &$pg) {
+            if ((int)$pg['id'] === $id) { $entry['created_at'] = $pg['created_at']; $pg = $entry; break; }
+        }
+        unset($pg);
+    } else {
+        $pages[] = $entry;
+    }
+    jdb_write(JSON_PAGES, $pages);
+    json_response(['success' => true, 'id' => $entry['id'], 'slug' => $slug]);
+    break;
+
+case 'page_delete':
+    require_admin();
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') json_response(['error' => 'POST requis'], 405);
+    $id = (int)($json['id'] ?? 0);
+    if (!$id) json_response(['error' => 'ID invalide'], 400);
+    $pages = jdb_read(JSON_PAGES);
+    $pages = array_values(array_filter($pages, function($p) use ($id) { return (int)$p['id'] !== $id; }));
+    jdb_write(JSON_PAGES, $pages);
+    json_response(['success' => true]);
+    break;
+
+case 'page_duplicate':
+    require_admin();
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') json_response(['error' => 'POST requis'], 405);
+    $id = (int)($json['id'] ?? 0);
+    $pages = jdb_read(JSON_PAGES);
+    $source = null;
+    foreach ($pages as $pg) { if ((int)$pg['id'] === $id) { $source = $pg; break; } }
+    if (!$source) json_response(['error' => 'Page introuvable'], 404);
+    $newSlug = $source['slug'] . '-copie';
+    $i = 2;
+    $slugs = array_column($pages, 'slug');
+    while (in_array($newSlug, $slugs)) { $newSlug = $source['slug'] . '-copie-' . $i++; }
+    $now = date('Y-m-d H:i:s');
+    $copy = array_merge($source, [
+        'id'         => jdb_next_id($pages),
+        'title'      => $source['title'] . ' (copie)',
+        'slug'       => $newSlug,
+        'is_active'  => false,
+        'created_at' => $now,
+        'updated_at' => $now,
+    ]);
+    $pages[] = $copy;
+    jdb_write(JSON_PAGES, $pages);
+    json_response(['success' => true, 'id' => $copy['id'], 'slug' => $newSlug]);
+    break;
+
 default:
     json_response(['error' => 'Action inconnue'], 404);
 }

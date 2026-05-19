@@ -162,6 +162,63 @@ tr:hover td { background:#fafafa; }
 .setting-control { flex-shrink:0; }
 .select-input { padding:8px 12px;border:1px solid #d2d2d7;border-radius:8px;font-size:14px;font-family:var(--sf);background:var(--light); }
 
+/* ─── CONTENT EDITOR ─── */
+.cms-tabs { display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px; }
+.cms-tab { padding:8px 18px;border-radius:980px;font-size:13px;border:1px solid #d2d2d7;cursor:pointer;background:var(--white);font-family:var(--sf);font-weight:500;transition:all .15s; }
+.cms-tab.active { background:var(--black);color:#fff;border-color:var(--black); }
+.cms-panel { display:none; }
+.cms-panel.active { display:block; }
+.cms-field { margin-bottom:20px; }
+.cms-field label { display:block;font-size:12px;font-weight:600;color:var(--mid);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px; }
+.cms-input { width:100%;background:var(--light);border:1px solid #d2d2d7;border-radius:10px;padding:10px 14px;font-size:15px;color:var(--black);font-family:var(--sf);outline:none;transition:border-color .2s; }
+.cms-input:focus { border-color:var(--blue);background:var(--white); }
+textarea.cms-input { min-height:90px;resize:vertical; }
+.cms-color-row { display:flex;align-items:center;gap:12px; }
+.cms-color-row input[type=color] { width:44px;height:44px;border:1px solid #d2d2d7;border-radius:8px;cursor:pointer;padding:2px;background:var(--white); }
+.cms-array-list { display:flex;flex-direction:column;gap:12px; }
+.cms-array-item { background:var(--light);border-radius:12px;padding:16px;position:relative; }
+.cms-array-item .item-head { display:flex;align-items:center;justify-content:space-between;margin-bottom:12px; }
+.cms-array-item .item-title { font-size:14px;font-weight:600; }
+.cms-item-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+.cms-item-grid .full { grid-column:1/-1; }
+.img-upload-wrap { display:flex;align-items:center;gap:12px;flex-wrap:wrap; }
+.img-preview { width:80px;height:60px;object-fit:cover;border-radius:8px;border:1px solid #d2d2d7;display:none; }
+.img-preview.show { display:block; }
+.upload-btn { padding:8px 16px;border:1px dashed #d2d2d7;border-radius:8px;font-size:13px;cursor:pointer;background:var(--white);font-family:var(--sf); }
+.upload-btn:hover { border-color:var(--blue);color:var(--blue); }
+.cms-save-bar { position:sticky;bottom:0;background:var(--white);border-top:1px solid #e5e5ea;padding:16px 0;margin-top:28px;display:flex;align-items:center;gap:12px; }
+
+/* ─── TECHNICIANS ─── */
+.tech-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px; }
+.tech-card { background:var(--white);border-radius:16px;padding:22px;border:1px solid #e5e5ea;position:relative; }
+.tech-card .tc-name { font-size:17px;font-weight:600;margin-bottom:4px; }
+.tech-card .tc-city { font-size:13px;color:var(--mid);margin-bottom:12px; }
+.tech-card .tc-meta { font-size:12px;color:var(--mid); }
+.tech-badge-active { display:inline-block;padding:3px 10px;border-radius:980px;font-size:11px;background:#e8fdf0;color:#1d6336;margin-bottom:10px; }
+.tech-badge-inactive { display:inline-block;padding:3px 10px;border-radius:980px;font-size:11px;background:#f0f0f5;color:var(--mid);margin-bottom:10px; }
+.tc-actions { display:flex;gap:8px;margin-top:14px; }
+.tech-form-wrap { background:var(--white);border-radius:16px;padding:28px;margin-bottom:24px; }
+.tech-form-wrap h3 { font-size:17px;font-weight:600;margin-bottom:20px; }
+.tf-grid { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
+.tf-grid .tf-full { grid-column:1/-1; }
+
+/* ─── PAGES ─── */
+.pages-list { display:flex;flex-direction:column;gap:12px; }
+.page-item { background:var(--white);border-radius:14px;padding:18px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap; }
+.pi-info { flex:1;min-width:180px; }
+.pi-title { font-size:16px;font-weight:600;margin-bottom:4px; }
+.pi-slug { font-size:12px;color:var(--mid); }
+.pi-actions { display:flex;gap:8px;flex-wrap:wrap; }
+.page-editor-wrap { background:var(--white);border-radius:16px;padding:28px;margin-bottom:24px; }
+.page-editor-wrap h3 { font-size:17px;font-weight:600;margin-bottom:20px; }
+.pe-grid { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
+.pe-full { grid-column:1/-1; }
+.pe-editor { width:100%;min-height:280px;padding:14px;border:1px solid #d2d2d7;border-radius:10px;font-size:14px;font-family:var(--sf);background:var(--light);resize:vertical;line-height:1.6; }
+.pe-editor:focus { border-color:var(--blue);background:var(--white);outline:none; }
+.pe-toolbar { display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px; }
+.pe-tool { padding:5px 12px;border:1px solid #d2d2d7;border-radius:6px;font-size:12px;cursor:pointer;background:var(--white);font-family:var(--sf);font-weight:500; }
+.pe-tool:hover { background:var(--black);color:#fff;border-color:var(--black); }
+
 /* ─── TOAST ─── */
 .toast {
   position:fixed;bottom:24px;right:24px;z-index:999;
@@ -295,6 +352,18 @@ tr:hover td { background:#fafafa; }
     <button class="sb-link" data-page="blocked">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
       Dates bloquées
+    </button>
+    <button class="sb-link" data-page="content">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Contenu du site
+    </button>
+    <button class="sb-link" data-page="technicians">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Techniciens
+    </button>
+    <button class="sb-link" data-page="pages">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Pages
     </button>
     <button class="sb-link" data-page="settings">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -432,6 +501,245 @@ tr:hover td { background:#fafafa; }
     <p style="font-size:14px;color:var(--mid);margin-bottom:18px">Envoie un email de test à l'adresse admin pour vérifier la configuration SMTP.</p>
     <button class="btn-primary" style="width:auto;padding:12px 28px;background:var(--black)" id="test-smtp">Envoyer un email de test</button>
     <span id="smtp-result" style="font-size:13px;margin-left:12px;display:none"></span>
+  </div>
+</div>
+
+<!-- ─── CONTENU DU SITE ─── -->
+<div class="page" id="page-content">
+  <div class="topbar">
+    <div class="page-title">Contenu du site</div>
+    <div class="topbar-right">
+      <a href="../" target="_blank" style="font-size:13px;color:var(--blue);text-decoration:none">Voir le site ↗</a>
+    </div>
+  </div>
+  <div class="cms-tabs">
+    <button class="cms-tab active" data-tab="tab-texts">Textes & Prix</button>
+    <button class="cms-tab" data-tab="tab-colors">Couleurs</button>
+    <button class="cms-tab" data-tab="tab-features">Fonctionnalités</button>
+    <button class="cms-tab" data-tab="tab-reviews">Avis clients</button>
+    <button class="cms-tab" data-tab="tab-faq">FAQ</button>
+  </div>
+
+  <!-- Textes & Prix -->
+  <div class="settings-section cms-panel active" id="tab-texts">
+    <h3>Textes principaux</h3>
+    <div class="cms-field">
+      <label>Accroche hero (petite ligne)</label>
+      <input type="text" class="cms-input" id="c-hero-eyebrow">
+    </div>
+    <div class="cms-field">
+      <label>Titre hero</label>
+      <input type="text" class="cms-input" id="c-hero-title">
+    </div>
+    <div class="cms-field">
+      <label>Mot mis en évidence dans le titre (en bleu)</label>
+      <input type="text" class="cms-input" id="c-hero-highlight">
+    </div>
+    <div class="cms-field">
+      <label>Sous-titre hero</label>
+      <textarea class="cms-input" id="c-hero-sub"></textarea>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px">
+      <div class="cms-field" style="margin:0">
+        <label>Texte du bouton principal</label>
+        <input type="text" class="cms-input" id="c-cta-primary">
+      </div>
+      <div class="cms-field" style="margin:0">
+        <label>Texte du lien secondaire</label>
+        <input type="text" class="cms-input" id="c-cta-secondary">
+      </div>
+    </div>
+    <h3 style="margin-top:8px;margin-bottom:20px">Prix</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="cms-field" style="margin:0">
+        <label>Prix (chiffre seul, sans €)</label>
+        <input type="number" class="cms-input" id="c-price" min="1">
+      </div>
+      <div class="cms-field" style="margin:0">
+        <label>Note sous le prix</label>
+        <input type="text" class="cms-input" id="c-price-note">
+      </div>
+    </div>
+    <div class="cms-save-bar">
+      <button class="btn-primary" style="width:auto;padding:12px 28px" id="save-content-texts">Enregistrer</button>
+      <span id="save-texts-msg" style="font-size:13px;display:none"></span>
+    </div>
+  </div>
+
+  <!-- Couleurs -->
+  <div class="settings-section cms-panel" id="tab-colors">
+    <h3>Couleurs principales</h3>
+    <p style="font-size:14px;color:var(--mid);margin-bottom:24px">Ces couleurs s'appliquent aux boutons, liens et accents sur tout le site.</p>
+    <div class="setting-row">
+      <div class="setting-info"><div class="label">Couleur principale</div><div class="desc">Boutons, liens, badges</div></div>
+      <div class="setting-control cms-color-row">
+        <input type="color" id="c-color-primary" value="#0071e3">
+        <input type="text" class="cms-input" id="c-color-primary-hex" style="width:120px" placeholder="#0071e3">
+      </div>
+    </div>
+    <div class="setting-row">
+      <div class="setting-info"><div class="label">Couleur au survol</div><div class="desc">Boutons au passage de la souris</div></div>
+      <div class="setting-control cms-color-row">
+        <input type="color" id="c-color-hover" value="#0077ed">
+        <input type="text" class="cms-input" id="c-color-hover-hex" style="width:120px" placeholder="#0077ed">
+      </div>
+    </div>
+    <div class="cms-save-bar">
+      <button class="btn-primary" style="width:auto;padding:12px 28px" id="save-content-colors">Enregistrer les couleurs</button>
+    </div>
+  </div>
+
+  <!-- Fonctionnalités -->
+  <div class="settings-section cms-panel" id="tab-features">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <h3 style="margin:0">Cartes fonctionnalités</h3>
+      <button class="btn-sm" id="add-feature">+ Ajouter</button>
+    </div>
+    <div class="cms-array-list" id="features-list"></div>
+    <div class="cms-save-bar">
+      <button class="btn-primary" style="width:auto;padding:12px 28px" id="save-content-features">Enregistrer</button>
+    </div>
+  </div>
+
+  <!-- Avis -->
+  <div class="settings-section cms-panel" id="tab-reviews">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <h3 style="margin:0">Avis clients</h3>
+      <button class="btn-sm" id="add-review">+ Ajouter</button>
+    </div>
+    <div class="cms-array-list" id="reviews-list"></div>
+    <div class="cms-save-bar">
+      <button class="btn-primary" style="width:auto;padding:12px 28px" id="save-content-reviews">Enregistrer</button>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="settings-section cms-panel" id="tab-faq">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <h3 style="margin:0">Questions fréquentes</h3>
+      <button class="btn-sm" id="add-faq">+ Ajouter</button>
+    </div>
+    <div class="cms-array-list" id="faq-list"></div>
+    <div class="cms-save-bar">
+      <button class="btn-primary" style="width:auto;padding:12px 28px" id="save-content-faq">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── TECHNICIENS ─── -->
+<div class="page" id="page-technicians">
+  <div class="topbar">
+    <div class="page-title">Techniciens installateurs</div>
+    <div class="topbar-right">
+      <button class="btn-primary" style="width:auto;padding:10px 22px;font-size:14px" id="btn-add-tech">+ Nouveau technicien</button>
+    </div>
+  </div>
+  <!-- Formulaire -->
+  <div class="tech-form-wrap" id="tech-form-wrap" style="display:none">
+    <h3 id="tech-form-title">Nouveau technicien</h3>
+    <input type="hidden" id="tech-id">
+    <div class="tf-grid">
+      <div class="cms-field" style="margin:0">
+        <label>Nom complet *</label>
+        <input type="text" class="cms-input" id="tech-name" placeholder="Jean Martin">
+      </div>
+      <div class="cms-field" style="margin:0">
+        <label>Ville *</label>
+        <input type="text" class="cms-input" id="tech-city" placeholder="Paris">
+      </div>
+      <div class="cms-field" style="margin:0">
+        <label>Email</label>
+        <input type="email" class="cms-input" id="tech-email" placeholder="jean@example.com">
+      </div>
+      <div class="cms-field" style="margin:0">
+        <label>Téléphone</label>
+        <input type="tel" class="cms-input" id="tech-phone" placeholder="06 00 00 00 00">
+      </div>
+      <div class="cms-field tf-full" style="margin:0">
+        <label>Zones d'intervention (villes séparées par des virgules)</label>
+        <input type="text" class="cms-input" id="tech-zones" placeholder="Paris, Boulogne, Versailles…">
+      </div>
+      <div class="cms-field tf-full" style="margin:0">
+        <label>Note interne</label>
+        <textarea class="cms-input" id="tech-note" style="min-height:70px" placeholder="Disponibilités, spécialités…"></textarea>
+      </div>
+      <div class="cms-field" style="margin:0;display:flex;align-items:center;gap:10px">
+        <label class="avail-toggle" style="margin:0">
+          <input type="checkbox" id="tech-active" checked>
+          <span class="avail-slider"></span>
+        </label>
+        <span style="font-size:14px;font-weight:500">Actif (visible dans les affectations)</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:22px">
+      <button class="btn-primary" style="width:auto;padding:12px 28px" id="save-tech">Enregistrer</button>
+      <button class="btn-sm" id="cancel-tech-form" style="padding:12px 20px">Annuler</button>
+    </div>
+  </div>
+  <!-- Liste -->
+  <div class="tech-grid" id="tech-list">
+    <div style="padding:40px;text-align:center;color:var(--mid);font-size:14px">Chargement…</div>
+  </div>
+</div>
+
+<!-- ─── PAGES ─── -->
+<div class="page" id="page-pages">
+  <div class="topbar">
+    <div class="page-title">Gestion des pages</div>
+    <div class="topbar-right">
+      <button class="btn-primary" style="width:auto;padding:10px 22px;font-size:14px" id="btn-new-page">+ Nouvelle page</button>
+    </div>
+  </div>
+  <!-- Éditeur -->
+  <div class="page-editor-wrap" id="page-editor-wrap" style="display:none">
+    <h3 id="page-editor-title">Nouvelle page</h3>
+    <input type="hidden" id="pe-id">
+    <div class="pe-grid">
+      <div class="cms-field" style="margin:0">
+        <label>Titre de la page *</label>
+        <input type="text" class="cms-input" id="pe-title" placeholder="Page influenceur">
+      </div>
+      <div class="cms-field" style="margin:0">
+        <label>Slug (URL) *</label>
+        <input type="text" class="cms-input" id="pe-slug" placeholder="influenceur" style="font-family:monospace">
+        <span style="font-size:11px;color:var(--mid);margin-top:4px;display:block">Accessible sur : /page.php?slug=<span id="pe-slug-preview">…</span></span>
+      </div>
+      <div class="cms-field" style="margin:0">
+        <label>Description SEO</label>
+        <input type="text" class="cms-input" id="pe-meta" placeholder="Courte description pour Google">
+      </div>
+      <div class="cms-field" style="margin:0;display:flex;align-items:center;gap:10px;padding-top:20px">
+        <label class="avail-toggle" style="margin:0">
+          <input type="checkbox" id="pe-active">
+          <span class="avail-slider"></span>
+        </label>
+        <span style="font-size:14px;font-weight:500">Page active (visible par les visiteurs)</span>
+      </div>
+      <div class="cms-field pe-full" style="margin:0">
+        <label>Contenu de la page (HTML supporté)</label>
+        <div class="pe-toolbar">
+          <button class="pe-tool" data-cmd="bold"><b>G</b></button>
+          <button class="pe-tool" data-cmd="italic"><i>I</i></button>
+          <button class="pe-tool" data-cmd="h2">H2</button>
+          <button class="pe-tool" data-cmd="h3">H3</button>
+          <button class="pe-tool" data-cmd="ul">Liste</button>
+          <button class="pe-tool" data-cmd="link">Lien</button>
+          <button class="pe-tool" data-cmd="img">Image</button>
+        </div>
+        <textarea class="pe-editor" id="pe-content" placeholder="Écrivez votre contenu ici. Vous pouvez utiliser du HTML : <h2>, <p>, <ul>, <strong>, <a href=&quot;...&quot;>…"></textarea>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:22px">
+      <button class="btn-primary" style="width:auto;padding:12px 28px" id="save-page">Enregistrer</button>
+      <button class="btn-sm" id="cancel-page-editor" style="padding:12px 20px">Annuler</button>
+    </div>
+  </div>
+  <!-- Liste des pages -->
+  <div class="card">
+    <div class="card-header"><span class="card-title">Pages créées</span></div>
+    <div class="pages-list" id="pages-list" style="padding:0 24px 24px">
+      <div style="padding:40px;text-align:center;color:var(--mid);font-size:14px">Chargement…</div>
+    </div>
   </div>
 </div>
 
@@ -748,6 +1056,440 @@ el('test-smtp').addEventListener('click', async () => {
     if (window.innerWidth <= 768) closeSidebar();
   }));
 })();
+
+// ─── NAVIGATION ÉTENDUE ───────────────────────────────────────────────────────
+const pageLoaders = {
+  content: loadContent, technicians: loadTechnicians, pages: loadPages
+};
+qa('.sb-link').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const page = btn.dataset.page;
+    if (pageLoaders[page]) pageLoaders[page]();
+  });
+});
+
+// ─── CONTENU DU SITE ─────────────────────────────────────────────────────────
+let cmsData = {};
+
+async function loadContent() {
+  cmsData = await apiFetch('?a=content_get');
+  // Textes
+  el('c-hero-eyebrow').value  = cmsData.hero_eyebrow || '';
+  el('c-hero-title').value    = cmsData.hero_title || '';
+  el('c-hero-highlight').value= cmsData.hero_title_highlight || '';
+  el('c-hero-sub').value      = cmsData.hero_sub || '';
+  el('c-cta-primary').value   = cmsData.hero_cta_primary || '';
+  el('c-cta-secondary').value = cmsData.hero_cta_secondary || '';
+  el('c-price').value         = cmsData.price || '';
+  el('c-price-note').value    = cmsData.price_note || '';
+  // Couleurs
+  const primary = (cmsData.colors||{}).primary || '#0071e3';
+  const hover   = (cmsData.colors||{}).primary_hover || '#0077ed';
+  el('c-color-primary').value     = primary;
+  el('c-color-primary-hex').value = primary;
+  el('c-color-hover').value       = hover;
+  el('c-color-hover-hex').value   = hover;
+  // Listes
+  renderFeatures(cmsData.features || []);
+  renderReviews(cmsData.reviews || []);
+  renderFaqList(cmsData.faq || []);
+}
+
+// Tabs
+qa('.cms-tab').forEach(t => t.addEventListener('click', () => {
+  qa('.cms-tab').forEach(x => x.classList.remove('active'));
+  qa('.cms-panel').forEach(x => x.classList.remove('active'));
+  t.classList.add('active');
+  el(t.dataset.tab).classList.add('active');
+}));
+
+// Sync color picker ↔ text input
+function syncColor(pickerId, hexId) {
+  el(pickerId).addEventListener('input', () => el(hexId).value = el(pickerId).value);
+  el(hexId).addEventListener('input', () => { if (/^#[0-9a-f]{6}$/i.test(el(hexId).value)) el(pickerId).value = el(hexId).value; });
+}
+syncColor('c-color-primary', 'c-color-primary-hex');
+syncColor('c-color-hover',   'c-color-hover-hex');
+
+// Save textes
+el('save-content-texts').addEventListener('click', async () => {
+  const payload = {
+    hero_eyebrow: el('c-hero-eyebrow').value.trim(),
+    hero_title:   el('c-hero-title').value.trim(),
+    hero_title_highlight: el('c-hero-highlight').value.trim(),
+    hero_sub:     el('c-hero-sub').value.trim(),
+    hero_cta_primary:   el('c-cta-primary').value.trim(),
+    hero_cta_secondary: el('c-cta-secondary').value.trim(),
+    price:      el('c-price').value.trim(),
+    price_note: el('c-price-note').value.trim(),
+  };
+  const d = await apiFetch('?a=content_save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+  const msg = el('save-texts-msg');
+  msg.style.display = 'inline';
+  if (d.success) { msg.textContent = '✓ Enregistré'; msg.style.color = 'var(--green)'; }
+  else { msg.textContent = 'Erreur'; msg.style.color = 'var(--red)'; }
+  setTimeout(() => msg.style.display = 'none', 3000);
+});
+
+// Save couleurs
+el('save-content-colors').addEventListener('click', async () => {
+  const payload = { colors: { primary: el('c-color-primary-hex').value, primary_hover: el('c-color-hover-hex').value } };
+  const d = await apiFetch('?a=content_save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+  toast(d.success ? '✓ Couleurs enregistrées' : 'Erreur', !d.success);
+});
+
+// ── FEATURES ──
+function renderFeatures(arr) {
+  const ICONS = ['📷','🤖','📱','🔐','☁️','🔋','🛡️','⚡','💬','🏆','📡','🔑'];
+  const COLORS = ['ic-blue','ic-purple','ic-green','ic-orange','ic-teal','ic-red'];
+  el('features-list').innerHTML = arr.map((f,i) => `
+    <div class="cms-array-item" data-idx="${i}">
+      <div class="item-head">
+        <span class="item-title">#${i+1} ${esc(f.title||'Fonctionnalité')}</span>
+        <div style="display:flex;gap:6px">
+          ${i>0?`<button class="btn-sm" onclick="moveFeat(${i},-1)">↑</button>`:''}
+          ${i<arr.length-1?`<button class="btn-sm" onclick="moveFeat(${i},1)">↓</button>`:''}
+          <button class="btn-sm btn-delete" onclick="removeFeat(${i})">Supprimer</button>
+        </div>
+      </div>
+      <div class="cms-item-grid">
+        <div class="cms-field" style="margin:0">
+          <label>Icône</label>
+          <select class="cms-input feat-icon" data-idx="${i}">
+            ${ICONS.map(ic=>`<option ${f.icon===ic?'selected':''}>${ic}</option>`).join('')}
+          </select>
+        </div>
+        <div class="cms-field" style="margin:0">
+          <label>Couleur fond</label>
+          <select class="cms-input feat-color" data-idx="${i}">
+            ${COLORS.map(c=>`<option value="${c}" ${f.color===c?'selected':''}>${c}</option>`).join('')}
+          </select>
+        </div>
+        <div class="cms-field full" style="margin:0">
+          <label>Titre</label>
+          <input type="text" class="cms-input feat-title" data-idx="${i}" value="${esc(f.title||'')}">
+        </div>
+        <div class="cms-field full" style="margin:0">
+          <label>Description</label>
+          <textarea class="cms-input feat-desc" data-idx="${i}" style="min-height:70px">${esc(f.desc||'')}</textarea>
+        </div>
+        <div class="cms-field full" style="margin:0">
+          <label>Pill / Badge</label>
+          <input type="text" class="cms-input feat-pill" data-idx="${i}" value="${esc(f.pill||'')}">
+        </div>
+      </div>
+    </div>`).join('');
+}
+function collectFeatures() {
+  return Array.from(qa('.cms-array-item', el('features-list'))).map(item => {
+    const i = item.dataset.idx;
+    return {
+      icon: qs(`.feat-icon[data-idx="${i}"]`, item).value,
+      color: qs(`.feat-color[data-idx="${i}"]`, item).value,
+      title: qs(`.feat-title[data-idx="${i}"]`, item).value.trim(),
+      desc: qs(`.feat-desc[data-idx="${i}"]`, item).value.trim(),
+      pill: qs(`.feat-pill[data-idx="${i}"]`, item).value.trim(),
+    };
+  });
+}
+window.moveFeat = function(idx, dir) {
+  const arr = collectFeatures(); const tmp = arr[idx]; arr[idx] = arr[idx+dir]; arr[idx+dir] = tmp; renderFeatures(arr);
+};
+window.removeFeat = function(idx) {
+  const arr = collectFeatures(); arr.splice(idx,1); renderFeatures(arr);
+};
+el('add-feature').addEventListener('click', () => {
+  const arr = collectFeatures();
+  arr.push({ icon:'📷', color:'ic-blue', title:'Nouvelle fonctionnalité', desc:'Description à modifier.', pill:'' });
+  renderFeatures(arr);
+});
+el('save-content-features').addEventListener('click', async () => {
+  const d = await apiFetch('?a=content_save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ features: collectFeatures() }) });
+  toast(d.success ? '✓ Fonctionnalités enregistrées' : 'Erreur', !d.success);
+});
+
+// ── REVIEWS ──
+function renderReviews(arr) {
+  el('reviews-list').innerHTML = arr.map((r,i) => `
+    <div class="cms-array-item" data-ridx="${i}">
+      <div class="item-head">
+        <span class="item-title">#${i+1} ${esc(r.name||'Avis')}</span>
+        <div style="display:flex;gap:6px">
+          ${i>0?`<button class="btn-sm" onclick="moveRv(${i},-1)">↑</button>`:''}
+          ${i<arr.length-1?`<button class="btn-sm" onclick="moveRv(${i},1)">↓</button>`:''}
+          <button class="btn-sm btn-delete" onclick="removeRv(${i})">Supprimer</button>
+        </div>
+      </div>
+      <div class="cms-item-grid">
+        <div class="cms-field" style="margin:0">
+          <label>Nom</label>
+          <input type="text" class="cms-input rv-name" data-ridx="${i}" value="${esc(r.name||'')}">
+        </div>
+        <div class="cms-field" style="margin:0">
+          <label>Ville / Localisation</label>
+          <input type="text" class="cms-input rv-location" data-ridx="${i}" value="${esc(r.location||'')}">
+        </div>
+        <div class="cms-field" style="margin:0">
+          <label>Initiales (avatar)</label>
+          <input type="text" class="cms-input rv-initials" data-ridx="${i}" value="${esc(r.initials||'')}" maxlength="3" style="width:90px">
+        </div>
+        <div class="cms-field" style="margin:0">
+          <label>Couleur avatar</label>
+          <input type="color" class="rv-color" data-ridx="${i}" value="${r.color||'#0071e3'}" style="width:44px;height:44px;border:1px solid #d2d2d7;border-radius:8px;cursor:pointer;padding:2px">
+        </div>
+        <div class="cms-field" style="margin:0">
+          <label>Note (1–5)</label>
+          <select class="cms-input rv-stars" data-ridx="${i}">
+            ${[1,2,3,4,5].map(n=>`<option value="${n}" ${r.stars==n?'selected':''}>${n} étoile${n>1?'s':''}</option>`).join('')}
+          </select>
+        </div>
+        <div class="cms-field" style="margin:0">
+          <label>Date affichée</label>
+          <input type="text" class="cms-input rv-date" data-ridx="${i}" value="${esc(r.date||'')}" placeholder="il y a 3 mois">
+        </div>
+        <div class="cms-field full" style="margin:0">
+          <label>Texte du témoignage</label>
+          <textarea class="cms-input rv-text" data-ridx="${i}" style="min-height:80px">${esc(r.text||'')}</textarea>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function collectReviews() {
+  return Array.from(qa('.cms-array-item', el('reviews-list'))).map(item => {
+    const i = item.dataset.ridx;
+    return {
+      name: qs(`.rv-name[data-ridx="${i}"]`, item).value.trim(),
+      location: qs(`.rv-location[data-ridx="${i}"]`, item).value.trim(),
+      initials: qs(`.rv-initials[data-ridx="${i}"]`, item).value.trim(),
+      color: qs(`.rv-color[data-ridx="${i}"]`, item).value,
+      stars: parseInt(qs(`.rv-stars[data-ridx="${i}"]`, item).value),
+      date: qs(`.rv-date[data-ridx="${i}"]`, item).value.trim(),
+      text: qs(`.rv-text[data-ridx="${i}"]`, item).value.trim(),
+    };
+  });
+}
+window.moveRv = function(idx, dir) { const arr=collectReviews(); const tmp=arr[idx]; arr[idx]=arr[idx+dir]; arr[idx+dir]=tmp; renderReviews(arr); };
+window.removeRv = function(idx) { const arr=collectReviews(); arr.splice(idx,1); renderReviews(arr); };
+el('add-review').addEventListener('click', () => {
+  const arr=collectReviews();
+  arr.push({ name:'Nouveau client', location:'Paris', initials:'NC', color:'#0071e3', stars:5, date:'il y a 1 mois', text:'Témoignage à modifier.' });
+  renderReviews(arr);
+});
+el('save-content-reviews').addEventListener('click', async () => {
+  const d = await apiFetch('?a=content_save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ reviews: collectReviews() }) });
+  toast(d.success ? '✓ Avis enregistrés' : 'Erreur', !d.success);
+});
+
+// ── FAQ ──
+function renderFaqList(arr) {
+  el('faq-list').innerHTML = arr.map((f,i) => `
+    <div class="cms-array-item" data-fidx="${i}">
+      <div class="item-head">
+        <span class="item-title">#${i+1} ${esc(f.q||'Question')}</span>
+        <div style="display:flex;gap:6px">
+          ${i>0?`<button class="btn-sm" onclick="moveFaq(${i},-1)">↑</button>`:''}
+          ${i<arr.length-1?`<button class="btn-sm" onclick="moveFaq(${i},1)">↓</button>`:''}
+          <button class="btn-sm btn-delete" onclick="removeFaq(${i})">Supprimer</button>
+        </div>
+      </div>
+      <div class="cms-field" style="margin:0 0 12px">
+        <label>Question</label>
+        <input type="text" class="cms-input faq-q" data-fidx="${i}" value="${esc(f.q||'')}">
+      </div>
+      <div class="cms-field" style="margin:0">
+        <label>Réponse</label>
+        <textarea class="cms-input faq-a" data-fidx="${i}" style="min-height:80px">${esc(f.a||'')}</textarea>
+      </div>
+    </div>`).join('');
+}
+function collectFaq() {
+  return Array.from(qa('.cms-array-item', el('faq-list'))).map(item => {
+    const i = item.dataset.fidx;
+    return { q: qs(`.faq-q[data-fidx="${i}"]`, item).value.trim(), a: qs(`.faq-a[data-fidx="${i}"]`, item).value.trim() };
+  });
+}
+window.moveFaq = function(idx, dir) { const arr=collectFaq(); const tmp=arr[idx]; arr[idx]=arr[idx+dir]; arr[idx+dir]=tmp; renderFaqList(arr); };
+window.removeFaq = function(idx) { const arr=collectFaq(); arr.splice(idx,1); renderFaqList(arr); };
+el('add-faq').addEventListener('click', () => { const arr=collectFaq(); arr.push({q:'Nouvelle question ?', a:'Réponse à compléter.'}); renderFaqList(arr); });
+el('save-content-faq').addEventListener('click', async () => {
+  const d = await apiFetch('?a=content_save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ faq: collectFaq() }) });
+  toast(d.success ? '✓ FAQ enregistrée' : 'Erreur', !d.success);
+});
+
+// ─── TECHNICIENS ─────────────────────────────────────────────────────────────
+async function loadTechnicians() {
+  el('tech-form-wrap').style.display = 'none';
+  const data = await apiFetch('?a=technicians');
+  const techs = data.technicians || [];
+  if (!techs.length) {
+    el('tech-list').innerHTML = '<div style="padding:40px;text-align:center;color:var(--mid);font-size:14px;grid-column:1/-1">Aucun technicien. Cliquez sur « Nouveau technicien » pour commencer.</div>';
+    return;
+  }
+  el('tech-list').innerHTML = techs.map(t => `
+    <div class="tech-card">
+      <span class="${t.is_active ? 'tech-badge-active' : 'tech-badge-inactive'}">${t.is_active ? 'Actif' : 'Désactivé'}</span>
+      <div class="tc-name">${esc(t.name)}</div>
+      <div class="tc-city">${esc(t.city)}</div>
+      ${t.zones ? `<div class="tc-meta" style="margin-bottom:6px">📍 ${esc(t.zones)}</div>` : ''}
+      ${t.email ? `<div class="tc-meta">✉️ ${esc(t.email)}</div>` : ''}
+      ${t.phone ? `<div class="tc-meta">📞 ${esc(t.phone)}</div>` : ''}
+      ${t.note  ? `<div class="tc-meta" style="margin-top:8px;font-style:italic;color:var(--mid)">${esc(t.note)}</div>` : ''}
+      <div class="tc-actions">
+        <button class="btn-sm" onclick="editTech(${t.id})">Modifier</button>
+        <button class="btn-sm btn-delete" onclick="deleteTech(${t.id})">Supprimer</button>
+      </div>
+    </div>`).join('');
+}
+let techsCache = [];
+el('btn-add-tech').addEventListener('click', () => { openTechForm(null); });
+function openTechForm(t) {
+  el('tech-form-wrap').style.display = 'block';
+  el('tech-form-title').textContent = t ? 'Modifier le technicien' : 'Nouveau technicien';
+  el('tech-id').value     = t ? t.id : '';
+  el('tech-name').value   = t ? t.name : '';
+  el('tech-city').value   = t ? t.city : '';
+  el('tech-email').value  = t ? (t.email||'') : '';
+  el('tech-phone').value  = t ? (t.phone||'') : '';
+  el('tech-zones').value  = t ? (t.zones||'') : '';
+  el('tech-note').value   = t ? (t.note||'') : '';
+  el('tech-active').checked = t ? !!t.is_active : true;
+  el('tech-form-wrap').scrollIntoView({ behavior:'smooth' });
+}
+window.editTech = async function(id) {
+  const data = await apiFetch('?a=technicians');
+  const t = (data.technicians||[]).find(x => x.id===id);
+  if (t) openTechForm(t);
+};
+window.deleteTech = function(id) {
+  showModal('Supprimer ce technicien ?', 'Cette action est irréversible.', async () => {
+    await apiFetch('?a=technician_delete', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({id}) });
+    toast('Technicien supprimé'); loadTechnicians();
+  }, 'Supprimer');
+};
+el('cancel-tech-form').addEventListener('click', () => el('tech-form-wrap').style.display='none');
+el('save-tech').addEventListener('click', async () => {
+  const payload = {
+    id:        el('tech-id').value ? parseInt(el('tech-id').value) : 0,
+    name:      el('tech-name').value.trim(),
+    city:      el('tech-city').value.trim(),
+    email:     el('tech-email').value.trim(),
+    phone:     el('tech-phone').value.trim(),
+    zones:     el('tech-zones').value.trim(),
+    note:      el('tech-note').value.trim(),
+    is_active: el('tech-active').checked,
+  };
+  if (!payload.name || !payload.city) return toast('Nom et ville requis', true);
+  const d = await apiFetch('?a=technician_save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+  if (d.success) { toast('✓ Technicien enregistré'); loadTechnicians(); el('tech-form-wrap').style.display='none'; }
+  else toast('Erreur : ' + (d.error||''), true);
+});
+
+// ─── PAGES ───────────────────────────────────────────────────────────────────
+async function loadPages() {
+  el('page-editor-wrap').style.display = 'none';
+  const data = await apiFetch('?a=pages');
+  const pages = data.pages || [];
+  if (!pages.length) {
+    el('pages-list').innerHTML = '<div style="padding:40px;text-align:center;color:var(--mid);font-size:14px">Aucune page. Cliquez sur « Nouvelle page » pour commencer.</div>';
+    return;
+  }
+  el('pages-list').innerHTML = pages.map(p => `
+    <div class="page-item">
+      <div class="pi-info">
+        <div class="pi-title">${esc(p.title)} ${p.is_active ? '<span class="badge badge-confirmed">Active</span>' : '<span class="badge" style="background:#f0f0f5;color:var(--mid)">Désactivée</span>'}</div>
+        <div class="pi-slug">/page.php?slug=${esc(p.slug)}</div>
+      </div>
+      <div class="pi-actions">
+        <a href="../page.php?slug=${esc(p.slug)}" target="_blank" class="btn-sm" style="text-decoration:none">Aperçu ↗</a>
+        <button class="btn-sm" onclick="editPage(${p.id})">Modifier</button>
+        <button class="btn-sm" onclick="duplicatePage(${p.id})">Dupliquer</button>
+        <button class="btn-sm btn-delete" onclick="deletePage(${p.id})">Supprimer</button>
+      </div>
+    </div>`).join('');
+}
+el('btn-new-page').addEventListener('click', () => openPageEditor(null));
+function openPageEditor(p) {
+  el('page-editor-wrap').style.display = 'block';
+  el('page-editor-title').textContent = p ? 'Modifier la page' : 'Nouvelle page';
+  el('pe-id').value      = p ? p.id : '';
+  el('pe-title').value   = p ? p.title : '';
+  el('pe-slug').value    = p ? p.slug : '';
+  el('pe-meta').value    = p ? (p.meta_desc||'') : '';
+  el('pe-active').checked = p ? !!p.is_active : false;
+  el('pe-content').value = p ? (p.content||'') : '';
+  el('pe-slug-preview').textContent = p ? p.slug : '…';
+  el('page-editor-wrap').scrollIntoView({ behavior:'smooth' });
+}
+el('pe-slug').addEventListener('input', () => {
+  const val = el('pe-slug').value.toLowerCase().replace(/[^a-z0-9_-]/g,'');
+  el('pe-slug').value = val;
+  el('pe-slug-preview').textContent = val || '…';
+});
+el('pe-title').addEventListener('input', () => {
+  if (!el('pe-id').value) { // Only auto-slugify for new pages
+    const slug = el('pe-title').value.toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g,'')
+      .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    el('pe-slug').value = slug;
+    el('pe-slug-preview').textContent = slug || '…';
+  }
+});
+// Toolbar
+qa('.pe-tool').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const ta = el('pe-content');
+    const cmd = btn.dataset.cmd;
+    const sel = ta.value.substring(ta.selectionStart, ta.selectionEnd);
+    const map = {
+      bold:   `<strong>${sel||'texte gras'}</strong>`,
+      italic: `<em>${sel||'texte italique'}</em>`,
+      h2:     `<h2>${sel||'Titre'}</h2>`,
+      h3:     `<h3>${sel||'Sous-titre'}</h3>`,
+      ul:     `<ul>\n  <li>${sel||'Élément'}</li>\n</ul>`,
+      link:   `<a href="URL">${sel||'Texte du lien'}</a>`,
+      img:    `<img src="URL" alt="${sel||'description'}">`,
+    };
+    const insert = map[cmd] || sel;
+    const start = ta.selectionStart, end = ta.selectionEnd;
+    ta.value = ta.value.substring(0,start) + insert + ta.value.substring(end);
+    ta.focus(); ta.selectionStart = ta.selectionEnd = start + insert.length;
+  });
+});
+el('cancel-page-editor').addEventListener('click', () => el('page-editor-wrap').style.display='none');
+el('save-page').addEventListener('click', async () => {
+  const payload = {
+    id:       el('pe-id').value ? parseInt(el('pe-id').value) : 0,
+    title:    el('pe-title').value.trim(),
+    slug:     el('pe-slug').value.trim(),
+    meta_desc: el('pe-meta').value.trim(),
+    is_active: el('pe-active').checked,
+    content:  el('pe-content').value,
+  };
+  if (!payload.title || !payload.slug) return toast('Titre et slug requis', true);
+  const d = await apiFetch('?a=page_save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+  if (d.success) { toast('✓ Page enregistrée'); loadPages(); el('page-editor-wrap').style.display='none'; }
+  else toast('Erreur : ' + (d.error||''), true);
+});
+window.editPage = async function(id) {
+  const data = await apiFetch('?a=pages');
+  const p = (data.pages||[]).find(x => x.id===id);
+  if (p) openPageEditor(p);
+};
+window.duplicatePage = function(id) {
+  showModal('Dupliquer cette page ?', 'Une copie désactivée sera créée avec le slug "-copie".',
+    async () => {
+      const d = await apiFetch('?a=page_duplicate', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({id}) });
+      if (d.success) { toast('✓ Page dupliquée'); loadPages(); }
+      else toast('Erreur', true);
+    }, 'Dupliquer');
+};
+window.deletePage = function(id) {
+  showModal('Supprimer cette page ?', 'Cette action est irréversible.',
+    async () => {
+      await apiFetch('?a=page_delete', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({id}) });
+      toast('Page supprimée'); loadPages();
+    }, 'Supprimer');
+};
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 function esc(s) {

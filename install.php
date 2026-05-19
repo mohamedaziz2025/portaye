@@ -55,6 +55,21 @@ if (!file_exists(JSON_BLOCKED)) {
     jdb_write(JSON_BLOCKED, []);
 }
 
+if (!file_exists(JSON_TECHNICIANS)) {
+    jdb_write(JSON_TECHNICIANS, []);
+}
+
+if (!file_exists(JSON_PAGES)) {
+    jdb_write(JSON_PAGES, []);
+}
+
+// Créer le dossier uploads/ si absent
+if (!is_dir(UPLOADS_DIR)) {
+    mkdir(UPLOADS_DIR, 0750, true);
+    $uploadsHt = "Options -Indexes\n<FilesMatch \"\\.(php|php3|php4|php5|phtml|pl|py|cgi|sh)$\">\n    Require all denied\n</FilesMatch>\n";
+    file_put_contents(UPLOADS_DIR . '/.htaccess', $uploadsHt);
+}
+
 ?><!DOCTYPE html>
 <html lang="fr">
 <head>
