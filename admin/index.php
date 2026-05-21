@@ -54,6 +54,8 @@ body { font-family:var(--sf);background:var(--light);color:var(--black);-webkit-
 .sb-link svg { width:18px;height:18px;flex-shrink:0; }
 .sb-link:hover { color:#f5f5f7; }
 .sb-link.active { color:#f5f5f7;background:rgba(255,255,255,.08);border-radius:8px;margin:0 10px;padding:11px 12px;width:calc(100% - 20px); }
+.sb-sub { padding-left:42px !important;font-size:13px;color:#86868b; }
+.sb-sub.active { padding-left:32px !important; }
 .sb-bottom { padding:16px 22px; }
 .sb-logout { font-size:13px;color:#86868b;text-decoration:none;display:block; }
 .sb-logout:hover { color:#f5f5f7; }
@@ -356,6 +358,14 @@ textarea.cms-input { min-height:90px;resize:vertical; }
     <button class="sb-link" data-page="content">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
       Contenu du site
+    </button>
+    <button class="sb-link sb-sub" data-page="content" data-tab="tab-reviews">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Avis clients
+    </button>
+    <button class="sb-link sb-sub" data-page="content" data-tab="tab-faq">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      FAQ
     </button>
     <button class="sb-link" data-page="technicians">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -789,14 +799,23 @@ function statusBadge(s) {
 
 // ─── Navigation ───────────────────────────────────────────────────────────────
 let currentPage = 'dashboard';
+function activateCmsTab(tabId) {
+  qa('.cms-tab').forEach(x => x.classList.remove('active'));
+  qa('.cms-panel').forEach(x => x.classList.remove('active'));
+  const tabBtn = qs(`.cms-tab[data-tab="${tabId}"]`);
+  if (tabBtn) tabBtn.classList.add('active');
+  if (el(tabId)) el(tabId).classList.add('active');
+}
 qa('.sb-link').forEach(btn => {
   btn.addEventListener('click', () => {
     const page = btn.dataset.page;
+    const tab  = btn.dataset.tab;
     qa('.sb-link').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     qa('.page').forEach(p => p.classList.remove('active'));
     el('page-' + page).classList.add('active');
     currentPage = page;
+    if (tab) activateCmsTab(tab);
     if (page === 'dashboard') loadDashboard();
     if (page === 'appointments') loadAppointments();
     if (page === 'calview') loadCalView();
