@@ -656,15 +656,15 @@ footer {
 <!-- PRICE -->
 <section id="price">
   <div class="price-wrap">
-    <p class="section-eyebrow" style="text-align:center;color:#86b9f5">Tarif</p>
-    <h2 class="section-h2">Simple. Transparent.</h2>
-    <p class="section-p">Un forfait unique, tout inclus. Aucun abonnement, aucune surprise.</p>
+    <p class="section-eyebrow" style="text-align:center;color:#86b9f5" id="cms-price-eyebrow">Tarif</p>
+    <h2 class="section-h2" id="cms-price-title">Simple. Transparent.</h2>
+    <p class="section-p" id="cms-price-sub">Un forfait unique, tout inclus. Aucun abonnement, aucune surprise.</p>
     <div class="price-layout">
       <div class="price-card">
-        <p class="pc-eyebrow">Forfait tout inclus</p>
+        <p class="pc-eyebrow" id="cms-price-plan">Forfait tout inclus</p>
         <div class="pc-amount"><sup>€</sup><span id="cms-price-main">179</span></div>
-        <p class="pc-note">Paiement unique · Aucun abonnement</p>
-        <ul class="pc-list">
+        <p class="pc-note" id="cms-price-card-note">Paiement unique · Aucun abonnement</p>
+        <ul class="pc-list" id="cms-price-list">
           <li><span class="pc-check">✓</span> Appareil Portaye 4K HDR</li>
           <li><span class="pc-check">✓</span> Installation par expert certifié</li>
           <li><span class="pc-check">✓</span> Configuration & mise en service</li>
@@ -674,12 +674,12 @@ footer {
           <li><span class="pc-check">✓</span> Garantie 2 ans</li>
           <li><span class="pc-check">✓</span> Remboursé si non satisfait</li>
         </ul>
-        <button class="pc-btn" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
+        <button class="pc-btn" id="cms-price-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
           Réserver mon installation
         </button>
-        <p class="pc-safe">🔒 Paiement sécurisé · Aucun frais caché</p>
+        <p class="pc-safe" id="cms-price-safe">🔒 Paiement sécurisé · Aucun frais caché</p>
       </div>
-      <div class="price-guarantees">
+      <div class="price-guarantees" id="cms-price-guarantees">
         <div class="pg-item">
           <span class="pg-icon">🛡️</span>
           <div>
@@ -1275,6 +1275,27 @@ document.querySelectorAll('.door-opt').forEach(d => {
       var pm=document.getElementById('cms-price-main');if(pm)pm.textContent=c.price;
     }
     if(c.price_note){var pn=document.getElementById('cms-price-note');if(pn)pn.textContent=c.price_note;}
+
+    // Price section
+    if(c.price_eyebrow){var e=document.getElementById('cms-price-eyebrow');if(e)e.textContent=c.price_eyebrow;}
+    if(c.price_title){var e=document.getElementById('cms-price-title');if(e)e.textContent=c.price_title;}
+    if(c.price_sub){var e=document.getElementById('cms-price-sub');if(e)e.textContent=c.price_sub;}
+    if(c.price_plan_name){var e=document.getElementById('cms-price-plan');if(e)e.textContent=c.price_plan_name;}
+    if(c.price_card_note){var e=document.getElementById('cms-price-card-note');if(e)e.textContent=c.price_card_note;}
+    if(c.price_cta){var e=document.getElementById('cms-price-cta');if(e)e.textContent=c.price_cta;}
+    if(c.price_safe_note){var e=document.getElementById('cms-price-safe');if(e)e.textContent=c.price_safe_note;}
+    if(Array.isArray(c.price_features)&&c.price_features.length){
+      var pl=document.getElementById('cms-price-list');
+      if(pl) pl.innerHTML=c.price_features.map(function(t){ return '<li><span class="pc-check">✓</span> '+esc(t)+'</li>'; }).join('');
+    }
+    if(Array.isArray(c.price_guarantees)&&c.price_guarantees.length){
+      var pg=document.getElementById('cms-price-guarantees');
+      if(pg){
+        pg.innerHTML=c.price_guarantees.map(function(g){
+          return '<div class="pg-item"><span class="pg-icon">'+esc(g.icon)+'</span><div><div class="pg-title">'+esc(g.title)+'</div><div class="pg-desc">'+esc(g.desc)+'</div></div></div>';
+        }).join('');
+      }
+    }
 
     // Features
     if(Array.isArray(c.features)&&c.features.length){

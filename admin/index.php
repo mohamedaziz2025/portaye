@@ -526,6 +526,7 @@ textarea.cms-input { min-height:90px;resize:vertical; }
     <button class="cms-tab active" data-tab="tab-texts">Textes & Prix</button>
     <button class="cms-tab" data-tab="tab-colors">Couleurs</button>
     <button class="cms-tab" data-tab="tab-features">Fonctionnalités</button>
+    <button class="cms-tab" data-tab="tab-pricing">Section Tarif</button>
     <button class="cms-tab" data-tab="tab-reviews">Avis clients</button>
     <button class="cms-tab" data-tab="tab-faq">FAQ</button>
   </div>
@@ -608,6 +609,67 @@ textarea.cms-input { min-height:90px;resize:vertical; }
     <div class="cms-array-list" id="features-list"></div>
     <div class="cms-save-bar">
       <button class="btn-primary" style="width:auto;padding:12px 28px" id="save-content-features">Enregistrer</button>
+    </div>
+  </div>
+
+  <!-- Section Tarif -->
+  <div class="settings-section cms-panel" id="tab-pricing">
+    <h3>Textes de la section</h3>
+    <div class="cms-field">
+      <label>Accroche (petite ligne au-dessus du titre)</label>
+      <input type="text" class="cms-input" id="c-price-eyebrow">
+    </div>
+    <div class="cms-field">
+      <label>Titre de la section</label>
+      <input type="text" class="cms-input" id="c-price-title">
+    </div>
+    <div class="cms-field">
+      <label>Sous-titre de la section</label>
+      <textarea class="cms-input" id="c-price-sub"></textarea>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="cms-field" style="margin:0">
+        <label>Nom du forfait</label>
+        <input type="text" class="cms-input" id="c-price-plan">
+      </div>
+      <div class="cms-field" style="margin:0">
+        <label>Note sous le prix (carte)</label>
+        <input type="text" class="cms-input" id="c-price-card-note">
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+      <div class="cms-field" style="margin:0">
+        <label>Texte du bouton</label>
+        <input type="text" class="cms-input" id="c-price-cta">
+      </div>
+      <div class="cms-field" style="margin:0">
+        <label>Note de sécurité (sous le bouton)</label>
+        <input type="text" class="cms-input" id="c-price-safe">
+      </div>
+    </div>
+    <div class="cms-save-bar">
+      <button class="btn-primary" style="width:auto;padding:12px 28px" id="save-price-texts">Enregistrer</button>
+      <span id="save-price-texts-msg" style="font-size:13px;display:none"></span>
+    </div>
+
+    <h3 style="margin-top:28px">Liste incluse dans le forfait</h3>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <p style="font-size:13px;color:var(--mid);margin:0">Les lignes avec ✓ affichées dans la carte de prix.</p>
+      <button class="btn-sm" id="add-price-feature">+ Ajouter</button>
+    </div>
+    <div class="cms-array-list" id="price-features-list"></div>
+    <div class="cms-save-bar">
+      <button class="btn-primary" style="width:auto;padding:12px 28px" id="save-price-features">Enregistrer</button>
+    </div>
+
+    <h3 style="margin-top:28px">Cartes de garantie</h3>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <p style="font-size:13px;color:var(--mid);margin:0">Les 4 blocs affichés à côté de la carte de prix.</p>
+      <button class="btn-sm" id="add-price-guarantee">+ Ajouter</button>
+    </div>
+    <div class="cms-array-list" id="price-guarantees-list"></div>
+    <div class="cms-save-bar">
+      <button class="btn-primary" style="width:auto;padding:12px 28px" id="save-price-guarantees">Enregistrer</button>
     </div>
   </div>
 
@@ -1101,6 +1163,14 @@ async function loadContent() {
   el('c-cta-secondary').value = cmsData.hero_cta_secondary || '';
   el('c-price').value         = cmsData.price || '';
   el('c-price-note').value    = cmsData.price_note || '';
+  // Section Tarif
+  el('c-price-eyebrow').value  = cmsData.price_eyebrow || '';
+  el('c-price-title').value    = cmsData.price_title || '';
+  el('c-price-sub').value      = cmsData.price_sub || '';
+  el('c-price-plan').value     = cmsData.price_plan_name || '';
+  el('c-price-card-note').value= cmsData.price_card_note || '';
+  el('c-price-cta').value      = cmsData.price_cta || '';
+  el('c-price-safe').value     = cmsData.price_safe_note || '';
   // Couleurs
   const primary = (cmsData.colors||{}).primary || '#0071e3';
   const hover   = (cmsData.colors||{}).primary_hover || '#0077ed';
@@ -1110,6 +1180,8 @@ async function loadContent() {
   el('c-color-hover-hex').value   = hover;
   // Listes
   renderFeatures(cmsData.features || []);
+  renderPriceFeatures(cmsData.price_features || []);
+  renderPriceGuarantees(cmsData.price_guarantees || []);
   renderReviews(cmsData.reviews || []);
   renderFaqList(cmsData.faq || []);
 }
@@ -1225,6 +1297,109 @@ el('add-feature').addEventListener('click', () => {
 el('save-content-features').addEventListener('click', async () => {
   const d = await apiFetch('?a=content_save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ features: collectFeatures() }) });
   toast(d.success ? '✓ Fonctionnalités enregistrées' : 'Erreur', !d.success);
+});
+
+// ── SECTION TARIF : textes ──
+el('save-price-texts').addEventListener('click', async () => {
+  const payload = {
+    price_eyebrow:    el('c-price-eyebrow').value.trim(),
+    price_title:      el('c-price-title').value.trim(),
+    price_sub:        el('c-price-sub').value.trim(),
+    price_plan_name:  el('c-price-plan').value.trim(),
+    price_card_note:  el('c-price-card-note').value.trim(),
+    price_cta:        el('c-price-cta').value.trim(),
+    price_safe_note:  el('c-price-safe').value.trim(),
+  };
+  const d = await apiFetch('?a=content_save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+  const msg = el('save-price-texts-msg');
+  msg.style.display = 'inline';
+  if (d.success) { msg.textContent = '✓ Enregistré'; msg.style.color = 'var(--green)'; }
+  else { msg.textContent = 'Erreur'; msg.style.color = 'var(--red)'; }
+  setTimeout(() => msg.style.display = 'none', 3000);
+});
+
+// ── SECTION TARIF : liste incluse ──
+function renderPriceFeatures(arr) {
+  el('price-features-list').innerHTML = arr.map((t,i) => `
+    <div class="cms-array-item" data-pfidx="${i}">
+      <div class="item-head">
+        <span class="item-title">#${i+1}</span>
+        <div style="display:flex;gap:6px">
+          ${i>0?`<button class="btn-sm" onclick="movePriceFeat(${i},-1)">↑</button>`:''}
+          ${i<arr.length-1?`<button class="btn-sm" onclick="movePriceFeat(${i},1)">↓</button>`:''}
+          <button class="btn-sm btn-delete" onclick="removePriceFeat(${i})">Supprimer</button>
+        </div>
+      </div>
+      <div class="cms-field" style="margin:0">
+        <input type="text" class="cms-input pf-text" data-pfidx="${i}" value="${esc(t||'')}">
+      </div>
+    </div>`).join('');
+}
+function collectPriceFeatures() {
+  return Array.from(qa('.cms-array-item', el('price-features-list'))).map(item => {
+    const i = item.dataset.pfidx;
+    return qs(`.pf-text[data-pfidx="${i}"]`, item).value.trim();
+  });
+}
+window.movePriceFeat = function(idx, dir) { const arr=collectPriceFeatures(); const tmp=arr[idx]; arr[idx]=arr[idx+dir]; arr[idx+dir]=tmp; renderPriceFeatures(arr); };
+window.removePriceFeat = function(idx) { const arr=collectPriceFeatures(); arr.splice(idx,1); renderPriceFeatures(arr); };
+el('add-price-feature').addEventListener('click', () => { const arr=collectPriceFeatures(); arr.push('Nouvel avantage'); renderPriceFeatures(arr); });
+el('save-price-features').addEventListener('click', async () => {
+  const d = await apiFetch('?a=content_save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ price_features: collectPriceFeatures() }) });
+  toast(d.success ? '✓ Liste enregistrée' : 'Erreur', !d.success);
+});
+
+// ── SECTION TARIF : cartes de garantie ──
+function renderPriceGuarantees(arr) {
+  const ICONS = ['🛡️','⚡','💬','🏆','📦','🔧','✅','⭐'];
+  el('price-guarantees-list').innerHTML = arr.map((g,i) => `
+    <div class="cms-array-item" data-pgidx="${i}">
+      <div class="item-head">
+        <span class="item-title">#${i+1} ${esc(g.title||'Garantie')}</span>
+        <div style="display:flex;gap:6px">
+          ${i>0?`<button class="btn-sm" onclick="movePriceGuar(${i},-1)">↑</button>`:''}
+          ${i<arr.length-1?`<button class="btn-sm" onclick="movePriceGuar(${i},1)">↓</button>`:''}
+          <button class="btn-sm btn-delete" onclick="removePriceGuar(${i})">Supprimer</button>
+        </div>
+      </div>
+      <div class="cms-item-grid">
+        <div class="cms-field" style="margin:0">
+          <label>Icône</label>
+          <select class="cms-input pg-icon" data-pgidx="${i}">
+            ${ICONS.map(ic=>`<option ${g.icon===ic?'selected':''}>${ic}</option>`).join('')}
+          </select>
+        </div>
+        <div class="cms-field full" style="margin:0">
+          <label>Titre</label>
+          <input type="text" class="cms-input pg-title" data-pgidx="${i}" value="${esc(g.title||'')}">
+        </div>
+        <div class="cms-field full" style="margin:0">
+          <label>Description</label>
+          <textarea class="cms-input pg-desc" data-pgidx="${i}" style="min-height:70px">${esc(g.desc||'')}</textarea>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function collectPriceGuarantees() {
+  return Array.from(qa('.cms-array-item', el('price-guarantees-list'))).map(item => {
+    const i = item.dataset.pgidx;
+    return {
+      icon: qs(`.pg-icon[data-pgidx="${i}"]`, item).value,
+      title: qs(`.pg-title[data-pgidx="${i}"]`, item).value.trim(),
+      desc: qs(`.pg-desc[data-pgidx="${i}"]`, item).value.trim(),
+    };
+  });
+}
+window.movePriceGuar = function(idx, dir) { const arr=collectPriceGuarantees(); const tmp=arr[idx]; arr[idx]=arr[idx+dir]; arr[idx+dir]=tmp; renderPriceGuarantees(arr); };
+window.removePriceGuar = function(idx) { const arr=collectPriceGuarantees(); arr.splice(idx,1); renderPriceGuarantees(arr); };
+el('add-price-guarantee').addEventListener('click', () => {
+  const arr=collectPriceGuarantees();
+  arr.push({ icon:'🛡️', title:'Nouvelle garantie', desc:'Description à modifier.' });
+  renderPriceGuarantees(arr);
+});
+el('save-price-guarantees').addEventListener('click', async () => {
+  const d = await apiFetch('?a=content_save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ price_guarantees: collectPriceGuarantees() }) });
+  toast(d.success ? '✓ Garanties enregistrées' : 'Erreur', !d.success);
 });
 
 // ── REVIEWS ──
