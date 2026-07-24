@@ -529,6 +529,7 @@ textarea.cms-input { min-height:90px;resize:vertical; }
     <button class="cms-tab" data-tab="tab-pricing">Section Tarif</button>
     <button class="cms-tab" data-tab="tab-reviews">Avis clients</button>
     <button class="cms-tab" data-tab="tab-faq">FAQ</button>
+    <button class="cms-tab" data-tab="tab-contact">Contact & réseaux</button>
   </div>
 
   <!-- Textes & Prix -->
@@ -694,6 +695,34 @@ textarea.cms-input { min-height:90px;resize:vertical; }
     <div class="cms-array-list" id="faq-list"></div>
     <div class="cms-save-bar">
       <button class="btn-primary" style="width:auto;padding:12px 28px" id="save-content-faq">Enregistrer</button>
+    </div>
+  </div>
+
+  <!-- Contact & réseaux -->
+  <div class="settings-section cms-panel" id="tab-contact">
+    <h3>Pied de page — Contact & réseaux</h3>
+    <p style="font-size:13px;color:var(--mid);margin-bottom:20px">La barre WhatsApp / réseaux sociaux n'apparaît sur le site qu'une fois au moins un champ renseigné.</p>
+    <div class="cms-field">
+      <label>Numéro WhatsApp (avec indicatif, ex: +33652769151)</label>
+      <input type="text" class="cms-input" id="c-whatsapp" placeholder="+33 6 XX XX XX XX">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+      <div class="cms-field" style="margin:0">
+        <label>Lien Facebook</label>
+        <input type="text" class="cms-input" id="c-fb" placeholder="https://facebook.com/…">
+      </div>
+      <div class="cms-field" style="margin:0">
+        <label>Lien Instagram</label>
+        <input type="text" class="cms-input" id="c-ig" placeholder="https://instagram.com/…">
+      </div>
+      <div class="cms-field" style="margin:0">
+        <label>Lien YouTube</label>
+        <input type="text" class="cms-input" id="c-yt" placeholder="https://youtube.com/…">
+      </div>
+    </div>
+    <div class="cms-save-bar">
+      <button class="btn-primary" style="width:auto;padding:12px 28px" id="save-content-contact">Enregistrer</button>
+      <span id="save-contact-msg" style="font-size:13px;display:none"></span>
     </div>
   </div>
 </div>
@@ -1171,6 +1200,11 @@ async function loadContent() {
   el('c-price-card-note').value= cmsData.price_card_note || '';
   el('c-price-cta').value      = cmsData.price_cta || '';
   el('c-price-safe').value     = cmsData.price_safe_note || '';
+  // Contact & réseaux
+  el('c-whatsapp').value = cmsData.whatsapp_number || '';
+  el('c-fb').value        = cmsData.social_facebook || '';
+  el('c-ig').value        = cmsData.social_instagram || '';
+  el('c-yt').value        = cmsData.social_youtube || '';
   // Couleurs
   const primary = (cmsData.colors||{}).primary || '#0071e3';
   const hover   = (cmsData.colors||{}).primary_hover || '#0077ed';
@@ -1508,6 +1542,22 @@ el('add-faq').addEventListener('click', () => { const arr=collectFaq(); arr.push
 el('save-content-faq').addEventListener('click', async () => {
   const d = await apiFetch('?a=content_save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ faq: collectFaq() }) });
   toast(d.success ? '✓ FAQ enregistrée' : 'Erreur', !d.success);
+});
+
+// ── CONTACT & RÉSEAUX ──
+el('save-content-contact').addEventListener('click', async () => {
+  const payload = {
+    whatsapp_number:  el('c-whatsapp').value.trim(),
+    social_facebook:  el('c-fb').value.trim(),
+    social_instagram: el('c-ig').value.trim(),
+    social_youtube:   el('c-yt').value.trim(),
+  };
+  const d = await apiFetch('?a=content_save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+  const msg = el('save-contact-msg');
+  msg.style.display = 'inline';
+  if (d.success) { msg.textContent = '✓ Enregistré'; msg.style.color = 'var(--green)'; }
+  else { msg.textContent = 'Erreur'; msg.style.color = 'var(--red)'; }
+  setTimeout(() => msg.style.display = 'none', 3000);
 });
 
 // ─── TECHNICIENS ─────────────────────────────────────────────────────────────

@@ -40,8 +40,16 @@ nav a {
   transition: opacity .15s; white-space: nowrap;
 }
 nav a:hover { opacity: 1; }
-.nav-logo { font-size: 20px; font-weight: 600; margin-right: 12px; }
-.nav-cta { color: var(--blue) !important; opacity: 1 !important; }
+.nav-logo { font-size: 20px; font-weight: 600; margin-right: 12px; display:inline-flex; align-items:center; gap:8px; letter-spacing:.5px; }
+.nav-logo-mark { width:22px; height:22px; border-radius:50%; border:2px solid var(--black); position:relative; flex-shrink:0; }
+.nav-logo-mark::after { content:''; position:absolute; width:6px; height:6px; border-radius:50%; background:var(--black); top:50%; left:50%; transform:translate(-50%,-50%); }
+.nav-cta {
+  background: var(--blue) !important; color: #fff !important; opacity: 1 !important;
+  padding: 8px 18px; border-radius: 980px; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: background .15s;
+}
+.nav-cta:hover { background: var(--blue-hover) !important; }
 
 /* ─── HERO — noir ─── */
 .hero {
@@ -85,10 +93,19 @@ nav a:hover { opacity: 1; }
 .cta-primary:hover { background: var(--blue-hover); }
 .cta-link { font-size: 17px; color: var(--blue); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
 .cta-link:hover { text-decoration: underline; }
-.price-badge {
-  margin-top: 20px; font-size: 15px; color: #86868b;
+.cta-secondary {
+  border: 1.5px solid rgba(255,255,255,0.3); color: #f5f5f7; background: transparent;
+  font-size: 17px; font-weight: 400; padding: 12px 28px; border-radius: 980px;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+  transition: border-color .15s, background .15s;
 }
-.price-badge strong { color: #f5f5f7; }
+.cta-secondary:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.06); }
+.hero-badge {
+  margin-top: 24px; display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
+  padding: 9px 20px; border-radius: 980px; font-size: 14px; color: #d1d1d6;
+}
+.hero-badge strong { color: #f5f5f7; font-weight: 600; }
 
 /* hero device strip */
 .hero-device {
@@ -149,23 +166,55 @@ nav a:hover { opacity: 1; }
 /* ─── STATS BAND — blanc ─── */
 .stats-band {
   background: var(--white);
-  padding: 52px 24px;
+  padding: 44px 24px;
   border-bottom: 1px solid #d2d2d7;
 }
 .stats-inner {
-  max-width: 900px; margin: 0 auto;
-  display: grid; grid-template-columns: repeat(3,1fr);
-  gap: 1px; background: #d2d2d7;
-  border: 1px solid #d2d2d7; border-radius: 18px; overflow: hidden;
+  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 24px;
 }
 .stat-box {
-  background: var(--white); padding: 36px 28px; text-align: center;
+  display: flex; align-items: center; gap: 16px;
+}
+.stat-icon {
+  width: 52px; height: 52px; border-radius: 14px; flex-shrink: 0;
+  background: #e8f1fd; color: var(--blue);
+  display: flex; align-items: center; justify-content: center; font-size: 24px;
 }
 .stat-n {
-  font-size: 48px; font-weight: 700; color: var(--black);
-  letter-spacing: -1.5px; line-height: 1;
+  font-size: 26px; font-weight: 700; color: var(--black);
+  letter-spacing: -0.5px; line-height: 1.15;
 }
-.stat-l { font-size: 15px; color: var(--mid); margin-top: 8px; line-height: 1.4; }
+.stat-l { font-size: 13px; color: var(--mid); line-height: 1.3; }
+
+/* ─── APERÇU — mini fonctionnalités / comment ça marche ─── */
+#apercu { background: var(--light); padding: 56px 24px; }
+.apercu-inner {
+  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+}
+.apercu-col { padding: 8px 40px; }
+.apercu-col + .apercu-col { border-left: 1px solid #d2d2d7; }
+.apercu-h3 { font-size: 20px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 24px; }
+.apercu-row { display: flex; gap: 22px; flex-wrap: wrap; }
+.apercu-item { display: flex; align-items: flex-start; gap: 12px; flex: 1 1 140px; min-width: 140px; }
+.apercu-icon {
+  width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
+  background: var(--blue); color: #fff; font-weight: 700; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+}
+.apercu-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.apercu-item p { font-size: 12.5px; color: var(--mid); line-height: 1.4; font-weight: 300; }
+.step-item { display: flex; align-items: flex-start; gap: 12px; flex: 1 1 120px; min-width: 100px; }
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: var(--blue); color: #fff; font-weight: 700; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.step-item p { font-size: 12.5px; color: var(--mid); line-height: 1.4; font-weight: 300; }
+.step-arrow { align-self: center; color: #c7c7cc; font-size: 18px; margin: 0 -6px; }
 
 /* ─── FEATURES — gris clair ─── */
 #features { background: var(--light); padding: 80px 24px; }
@@ -430,13 +479,42 @@ footer {
 .footer-links a:hover { text-decoration:underline; }
 .footer-copy { max-width:960px;margin:0 auto;padding-top:12px;font-size:12px;color:var(--mid); }
 
+/* ─── FOOTER CONTACT BAR — noir ─── */
+.footer-contact {
+  background: #000; padding: 20px 24px;
+}
+.fc-inner {
+  max-width: 1080px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 18px;
+}
+.fc-whatsapp { display: flex; align-items: center; gap: 12px; }
+.fc-whatsapp-icon {
+  width: 36px; height: 36px; border-radius: 50%; background: #25d366;
+  display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0;
+}
+.fc-whatsapp-text a { color: #f5f5f7; text-decoration: none; font-weight: 600; font-size: 14px; }
+.fc-whatsapp-text a:hover { text-decoration: underline; }
+.fc-whatsapp-label { font-size: 11px; color: #86868b; }
+.fc-social { display: flex; align-items: center; gap: 14px; }
+.fc-social a {
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid #3a3a3c;
+  display: flex; align-items: center; justify-content: center; color: #f5f5f7;
+  text-decoration: none; font-size: 15px; transition: border-color .15s, background .15s;
+}
+.fc-social a:hover { border-color: var(--blue); background: rgba(0,113,227,0.12); }
+.fc-badge { display: flex; align-items: center; gap: 10px; }
+.fc-badge-icon { font-size: 22px; }
+.fc-badge-title { font-size: 13px; font-weight: 600; color: #f5f5f7; }
+.fc-badge-sub { font-size: 11px; color: #86868b; }
+
 /* animations */
 @keyframes fadeUp { from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)} }
 .hero-eyebrow{animation:fadeUp .5s ease both}
 .hero h1{animation:fadeUp .5s .1s ease both}
 .hero-sub{animation:fadeUp .5s .18s ease both}
 .cta-row{animation:fadeUp .5s .25s ease both}
-.price-badge{animation:fadeUp .5s .3s ease both}
+.hero-badge{animation:fadeUp .5s .3s ease both}
 .hero-device{animation:fadeUp .7s .2s ease both}
 
 /* Calendar */
@@ -510,9 +588,10 @@ footer {
   nav a:not(.nav-logo):not(.nav-cta) { display:none; }
   .hero { padding:56px 20px 40px; min-height:auto; }
   .hero-device { max-width:100%; }
-  .stats-inner { grid-template-columns:repeat(3,1fr); }
-  .stat-n { font-size:32px; }
-  .stat-box { padding:28px 16px; }
+  .stats-inner { grid-template-columns:repeat(2,1fr); }
+  .apercu-inner { grid-template-columns:1fr; gap:36px; }
+  .apercu-col + .apercu-col { border-left:none; border-top:1px solid #d2d2d7; padding-top:32px; }
+  .fc-inner { justify-content:center; text-align:center; }
   .feat-grid { grid-template-columns:1fr 1fr; }
   .price-layout { grid-template-columns:1fr; }
   .process-steps { grid-template-columns:1fr; gap:20px; }
@@ -527,9 +606,9 @@ footer {
 @media(max-width:520px) {
   .hero h1 { font-size:clamp(36px,10vw,56px); }
   .hero-device { display:none; }
-  .stats-inner { grid-template-columns:1fr; background:none; gap:0; border:none; }
-  .stat-box { border-right:none!important; border-bottom:1px solid #e5e5ea; border-radius:0; }
-  .stat-box:last-child { border-bottom:none; }
+  .stats-inner { grid-template-columns:1fr; }
+  .apercu-row { flex-direction:column; }
+  .step-arrow { display:none; }
   .feat-grid { grid-template-columns:1fr; }
   .reviews-grid { grid-template-columns:1fr; }
   .booking-sidebar { flex-direction:column; }
@@ -543,25 +622,26 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <span class="nav-logo">Portaye</span>
-  <a href="#features">Produit</a>
-  <a href="#process">Installation</a>
+  <a href="#" class="nav-logo"><span class="nav-logo-mark"></span>PORTAYE</a>
+  <a href="#">Accueil</a>
+  <a href="#features">Fonctionnalités</a>
+  <a href="#process">Comment ça marche</a>
   <a href="#avis">Avis</a>
   <a href="#faq">FAQ</a>
-  <a href="#booking" class="nav-cta">Réserver</a>
+  <a href="#booking">Contact</a>
+  <a href="#booking" class="nav-cta">📅 Prendre RDV</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
-  <p class="hero-eyebrow" id="cms-hero-eyebrow">Nouveau — Sécurité résidentielle intelligente</p>
-  <h1 id="cms-hero-title">La sécurité <span id="cms-hero-highlight">réinventée.</span></h1>
-  <p class="hero-sub" id="cms-hero-sub">Votre porte d'entrée devient un système de surveillance intelligent. Vision 4K HDR, IA de détection, contrôle instantané depuis n'importe où.</p>
+  <h1 id="cms-hero-title">Voyez qui sonne,<br><span id="cms-hero-highlight">même absent</span></h1>
+  <p class="hero-sub" id="cms-hero-sub">Le judas connecté qui sécurise votre domicile en 30 minutes.</p>
   <div class="cta-row">
-    <a href="#booking" class="cta-primary">Installer maintenant</a>
-    <a href="#features" class="cta-link">En savoir plus ›</a>
+    <a href="#booking" class="cta-primary">🔧 Installer maintenant</a>
+    <a href="#features" class="cta-secondary">ℹ️ En savoir plus</a>
   </div>
-  <p class="price-badge"><strong id="cms-price-hero">179 €</strong> <span id="cms-price-note">tout inclus · Aucun abonnement</span></p>
+  <p class="hero-badge">⭐ <strong>4,9/5</strong> · 80+ clients</p>
 
   <div class="hero-device">
     <div class="hd-bar">
@@ -592,19 +672,65 @@ footer {
 <div class="stats-band">
   <div class="stats-inner">
     <div class="stat-box">
-      <div class="stat-n">2 400+</div>
-      <div class="stat-l">Foyers protégés<br>en France</div>
+      <div class="stat-icon">👥</div>
+      <div><div class="stat-n">80+</div><div class="stat-l">Clients satisfaits</div></div>
     </div>
     <div class="stat-box">
-      <div class="stat-n">4,9/5</div>
-      <div class="stat-l">Note moyenne<br>clients vérifiés</div>
+      <div class="stat-icon">⭐</div>
+      <div><div class="stat-n">4,9/5</div><div class="stat-l">Note moyenne</div></div>
     </div>
     <div class="stat-box">
-      <div class="stat-n">&lt; 1 h</div>
-      <div class="stat-l">Durée<br>d'installation</div>
+      <div class="stat-icon">⏱️</div>
+      <div><div class="stat-n">&lt; 1h</div><div class="stat-l">Installation rapide</div></div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-icon">🛡️</div>
+      <div><div class="stat-n">100+</div><div class="stat-l">Techniciens certifiés</div></div>
     </div>
   </div>
 </div>
+
+<!-- APERÇU -->
+<section id="apercu">
+  <div class="apercu-inner">
+    <div class="apercu-col">
+      <h3 class="apercu-h3">Fonctionnalités</h3>
+      <div class="apercu-row">
+        <div class="apercu-item">
+          <div class="apercu-icon">HD</div>
+          <div><h4>Vidéo HD</h4><p>Image nette et fluide en haute définition</p></div>
+        </div>
+        <div class="apercu-item">
+          <div class="apercu-icon">👤</div>
+          <div><h4>Détection auto</h4><p>Notification instantanée dès qu'un visiteur sonne</p></div>
+        </div>
+        <div class="apercu-item">
+          <div class="apercu-icon">🌙</div>
+          <div><h4>Vision nocturne</h4><p>Voyez clairement, même dans l'obscurité</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="apercu-col">
+      <h3 class="apercu-h3">Comment ça marche</h3>
+      <div class="apercu-row">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div><h4>Installation</h4><p>Nous installons votre Portaye en moins d'1h</p></div>
+        </div>
+        <span class="step-arrow">›</span>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div><h4>Connexion</h4><p>Connecté à votre Wi-Fi, où que vous soyez</p></div>
+        </div>
+        <span class="step-arrow">›</span>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div><h4>Surveillance</h4><p>Voyez et parlez à vos visiteurs en temps réel</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- FEATURES -->
 <section id="features">
@@ -998,6 +1124,27 @@ footer {
   </div>
 </section>
 
+<!-- FOOTER CONTACT BAR -->
+<div class="footer-contact" id="footer-contact" style="display:none">
+  <div class="fc-inner">
+    <div class="fc-whatsapp" id="fc-whatsapp" style="display:none">
+      <span class="fc-whatsapp-icon">💬</span>
+      <div class="fc-whatsapp-text">
+        <div class="fc-whatsapp-label">WhatsApp</div>
+        <a href="#" id="fc-whatsapp-link" target="_blank" rel="noopener"></a>
+      </div>
+    </div>
+    <div class="fc-social" id="fc-social"></div>
+    <div class="fc-badge">
+      <span class="fc-badge-icon">🛡️</span>
+      <div>
+        <div class="fc-badge-title">Loi Hamon · 14 jours</div>
+        <div class="fc-badge-sub">Satisfait ou remboursé</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
@@ -1296,6 +1443,27 @@ document.querySelectorAll('.door-opt').forEach(d => {
         }).join('');
       }
     }
+
+    // Footer contact bar (WhatsApp + réseaux sociaux)
+    (function(){
+      var hasWhatsapp = !!c.whatsapp_number;
+      var socials = [
+        { url:c.social_facebook,  icon:'📘' },
+        { url:c.social_instagram, icon:'📷' },
+        { url:c.social_youtube,   icon:'▶️' }
+      ].filter(function(s){ return !!s.url; });
+      if(hasWhatsapp || socials.length){
+        var bar=document.getElementById('footer-contact'); if(bar) bar.style.display='';
+        if(hasWhatsapp){
+          var w=document.getElementById('fc-whatsapp'); if(w) w.style.display='';
+          var digits=String(c.whatsapp_number).replace(/[^\d+]/g,'');
+          var link=document.getElementById('fc-whatsapp-link');
+          if(link){ link.href='https://wa.me/'+digits.replace(/^\+/,''); link.textContent=c.whatsapp_number; }
+        }
+        var sc=document.getElementById('fc-social');
+        if(sc) sc.innerHTML=socials.map(function(s){ return '<a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+s.icon+'</a>'; }).join('');
+      }
+    })();
 
     // Features
     if(Array.isArray(c.features)&&c.features.length){
