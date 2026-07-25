@@ -1119,8 +1119,6 @@ footer {
     <p>Un technicien certifié se déplace à votre domicile dans les 48 heures. Compatible bois, métal, blindée, PVC — Portaye s'installe sans travaux. Vous payez 179€ uniquement à la fin, si vous êtes satisfait.</p>
     <h3>179€ tout inclus, zéro abonnement</h3>
     <p>Là où les concurrents imposent 10 à 30€/mois d'abonnement, Portaye fait le choix de la transparence : un seul paiement de 179€ couvrant appareil, installation, application et support 7j/7. Satisfait ou remboursé pendant 30 jours.</p>
-    <h3>Confidentialité et RGPD</h3>
-    <p>Chiffrement AES-256, serveurs en France, conformité RGPD totale. Vos vidéos ne sont jamais partagées ni revendues. Votre vie privée est protégée autant que votre domicile.</p>
   </div>
 </section>
 
@@ -1450,7 +1448,9 @@ document.querySelectorAll('.door-opt').forEach(d => {
       var socials = [
         { url:c.social_facebook,  icon:'📘' },
         { url:c.social_instagram, icon:'📷' },
-        { url:c.social_youtube,   icon:'▶️' }
+        { url:c.social_youtube,   icon:'▶️' },
+        { url:c.social_snapchat,  icon:'👻' },
+        { url:c.social_tiktok,    icon:'🎵' }
       ].filter(function(s){ return !!s.url; });
       if(hasWhatsapp || socials.length){
         var bar=document.getElementById('footer-contact'); if(bar) bar.style.display='';

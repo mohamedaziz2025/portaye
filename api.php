@@ -370,7 +370,7 @@ case 'content_save':
     $existing = jdb_read(JSON_CONTENT);
     $allowed = ['hero_eyebrow','hero_title','hero_title_highlight','hero_sub','hero_cta_primary','hero_cta_secondary','price','price_note','colors','features','reviews','faq',
         'price_eyebrow','price_title','price_sub','price_plan_name','price_card_note','price_cta','price_safe_note','price_features','price_guarantees',
-        'whatsapp_number','social_facebook','social_instagram','social_youtube'];
+        'whatsapp_number','social_facebook','social_instagram','social_youtube','social_snapchat','social_tiktok'];
     foreach ($allowed as $k) {
         if (isset($json[$k])) $existing[$k] = $json[$k];
     }

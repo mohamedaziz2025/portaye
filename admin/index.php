@@ -720,6 +720,16 @@ textarea.cms-input { min-height:90px;resize:vertical; }
         <input type="text" class="cms-input" id="c-yt" placeholder="https://youtube.com/…">
       </div>
     </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:14px">
+      <div class="cms-field" style="margin:0">
+        <label>Lien Snapchat</label>
+        <input type="text" class="cms-input" id="c-snap" placeholder="https://snapchat.com/add/…">
+      </div>
+      <div class="cms-field" style="margin:0">
+        <label>Lien TikTok</label>
+        <input type="text" class="cms-input" id="c-tiktok" placeholder="https://tiktok.com/@…">
+      </div>
+    </div>
     <div class="cms-save-bar">
       <button class="btn-primary" style="width:auto;padding:12px 28px" id="save-content-contact">Enregistrer</button>
       <span id="save-contact-msg" style="font-size:13px;display:none"></span>
@@ -1205,6 +1215,8 @@ async function loadContent() {
   el('c-fb').value        = cmsData.social_facebook || '';
   el('c-ig').value        = cmsData.social_instagram || '';
   el('c-yt').value        = cmsData.social_youtube || '';
+  el('c-snap').value      = cmsData.social_snapchat || '';
+  el('c-tiktok').value    = cmsData.social_tiktok || '';
   // Couleurs
   const primary = (cmsData.colors||{}).primary || '#0071e3';
   const hover   = (cmsData.colors||{}).primary_hover || '#0077ed';
@@ -1551,6 +1563,8 @@ el('save-content-contact').addEventListener('click', async () => {
     social_facebook:  el('c-fb').value.trim(),
     social_instagram: el('c-ig').value.trim(),
     social_youtube:   el('c-yt').value.trim(),
+    social_snapchat:  el('c-snap').value.trim(),
+    social_tiktok:    el('c-tiktok').value.trim(),
   };
   const d = await apiFetch('?a=content_save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
   const msg = el('save-contact-msg');
