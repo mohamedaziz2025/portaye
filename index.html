@@ -17,6 +17,7 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
+  html,body{overflow-x:hidden}
   body{
     font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
     color:#fff;background:var(--black);line-height:1.5;-webkit-font-smoothing:antialiased;
@@ -27,9 +28,9 @@
 
   /* ---------- HEADER ---------- */
   header{position:sticky;top:0;z-index:50;background:var(--black);border-bottom:1px solid rgba(255,255,255,.06)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:78px}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:108px;position:relative}
   .logo{display:flex;align-items:center}
-  .logo img{height:36px;width:auto;display:block}
+  .logo img{height:76px;width:auto;display:block}
   nav.links{display:flex;gap:34px;align-items:center}
   nav.links a{font-size:15px;color:#dfe1e4;font-weight:500;padding:6px 0;position:relative}
   nav.links a.active{color:#fff}
@@ -40,11 +41,15 @@
   .btn-red:hover{background:var(--red-dark)}
   .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35);padding:15px 26px}
   .btn-ghost:hover{border-color:#fff}
-  .menu-toggle{display:none;background:none;border:none;color:#fff;cursor:pointer}
+  .menu-toggle{display:none;background:none;border:none;color:#fff;cursor:pointer;padding:6px;z-index:60}
+  .menu-toggle .icon-close{display:none}
+  .menu-toggle.open .icon-menu{display:none}
+  .menu-toggle.open .icon-close{display:block}
 
   /* ---------- HERO ---------- */
-  .hero{padding:70px 0 90px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+  .hero{padding:70px 0 90px;
         background:radial-gradient(1200px 500px at 80% 20%,rgba(232,35,43,.10),transparent 60%),var(--black)}
+  .hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
   .hero h1{font-size:76px;line-height:.98;font-weight:800;letter-spacing:-.02em}
   .hero p.sub{margin-top:26px;font-size:20px;color:#c7cace;max-width:460px;line-height:1.45}
   .hero .cta{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap}
@@ -173,9 +178,19 @@
 
   /* ---------- RESPONSIVE ---------- */
   @media(max-width:960px){
+    .logo img{height:60px}
     nav.links{display:none}
+    nav.links.open{
+      display:flex;flex-direction:column;align-items:stretch;gap:2px;
+      position:absolute;top:100%;left:0;right:0;
+      background:var(--black);border-bottom:1px solid rgba(255,255,255,.08);
+      padding:12px 20px 20px;box-shadow:0 24px 40px rgba(0,0,0,.5)
+    }
+    nav.links.open a{padding:14px 4px;border-bottom:1px solid rgba(255,255,255,.06)}
+    nav.links.open a:last-child{border-bottom:none}
     .menu-toggle{display:block}
-    .hero{grid-template-columns:1fr;gap:44px;padding:50px 0 70px}
+    .hero{padding:50px 0 70px}
+    .hero .wrap{grid-template-columns:1fr;gap:44px}
     .hero h1{font-size:54px}
     .device{justify-self:center}
     .stats .grid{grid-template-columns:1fr 1fr}
@@ -190,7 +205,10 @@
     .guarantees{grid-template-columns:1fr}
   }
   @media(max-width:520px){
-    .hero h1{font-size:42px}
+    .logo img{height:48px}
+    .nav-cta{padding:12px}
+    .nav-cta-label{display:none}
+    .hero h1{font-size:38px}
     .stats .grid{grid-template-columns:1fr}
     .stat{border-right:none;border-bottom:1px solid var(--line)}
     .stat:last-child{border-bottom:none}
@@ -205,7 +223,7 @@
 <header>
   <div class="wrap nav">
     <a href="#" class="logo"><img src="logo/2-white.png" alt="Portaye"></a>
-    <nav class="links">
+    <nav class="links" id="navLinks">
       <a href="#" class="active">Accueil</a>
       <a href="#features">Fonctionnalités</a>
       <a href="#process">Comment ça marche</a>
@@ -214,19 +232,20 @@
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a href="https://wa.me/33652769151?text=Bonjour%2C%20je%20souhaite%20prendre%20rendez-vous%20pour%20l%27installation%20de%20Portaye." target="_blank" rel="noopener" class="btn btn-red" id="cms-wa-header">
+    <a href="https://wa.me/33652769151?text=Bonjour%2C%20je%20souhaite%20prendre%20rendez-vous%20pour%20l%27installation%20de%20Portaye." target="_blank" rel="noopener" class="btn btn-red nav-cta" id="cms-wa-header">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.1-.2.2-.3.2-.6.1-1.6-.8-2.6-1.4-3.7-3.2-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.2.2 2 3.1 5 4.3 1.9.8 2.6.9 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2A10 10 0 0 0 3.5 17.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1 1 12 20z"/></svg>
-      Prendre RDV
+      <span class="nav-cta-label">Prendre RDV</span>
     </a>
-    <button class="menu-toggle" aria-label="Menu">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
+      <svg class="icon-menu" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-close" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
   </div>
 </header>
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="wrap" style="display:contents">
+  <div class="wrap">
     <div>
       <h1 id="cms-hero-title">Voyez qui sonne,<br>même absent</h1>
       <p class="sub" id="cms-hero-sub">Le judas connecté qui sécurise votre domicile en 30 minutes.</p>
@@ -445,6 +464,23 @@
 </a>
 
 <script>
+  var menuToggle = document.getElementById('menuToggle');
+  var navLinks = document.getElementById('navLinks');
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', function () {
+      var open = navLinks.classList.toggle('open');
+      menuToggle.classList.toggle('open', open);
+      menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    navLinks.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        navLinks.classList.remove('open');
+        menuToggle.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
   var heroEl = document.getElementById('hero');
   var waFloat = document.getElementById('waFloat');
   if (heroEl && waFloat && 'IntersectionObserver' in window) {
