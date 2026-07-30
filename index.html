@@ -497,10 +497,22 @@
 <script>
 (function(){
   function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function frDigits(phone){
+    var d=String(phone||'').replace(/\D/g,'');
+    if(d.slice(0,2)==='33') return d;
+    if(d.charAt(0)==='0') return '33'+d.slice(1);
+    return d;
+  }
+  function frDisplay(phone){
+    var d=frDigits(phone);
+    if(d.slice(0,2)!=='33') return phone;
+    var national=d.slice(2);
+    var rest=national.slice(1).match(/.{1,2}/g);
+    return '+33 '+national.charAt(0)+(rest?' '+rest.join(' '):'');
+  }
   function waHref(href, phone){
     if(!phone) return href;
-    var digits=String(phone).replace(/[^\d+]/g,'').replace(/^\+/,'');
-    return href.replace(/wa\.me\/\d+/, 'wa.me/'+digits);
+    return href.replace(/wa\.me\/\d+/, 'wa.me/'+frDigits(phone));
   }
   function bindFaq(container){
     container.querySelectorAll('.faq-q').forEach(function(q){
@@ -534,7 +546,7 @@
         if(el) el.href=waHref(el.getAttribute('href'), c.whatsapp_number);
       });
       var lbl=document.getElementById('cms-wa-footer-label');
-      if(lbl) lbl.textContent=c.whatsapp_number;
+      if(lbl) lbl.textContent=frDisplay(c.whatsapp_number);
     }
 
     [['social-facebook',c.social_facebook],['social-instagram',c.social_instagram],['social-youtube',c.social_youtube]].forEach(function(pair){
