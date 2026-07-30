@@ -93,6 +93,54 @@
   .step h3{font-size:18px;font-weight:700;margin-bottom:3px}
   .step p{color:#6b7076;font-size:15px;max-width:300px}
 
+  /* ---------- PRICING ---------- */
+  .pricing{background:var(--black);color:#fff;padding:90px 0}
+  .pricing .head{text-align:center;max-width:640px;margin:0 auto 54px}
+  .pricing .eyebrow{color:var(--red);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+  .pricing h2{font-size:38px;font-weight:800;letter-spacing:-.01em;margin-bottom:14px}
+  .pricing .sub{color:#c7cace;font-size:17px}
+  .price-card{max-width:440px;margin:0 auto;background:#141414;border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:40px 36px;text-align:center}
+  .price-card .plan{color:var(--red);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
+  .price-card .amount{font-size:56px;font-weight:800;letter-spacing:-.02em}
+  .price-card .amount span{font-size:22px;font-weight:600;color:#9aa0a6}
+  .price-card .note{color:#9aa0a6;font-size:14px;margin-top:8px}
+  .price-list{list-style:none;text-align:left;margin:32px 0}
+  .price-list li{display:flex;gap:10px;padding:10px 0;font-size:15px;color:#dfe1e4;border-top:1px solid rgba(255,255,255,.08)}
+  .price-list li:first-child{border-top:none}
+  .pc-check{color:var(--red);font-weight:800;flex-shrink:0}
+  .price-card .btn-red{width:100%;justify-content:center;padding:16px;font-size:16px;margin-top:6px}
+  .safe-note{margin-top:18px;font-size:13px;color:#9aa0a6}
+  .guarantees{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:900px;margin:56px auto 0}
+  .pg-item{display:flex;gap:14px;align-items:flex-start}
+  .pg-icon{font-size:22px;flex-shrink:0}
+  .pg-title{font-weight:700;font-size:15px}
+  .pg-desc{font-size:13px;color:#9aa0a6;margin-top:2px}
+
+  /* ---------- REVIEWS ---------- */
+  .reviews{background:#fbfbfc;color:var(--ink);padding:90px 0}
+  .reviews .head{text-align:center;max-width:640px;margin:0 auto 54px}
+  .reviews h2{font-size:34px;font-weight:800;letter-spacing:-.01em}
+  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .rv-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px}
+  .rv-stars{color:#f6c445;font-size:16px;margin-bottom:12px}
+  .rv-text{font-size:15px;color:#3a3d42;line-height:1.5;margin-bottom:20px}
+  .rv-author{display:flex;gap:12px;align-items:center}
+  .rv-av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;flex-shrink:0}
+  .rv-name{font-weight:700;font-size:14px}
+  .rv-meta{font-size:12px;color:#8a8f96}
+
+  /* ---------- FAQ ---------- */
+  .faq-section{background:#fff;color:var(--ink);padding:90px 0}
+  .faq-inner{max-width:720px;margin:0 auto}
+  .faq-inner h2{font-size:34px;font-weight:800;text-align:center;margin-bottom:44px}
+  .faq-item{border-top:1px solid var(--line)}
+  .faq-item:last-child{border-bottom:1px solid var(--line)}
+  .faq-q{padding:20px 0;font-size:16px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .faq-plus{font-size:20px;color:var(--grey);transition:transform .2s;flex-shrink:0}
+  .faq-item.open .faq-plus{transform:rotate(45deg);color:var(--red)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;color:#6b7076;font-size:14px;line-height:1.6}
+  .faq-item.open .faq-a{max-height:240px;padding-bottom:20px}
+
   /* ---------- FOOTER ---------- */
   footer{background:var(--black);padding:34px 0}
   .foot{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px}
@@ -138,12 +186,16 @@
     .foot{grid-template-columns:1fr;text-align:center;gap:26px}
     .foot .guarantee{justify-self:center}
     .socials{order:-1}
+    .reviews-grid{grid-template-columns:1fr 1fr}
+    .guarantees{grid-template-columns:1fr}
   }
   @media(max-width:520px){
     .hero h1{font-size:42px}
     .stats .grid{grid-template-columns:1fr}
     .stat{border-right:none;border-bottom:1px solid var(--line)}
     .stat:last-child{border-bottom:none}
+    .reviews-grid{grid-template-columns:1fr}
+    .price-card{padding:32px 24px}
   }
 </style>
 </head>
@@ -152,11 +204,12 @@
 <!-- HEADER -->
 <header>
   <div class="wrap nav">
-    <a href="#" class="logo"><img src="logo/2.png" alt="Portaye"></a>
+    <a href="#" class="logo"><img src="logo/2-white.png" alt="Portaye"></a>
     <nav class="links">
       <a href="#" class="active">Accueil</a>
       <a href="#features">Fonctionnalités</a>
       <a href="#process">Comment ça marche</a>
+      <a href="#pricing">Tarifs</a>
       <a href="#avis">Avis</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
@@ -272,12 +325,104 @@
   </div>
 </section>
 
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow" id="cms-price-eyebrow">Tarif unique</div>
+      <h2 id="cms-price-title">Un prix simple, tout inclus</h2>
+      <p class="sub" id="cms-price-sub">Pas d'abonnement caché, pas de surprise.</p>
+    </div>
+    <div class="price-card">
+      <div class="plan" id="cms-price-plan">Portaye Essentiel</div>
+      <div class="amount"><span id="cms-price-main">179</span><span>€</span></div>
+      <div class="note" id="cms-price-card-note">Paiement unique, installation incluse</div>
+      <ul class="price-list" id="cms-price-list">
+        <li><span class="pc-check">✓</span> Judas connecté HD + installation</li>
+        <li><span class="pc-check">✓</span> Application mobile incluse</li>
+        <li><span class="pc-check">✓</span> Stockage cloud 30 jours gratuit</li>
+        <li><span class="pc-check">✓</span> Support 7j/7</li>
+      </ul>
+      <a href="https://wa.me/33652769151?text=Bonjour%2C%20je%20souhaite%20commander%20Portaye." target="_blank" rel="noopener" class="btn btn-red" id="cms-wa-price">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.1-.2.2-.3.2-.6.1-1.6-.8-2.6-1.4-3.7-3.2-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.2.2 2 3.1 5 4.3 1.9.8 2.6.9 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2A10 10 0 0 0 3.5 17.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1 1 12 20z"/></svg>
+        <span id="cms-price-cta">Prendre RDV sur WhatsApp</span>
+      </a>
+      <div class="safe-note" id="cms-price-safe">Satisfait ou remboursé 14 jours — Loi Hamon</div>
+    </div>
+    <div class="guarantees" id="cms-price-guarantees">
+      <div class="pg-item"><span class="pg-icon">🔒</span><div><div class="pg-title">Paiement sécurisé</div><div class="pg-desc">Transaction chiffrée et protégée</div></div></div>
+      <div class="pg-item"><span class="pg-icon">🛠️</span><div><div class="pg-title">Installation pro</div><div class="pg-desc">Par un technicien certifié</div></div></div>
+      <div class="pg-item"><span class="pg-icon">↩️</span><div><div class="pg-title">Remboursement 14j</div><div class="pg-desc">Sans condition, sans frais</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AVIS -->
+<section class="reviews" id="avis">
+  <div class="wrap">
+    <div class="head">
+      <h2>Ce que nos clients en disent</h2>
+    </div>
+    <div class="reviews-grid" id="cms-reviews-grid">
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">Installation rapide et propre, l'application est très simple à utiliser. Je vois qui sonne même quand je suis au travail.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#0071e3">SM</div>
+          <div><div class="rv-name">Sophie M.</div><div class="rv-meta">Lyon · Juin 2026</div></div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">Très satisfait, le technicien a été ponctuel et professionnel. La vision nocturne est bluffante.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#E8232B">KD</div>
+          <div><div class="rv-name">Karim D.</div><div class="rv-meta">Marseille · Mai 2026</div></div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">Enfin je sais qui sonne avant d'ouvrir. Rassurant pour toute la famille, je recommande.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#1a9b4c">EL</div>
+          <div><div class="rv-name">Elodie L.</div><div class="rv-meta">Paris · Avril 2026</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="wrap faq-inner">
+    <h2>Questions fréquentes</h2>
+    <div class="faq-list" id="faqEl">
+      <div class="faq-item">
+        <div class="faq-q">Compatible avec ma porte ? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Oui. Portaye est compatible avec tous les types de portes : bois, métal, blindée, PVC et double porte.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Combien de temps dure l'installation ? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Entre 45 minutes et 1 heure en moyenne, câblage et configuration de l'application inclus.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Y a-t-il un abonnement mensuel ? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Non. Les 179€ couvrent l'appareil, l'installation, l'app et le support 7j/7. Le stockage cloud 30 jours est inclus.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Comment fonctionne le remboursement ? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Pas satisfait sous 14 jours ? Contactez notre support, nous organisons la désinstallation et vous remboursons.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer id="contact">
   <div class="wrap foot">
     <a href="https://wa.me/33652769151" target="_blank" rel="noopener" class="contact" id="cms-wa-footer">
       <span class="ficon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.1-.2.2-.3.2-.6.1-1.6-.8-2.6-1.4-3.7-3.2-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.2.2 2 3.1 5 4.3 1.9.8 2.6.9 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2A10 10 0 0 0 3.5 17.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1 1 12 20z"/></svg></span>
-      <div><div class="flabel">WhatsApp</div><div class="fvalue" id="cms-wa-footer-label">06 52 76 91 51</div></div>
+      <div><div class="flabel">WhatsApp</div><div class="fvalue" id="cms-wa-footer-label">+33 6 52 76 91 51</div></div>
     </a>
 
     <div class="socials">
@@ -321,6 +466,19 @@
     var digits=String(phone).replace(/[^\d+]/g,'').replace(/^\+/,'');
     return href.replace(/wa\.me\/\d+/, 'wa.me/'+digits);
   }
+  function bindFaq(container){
+    container.querySelectorAll('.faq-q').forEach(function(q){
+      q.addEventListener('click', function(){
+        var item=q.parentElement;
+        var open=item.classList.contains('open');
+        container.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-plus').textContent='+';});
+        if(!open){item.classList.add('open');q.querySelector('.faq-plus').textContent='−';}
+      });
+    });
+  }
+  var faqEl=document.getElementById('faqEl');
+  if(faqEl) bindFaq(faqEl);
+
   fetch('/api.php?a=content_get').then(function(r){return r.json();}).then(function(c){
     if(!c||typeof c!=='object') return;
 
@@ -335,7 +493,7 @@
     if(c.hero_sub){var e=document.getElementById('cms-hero-sub');if(e)e.textContent=c.hero_sub;}
 
     if(c.whatsapp_number){
-      ['cms-wa-header','cms-wa-hero','cms-wa-footer','waFloat'].forEach(function(id){
+      ['cms-wa-header','cms-wa-hero','cms-wa-footer','waFloat','cms-wa-price'].forEach(function(id){
         var el=document.getElementById(id);
         if(el) el.href=waHref(el.getAttribute('href'), c.whatsapp_number);
       });
@@ -348,6 +506,50 @@
       var el=document.getElementById(pair[0]);
       if(el) el.href=pair[1];
     });
+
+    // Pricing
+    if(c.price){var pm=document.getElementById('cms-price-main');if(pm)pm.textContent=c.price;}
+    if(c.price_eyebrow){var e=document.getElementById('cms-price-eyebrow');if(e)e.textContent=c.price_eyebrow;}
+    if(c.price_title){var e=document.getElementById('cms-price-title');if(e)e.textContent=c.price_title;}
+    if(c.price_sub){var e=document.getElementById('cms-price-sub');if(e)e.textContent=c.price_sub;}
+    if(c.price_plan_name){var e=document.getElementById('cms-price-plan');if(e)e.textContent=c.price_plan_name;}
+    if(c.price_card_note){var e=document.getElementById('cms-price-card-note');if(e)e.textContent=c.price_card_note;}
+    if(c.price_cta){var e=document.getElementById('cms-price-cta');if(e)e.textContent=c.price_cta;}
+    if(c.price_safe_note){var e=document.getElementById('cms-price-safe');if(e)e.textContent=c.price_safe_note;}
+    if(Array.isArray(c.price_features)&&c.price_features.length){
+      var pl=document.getElementById('cms-price-list');
+      if(pl) pl.innerHTML=c.price_features.map(function(t){ return '<li><span class="pc-check">✓</span> '+esc(t)+'</li>'; }).join('');
+    }
+    if(Array.isArray(c.price_guarantees)&&c.price_guarantees.length){
+      var pg=document.getElementById('cms-price-guarantees');
+      if(pg){
+        pg.innerHTML=c.price_guarantees.map(function(g){
+          return '<div class="pg-item"><span class="pg-icon">'+esc(g.icon)+'</span><div><div class="pg-title">'+esc(g.title)+'</div><div class="pg-desc">'+esc(g.desc)+'</div></div></div>';
+        }).join('');
+      }
+    }
+
+    // Reviews
+    if(Array.isArray(c.reviews)&&c.reviews.length){
+      var rg=document.getElementById('cms-reviews-grid');
+      if(rg){
+        rg.innerHTML=c.reviews.map(function(r){
+          var stars='★'.repeat(r.stars||5)+(r.stars<5?'☆'.repeat(5-r.stars):'');
+          return '<div class="rv-card"><div class="rv-stars">'+stars+'</div><p class="rv-text">'+esc(r.text)+'</p><div class="rv-author"><div class="rv-av" style="background:'+esc(r.color||'#0071e3')+'">'+esc(r.initials)+'</div><div><div class="rv-name">'+esc(r.name)+'</div><div class="rv-meta">'+esc(r.location)+' · '+esc(r.date)+'</div></div></div></div>';
+        }).join('');
+      }
+    }
+
+    // FAQ
+    if(Array.isArray(c.faq)&&c.faq.length){
+      var fq=document.getElementById('faqEl');
+      if(fq){
+        fq.innerHTML=c.faq.map(function(f){
+          return '<div class="faq-item"><div class="faq-q">'+esc(f.q)+' <span class="faq-plus">+</span></div><div class="faq-a">'+esc(f.a)+'</div></div>';
+        }).join('');
+        bindFaq(fq);
+      }
+    }
   }).catch(function(){});
 })();
 </script>
