@@ -13,4 +13,4 @@ if ($notInstalled) {
     exit;
 }
 
-readfile(__DIR__ . '/main.html');
+readfile(__DIR__ . '/index.html');
